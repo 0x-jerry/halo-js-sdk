@@ -17,7 +17,12 @@ function typeToSting(type: Type): string {
   } else if (isObjType(type)) {
     return `{
         ${type.props
-          .map((p) => `${p.name}: ${p.type ? typeToSting(p.type) : 'any'}`)
+          .map(
+            (p) =>
+              `${p.name}${p.required ? '' : '?'}: ${
+                p.type ? typeToSting(p.type) : 'any'
+              }`
+          )
           .join('\n')}
       }`
   } else {
@@ -57,7 +62,9 @@ export function generateAPICode(
   const str = apis.map((api) => {
     const type = api.params
       .map((p) => {
-        return `${p.name}: ${p.type ? typeToSting(p.type) : 'any'}`
+        return `${p.name}${p.required ? '' : '?'}: ${
+          p.type ? typeToSting(p.type) : 'any'
+        }`
       })
       .join('\n')
 

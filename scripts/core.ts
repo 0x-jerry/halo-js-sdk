@@ -63,8 +63,17 @@ function generateCodeFromJson(json, apiFileName) {
 function toFile(fileName: string, source: string) {
   const filePath = path.join(__dirname, '../src', fileName)
 
-  const format = (source: string) =>
-    isDev ? source : prettier.format(source, { parser: 'typescript' })
+  const format = (source: string) => {
+    if (isDev) {
+      try {
+        return prettier.format(source, { parser: 'typescript' })
+      } catch (error) {
+        return source
+      }
+    } else {
+      return prettier.format(source, { parser: 'typescript' })
+    }
+  }
 
   fs.ensureDirSync(path.dirname(filePath))
   fs.writeFileSync(filePath, format(source))
