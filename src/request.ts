@@ -1,0 +1,7 @@
+export function get(path: string, data?: any): any {}
+
+export function post(path: string, data?: any): any {}
+
+export function put(path: string, data?: any): any {}
+
+export function remove(path: string, data?: any): any {}

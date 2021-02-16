@@ -1,0 +1,4474 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Documentation for Halo API",
+    "version": "1.4.3",
+    "title": "Halo API Documentation",
+    "termsOfService": "https://github.com/halo-dev",
+    "contact": {
+      "name": "halo-dev",
+      "url": "https://github.com/halo-dev/halo/issues",
+      "email": "hi@halo.run"
+    },
+    "license": {
+      "name": "GNU General Public License v3.0",
+      "url": "https://github.com/halo-dev/halo/blob/master/LICENSE"
+    }
+  },
+  "host": "localhost:8090",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "archive-controller",
+      "description": "Archive Controller"
+    },
+    {
+      "name": "category-controller",
+      "description": "Category Controller"
+    },
+    {
+      "name": "journal-controller",
+      "description": "Journal Controller"
+    },
+    {
+      "name": "link-controller",
+      "description": "Link Controller"
+    },
+    {
+      "name": "menu-controller",
+      "description": "Menu Controller"
+    },
+    {
+      "name": "option-controller",
+      "description": "Option Controller"
+    },
+    {
+      "name": "photo-controller",
+      "description": "Photo Controller"
+    },
+    {
+      "name": "post-controller",
+      "description": "Post Controller"
+    },
+    {
+      "name": "sheet-controller",
+      "description": "Sheet Controller"
+    },
+    {
+      "name": "statistic-controller",
+      "description": "Statistic Controller"
+    },
+    {
+      "name": "tag-controller",
+      "description": "Tag Controller"
+    },
+    {
+      "name": "theme-controller",
+      "description": "Theme Controller"
+    },
+    {
+      "name": "user-controller",
+      "description": "User Controller"
+    }
+  ],
+  "paths": {
+    "/api/content/archives/months": {
+      "get": {
+        "tags": [
+          "archive-controller"
+        ],
+        "summary": "listMonthArchives",
+        "operationId": "listMonthArchivesUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ArchiveMonthVO"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/archives/years": {
+      "get": {
+        "tags": [
+          "archive-controller"
+        ],
+        "summary": "listYearArchives",
+        "operationId": "listYearArchivesUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ArchiveYearVO"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/categories": {
+      "get": {
+        "tags": [
+          "category-controller"
+        ],
+        "summary": "Lists categories",
+        "operationId": "listCategoriesUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "more",
+            "in": "query",
+            "description": "more",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CategoryDTO"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/categories/{slug}/posts": {
+      "get": {
+        "tags": [
+          "category-controller"
+        ],
+        "summary": "Lists posts by category slug",
+        "operationId": "listPostsByUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "slug",
+            "in": "path",
+            "description": "slug",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«PostListVO»"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/journals": {
+      "get": {
+        "tags": [
+          "journal-controller"
+        ],
+        "summary": "Lists journals",
+        "operationId": "pageByUsingGET_9",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«JournalWithCmtCountDTO»"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/journals/comments": {
+      "post": {
+        "tags": [
+          "journal-controller"
+        ],
+        "summary": "Comments a post",
+        "operationId": "commentUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "journalCommentParam",
+            "description": "journalCommentParam",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JournalCommentParam"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BaseCommentDTO"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/journals/{id}/likes": {
+      "post": {
+        "tags": [
+          "journal-controller"
+        ],
+        "summary": "Likes a journal",
+        "operationId": "likeUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/journals/{journalId}": {
+      "get": {
+        "tags": [
+          "journal-controller"
+        ],
+        "summary": "Gets a journal detail",
+        "operationId": "getByUsingGET_12",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "journalId",
+            "in": "path",
+            "description": "journalId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JournalDTO"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/journals/{journalId}/comments/list_view": {
+      "get": {
+        "tags": [
+          "journal-controller"
+        ],
+        "summary": "Lists comment with list view",
+        "operationId": "listCommentsUsingGET_3",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "journalId",
+            "in": "path",
+            "description": "journalId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«BaseCommentWithParentVO»"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/journals/{journalId}/comments/top_view": {
+      "get": {
+        "tags": [
+          "journal-controller"
+        ],
+        "summary": "listTopComments",
+        "operationId": "listTopCommentsUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "journalId",
+            "in": "path",
+            "description": "journalId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«CommentWithHasChildrenVO»"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/journals/{journalId}/comments/tree_view": {
+      "get": {
+        "tags": [
+          "journal-controller"
+        ],
+        "summary": "Lists comments with tree view",
+        "operationId": "listCommentsTreeUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "journalId",
+            "in": "path",
+            "description": "journalId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«BaseCommentVO»"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/journals/{journalId}/comments/{commentParentId}/children": {
+      "get": {
+        "tags": [
+          "journal-controller"
+        ],
+        "summary": "listChildrenBy",
+        "operationId": "listChildrenByUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "commentParentId",
+            "in": "path",
+            "description": "commentParentId",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "journalId",
+            "in": "path",
+            "description": "journalId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BaseCommentDTO"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/links": {
+      "get": {
+        "tags": [
+          "link-controller"
+        ],
+        "summary": "List all links",
+        "operationId": "listLinksUsingGET_1",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LinkDTO"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/links/team_view": {
+      "get": {
+        "tags": [
+          "link-controller"
+        ],
+        "summary": "List all links with team view",
+        "operationId": "listTeamVosUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LinkTeamVO"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/menus": {
+      "get": {
+        "tags": [
+          "menu-controller"
+        ],
+        "summary": "Lists all menus",
+        "operationId": "listAllUsingGET_4",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MenuDTO"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/menus/tree_view": {
+      "get": {
+        "tags": [
+          "menu-controller"
+        ],
+        "summary": "Lists menus with tree view",
+        "operationId": "listMenusTreeUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MenuVO"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/options/comment": {
+      "get": {
+        "tags": [
+          "option-controller"
+        ],
+        "summary": "Options for comment",
+        "operationId": "commentUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/options/keys/{key}": {
+      "get": {
+        "tags": [
+          "option-controller"
+        ],
+        "summary": "Gets option value by option key",
+        "operationId": "getByUsingGET_13",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "description": "key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BaseResponse«object»"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/options/list_view": {
+      "get": {
+        "tags": [
+          "option-controller"
+        ],
+        "summary": "Lists all options with list view",
+        "operationId": "listAllUsingGET_5",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OptionDTO"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/options/map_view": {
+      "get": {
+        "tags": [
+          "option-controller"
+        ],
+        "summary": "Lists options with map view",
+        "operationId": "listAllWithMapViewUsingGET_1",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "key",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/photos": {
+      "get": {
+        "tags": [
+          "photo-controller"
+        ],
+        "summary": "pageBy",
+        "operationId": "pageByUsingGET_10",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "team",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«PhotoDTO»"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/photos/latest": {
+      "get": {
+        "tags": [
+          "photo-controller"
+        ],
+        "summary": "listPhotos",
+        "operationId": "listPhotosUsingGET_1",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PhotoDTO"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/posts": {
+      "get": {
+        "tags": [
+          "post-controller"
+        ],
+        "summary": "Lists posts",
+        "operationId": "pageByUsingGET_11",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«PostListVO»"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/posts/comments": {
+      "post": {
+        "tags": [
+          "post-controller"
+        ],
+        "summary": "Comments a post",
+        "operationId": "commentUsingPOST_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "postCommentParam",
+            "description": "postCommentParam",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PostCommentParam"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BaseCommentDTO"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/posts/search": {
+      "post": {
+        "tags": [
+          "post-controller"
+        ],
+        "summary": "Lists posts by keyword",
+        "operationId": "pageByUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "keyword",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«BasePostSimpleDTO»"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/posts/slug": {
+      "get": {
+        "tags": [
+          "post-controller"
+        ],
+        "summary": "Gets a post",
+        "operationId": "getByUsingGET_15",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "formatDisabled",
+            "in": "query",
+            "description": "formatDisabled",
+            "required": false,
+            "type": "boolean",
+            "default": true
+          },
+          {
+            "name": "slug",
+            "in": "query",
+            "description": "slug",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceDisabled",
+            "in": "query",
+            "description": "sourceDisabled",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PostDetailVO"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/posts/{postId}": {
+      "get": {
+        "tags": [
+          "post-controller"
+        ],
+        "summary": "Gets a post",
+        "operationId": "getByUsingGET_14",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "formatDisabled",
+            "in": "query",
+            "description": "formatDisabled",
+            "required": false,
+            "type": "boolean",
+            "default": true
+          },
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "postId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sourceDisabled",
+            "in": "query",
+            "description": "sourceDisabled",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PostDetailVO"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/posts/{postId}/comments/list_view": {
+      "get": {
+        "tags": [
+          "post-controller"
+        ],
+        "summary": "Lists comment with list view",
+        "operationId": "listCommentsUsingGET_4",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "format": "int32"
+          },
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "postId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«BaseCommentWithParentVO»"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/posts/{postId}/comments/top_view": {
+      "get": {
+        "tags": [
+          "post-controller"
+        ],
+        "summary": "listTopComments",
+        "operationId": "listTopCommentsUsingGET_1",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "format": "int32"
+          },
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "postId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«CommentWithHasChildrenVO»"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/posts/{postId}/comments/tree_view": {
+      "get": {
+        "tags": [
+          "post-controller"
+        ],
+        "summary": "Lists comments with tree view",
+        "operationId": "listCommentsTreeUsingGET_1",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "format": "int32"
+          },
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "postId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«BaseCommentVO»"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/posts/{postId}/comments/{commentParentId}/children": {
+      "get": {
+        "tags": [
+          "post-controller"
+        ],
+        "summary": "listChildrenBy",
+        "operationId": "listChildrenByUsingGET_1",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "commentParentId",
+            "in": "path",
+            "description": "commentParentId",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "postId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BaseCommentDTO"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/posts/{postId}/likes": {
+      "post": {
+        "tags": [
+          "post-controller"
+        ],
+        "summary": "Likes a post",
+        "operationId": "likeUsingPOST_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "postId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/posts/{postId}/next": {
+      "get": {
+        "tags": [
+          "post-controller"
+        ],
+        "summary": "Gets next post by current post id.",
+        "operationId": "getNextPostByUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "postId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PostDetailVO"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/posts/{postId}/prev": {
+      "get": {
+        "tags": [
+          "post-controller"
+        ],
+        "summary": "Gets previous post by current post id.",
+        "operationId": "getPrevPostByUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "postId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PostDetailVO"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/sheets": {
+      "get": {
+        "tags": [
+          "sheet-controller"
+        ],
+        "summary": "Lists sheets",
+        "operationId": "pageByUsingGET_12",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«SheetListVO»"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/sheets/comments": {
+      "post": {
+        "tags": [
+          "sheet-controller"
+        ],
+        "summary": "Comments a post",
+        "operationId": "commentUsingPOST_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "sheetCommentParam",
+            "description": "sheetCommentParam",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SheetCommentParam"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BaseCommentDTO"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/sheets/slug": {
+      "get": {
+        "tags": [
+          "sheet-controller"
+        ],
+        "summary": "Gets a sheet by slug",
+        "operationId": "getByUsingGET_17",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "formatDisabled",
+            "in": "query",
+            "description": "formatDisabled",
+            "required": false,
+            "type": "boolean",
+            "default": true
+          },
+          {
+            "name": "slug",
+            "in": "query",
+            "description": "slug",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceDisabled",
+            "in": "query",
+            "description": "sourceDisabled",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SheetDetailVO"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/sheets/{sheetId}": {
+      "get": {
+        "tags": [
+          "sheet-controller"
+        ],
+        "summary": "Gets a sheet",
+        "operationId": "getByUsingGET_16",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "formatDisabled",
+            "in": "query",
+            "description": "formatDisabled",
+            "required": false,
+            "type": "boolean",
+            "default": true
+          },
+          {
+            "name": "sheetId",
+            "in": "path",
+            "description": "sheetId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sourceDisabled",
+            "in": "query",
+            "description": "sourceDisabled",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SheetDetailVO"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/sheets/{sheetId}/comments/list_view": {
+      "get": {
+        "tags": [
+          "sheet-controller"
+        ],
+        "summary": "Lists comment with list view",
+        "operationId": "listCommentsUsingGET_5",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "format": "int32"
+          },
+          {
+            "name": "sheetId",
+            "in": "path",
+            "description": "sheetId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«BaseCommentWithParentVO»"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/sheets/{sheetId}/comments/top_view": {
+      "get": {
+        "tags": [
+          "sheet-controller"
+        ],
+        "summary": "listTopComments",
+        "operationId": "listTopCommentsUsingGET_2",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "format": "int32"
+          },
+          {
+            "name": "sheetId",
+            "in": "path",
+            "description": "sheetId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«CommentWithHasChildrenVO»"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/sheets/{sheetId}/comments/tree_view": {
+      "get": {
+        "tags": [
+          "sheet-controller"
+        ],
+        "summary": "Lists comments with tree view",
+        "operationId": "listCommentsTreeUsingGET_2",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "format": "int32"
+          },
+          {
+            "name": "sheetId",
+            "in": "path",
+            "description": "sheetId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«BaseCommentVO»"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/sheets/{sheetId}/comments/{commentParentId}/children": {
+      "get": {
+        "tags": [
+          "sheet-controller"
+        ],
+        "summary": "listChildrenBy",
+        "operationId": "listChildrenByUsingGET_2",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "commentParentId",
+            "in": "path",
+            "description": "commentParentId",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "sheetId",
+            "in": "path",
+            "description": "sheetId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BaseCommentDTO"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/statistics": {
+      "get": {
+        "tags": [
+          "statistic-controller"
+        ],
+        "summary": "Gets blog statistics.",
+        "operationId": "statisticsUsingGET_1",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StatisticDTO"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/statistics/user": {
+      "get": {
+        "tags": [
+          "statistic-controller"
+        ],
+        "summary": "Gets blog statistics with user",
+        "operationId": "statisticsWithUserUsingGET_1",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StatisticWithUserDTO"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/tags": {
+      "get": {
+        "tags": [
+          "tag-controller"
+        ],
+        "summary": "Lists tags",
+        "operationId": "listTagsUsingGET_1",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "more",
+            "in": "query",
+            "description": "If the param is true, post count of tag will be returned",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TagDTO"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/tags/{slug}/posts": {
+      "get": {
+        "tags": [
+          "tag-controller"
+        ],
+        "summary": "Lists posts by tag slug",
+        "operationId": "listPostsByUsingGET_1",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "slug",
+            "in": "path",
+            "description": "slug",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«PostListVO»"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/themes/activation": {
+      "get": {
+        "tags": [
+          "theme-controller"
+        ],
+        "summary": "Gets activated theme property",
+        "operationId": "getByUsingGET_18",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ThemeProperty"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/themes/activation/settings": {
+      "get": {
+        "tags": [
+          "theme-controller"
+        ],
+        "summary": "Lists activated theme settings",
+        "operationId": "listSettingsByUsingGET_2",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/content/users/profile": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "summary": "Gets blogger profile",
+        "operationId": "getProfileUsingGET_1",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserDTO"
+            }
+          }
+        },
+        "security": [
+          {
+            "Access key from header": [
+              "content api"
+            ]
+          },
+          {
+            "Access key from query": [
+              "content api"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Access key from header": {
+      "type": "apiKey",
+      "name": "API-Authorization",
+      "in": "header"
+    },
+    "Access key from query": {
+      "type": "apiKey",
+      "name": "api_access_key",
+      "in": "query"
+    }
+  },
+  "definitions": {
+    "ArchiveMonthVO": {
+      "type": "object",
+      "properties": {
+        "month": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "posts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PostListVO"
+          }
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "ArchiveMonthVO"
+    },
+    "ArchiveYearVO": {
+      "type": "object",
+      "properties": {
+        "posts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PostListVO"
+          }
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "ArchiveYearVO"
+    },
+    "Author": {
+      "type": "object",
+      "properties": {
+        "avatar": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string"
+        }
+      },
+      "title": "Author"
+    },
+    "BaseCommentDTO": {
+      "type": "object",
+      "properties": {
+        "allowNotification": {
+          "type": "boolean"
+        },
+        "author": {
+          "type": "string"
+        },
+        "authorUrl": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "email": {
+          "type": "string"
+        },
+        "gravatarMd5": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "isAdmin": {
+          "type": "boolean"
+        },
+        "parentId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "AUDITING",
+            "PUBLISHED",
+            "RECYCLE"
+          ]
+        },
+        "userAgent": {
+          "type": "string"
+        }
+      },
+      "title": "BaseCommentDTO"
+    },
+    "BaseCommentVO": {
+      "type": "object",
+      "properties": {
+        "allowNotification": {
+          "type": "boolean"
+        },
+        "author": {
+          "type": "string"
+        },
+        "authorUrl": {
+          "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseCommentVO"
+          }
+        },
+        "content": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "email": {
+          "type": "string"
+        },
+        "gravatarMd5": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "isAdmin": {
+          "type": "boolean"
+        },
+        "parentId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "AUDITING",
+            "PUBLISHED",
+            "RECYCLE"
+          ]
+        },
+        "userAgent": {
+          "type": "string"
+        }
+      },
+      "title": "BaseCommentVO"
+    },
+    "BaseCommentWithParentVO": {
+      "type": "object",
+      "properties": {
+        "allowNotification": {
+          "type": "boolean"
+        },
+        "author": {
+          "type": "string"
+        },
+        "authorUrl": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "email": {
+          "type": "string"
+        },
+        "gravatarMd5": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "isAdmin": {
+          "type": "boolean"
+        },
+        "parent": {
+          "$ref": "#/definitions/BaseCommentWithParentVO"
+        },
+        "parentId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "AUDITING",
+            "PUBLISHED",
+            "RECYCLE"
+          ]
+        },
+        "userAgent": {
+          "type": "string"
+        }
+      },
+      "title": "BaseCommentWithParentVO"
+    },
+    "BaseMetaDTO": {
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "key": {
+          "type": "string"
+        },
+        "postId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "title": "BaseMetaDTO"
+    },
+    "BasePostSimpleDTO": {
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "disallowComment": {
+          "type": "boolean"
+        },
+        "editTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "editorType": {
+          "type": "string",
+          "enum": [
+            "MARKDOWN",
+            "RICHTEXT"
+          ]
+        },
+        "fullPath": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "likes": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "metaDescription": {
+          "type": "string"
+        },
+        "metaKeywords": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "DRAFT",
+            "INTIMATE",
+            "PUBLISHED",
+            "RECYCLE"
+          ]
+        },
+        "summary": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "topPriority": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "topped": {
+          "type": "boolean"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "visits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "wordCount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "BasePostSimpleDTO"
+    },
+    "BaseResponse«object»": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object"
+        },
+        "devMessage": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "BaseResponse«object»"
+    },
+    "CategoryDTO": {
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "description": {
+          "type": "string"
+        },
+        "fullPath": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        }
+      },
+      "title": "CategoryDTO"
+    },
+    "CommentWithHasChildrenVO": {
+      "type": "object",
+      "properties": {
+        "allowNotification": {
+          "type": "boolean"
+        },
+        "author": {
+          "type": "string"
+        },
+        "authorUrl": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "email": {
+          "type": "string"
+        },
+        "gravatarMd5": {
+          "type": "string"
+        },
+        "hasChildren": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "isAdmin": {
+          "type": "boolean"
+        },
+        "parentId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "AUDITING",
+            "PUBLISHED",
+            "RECYCLE"
+          ]
+        },
+        "userAgent": {
+          "type": "string"
+        }
+      },
+      "title": "CommentWithHasChildrenVO"
+    },
+    "JournalCommentParam": {
+      "type": "object",
+      "required": [
+        "author",
+        "content",
+        "email"
+      ],
+      "properties": {
+        "allowNotification": {
+          "type": "boolean"
+        },
+        "author": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 50
+        },
+        "authorUrl": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 255
+        },
+        "content": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 1023
+        },
+        "email": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 255
+        },
+        "parentId": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "postId": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "exclusiveMinimum": false
+        }
+      },
+      "title": "JournalCommentParam"
+    },
+    "JournalDTO": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "likes": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sourceContent": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "INTIMATE",
+            "PUBLIC"
+          ]
+        }
+      },
+      "title": "JournalDTO"
+    },
+    "JournalWithCmtCountDTO": {
+      "type": "object",
+      "properties": {
+        "commentCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "content": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "likes": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sourceContent": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "INTIMATE",
+            "PUBLIC"
+          ]
+        }
+      },
+      "title": "JournalWithCmtCountDTO"
+    },
+    "LinkDTO": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "logo": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "team": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "title": "LinkDTO"
+    },
+    "LinkTeamVO": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkDTO"
+          }
+        },
+        "team": {
+          "type": "string"
+        }
+      },
+      "title": "LinkTeamVO"
+    },
+    "MenuDTO": {
+      "type": "object",
+      "properties": {
+        "icon": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "target": {
+          "type": "string"
+        },
+        "team": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "title": "MenuDTO"
+    },
+    "MenuVO": {
+      "type": "object",
+      "properties": {
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MenuVO"
+          }
+        },
+        "icon": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "target": {
+          "type": "string"
+        },
+        "team": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "title": "MenuVO"
+    },
+    "OptionDTO": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "object"
+        }
+      },
+      "title": "OptionDTO"
+    },
+    "Pageable": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "Pageable"
+    },
+    "Page«BaseCommentVO»": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseCommentVO"
+          }
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageable": {
+          "$ref": "#/definitions/Pageable"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Page«BaseCommentVO»"
+    },
+    "Page«BaseCommentWithParentVO»": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseCommentWithParentVO"
+          }
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageable": {
+          "$ref": "#/definitions/Pageable"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Page«BaseCommentWithParentVO»"
+    },
+    "Page«BasePostSimpleDTO»": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BasePostSimpleDTO"
+          }
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageable": {
+          "$ref": "#/definitions/Pageable"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Page«BasePostSimpleDTO»"
+    },
+    "Page«CommentWithHasChildrenVO»": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommentWithHasChildrenVO"
+          }
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageable": {
+          "$ref": "#/definitions/Pageable"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Page«CommentWithHasChildrenVO»"
+    },
+    "Page«JournalWithCmtCountDTO»": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JournalWithCmtCountDTO"
+          }
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageable": {
+          "$ref": "#/definitions/Pageable"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Page«JournalWithCmtCountDTO»"
+    },
+    "Page«PhotoDTO»": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PhotoDTO"
+          }
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageable": {
+          "$ref": "#/definitions/Pageable"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Page«PhotoDTO»"
+    },
+    "Page«PostListVO»": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PostListVO"
+          }
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageable": {
+          "$ref": "#/definitions/Pageable"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Page«PostListVO»"
+    },
+    "Page«SheetListVO»": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SheetListVO"
+          }
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageable": {
+          "$ref": "#/definitions/Pageable"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Page«SheetListVO»"
+    },
+    "PhotoDTO": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "location": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "takeTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "team": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "title": "PhotoDTO"
+    },
+    "PostCommentParam": {
+      "type": "object",
+      "required": [
+        "author",
+        "content",
+        "email"
+      ],
+      "properties": {
+        "allowNotification": {
+          "type": "boolean"
+        },
+        "author": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 50
+        },
+        "authorUrl": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 255
+        },
+        "content": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 1023
+        },
+        "email": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 255
+        },
+        "parentId": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "postId": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "exclusiveMinimum": false
+        }
+      },
+      "title": "PostCommentParam"
+    },
+    "PostDetailVO": {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CategoryDTO"
+          }
+        },
+        "categoryIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "commentCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "disallowComment": {
+          "type": "boolean"
+        },
+        "editTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "editorType": {
+          "type": "string",
+          "enum": [
+            "MARKDOWN",
+            "RICHTEXT"
+          ]
+        },
+        "formatContent": {
+          "type": "string"
+        },
+        "fullPath": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "likes": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "metaDescription": {
+          "type": "string"
+        },
+        "metaIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "metaKeywords": {
+          "type": "string"
+        },
+        "metas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseMetaDTO"
+          }
+        },
+        "originalContent": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "DRAFT",
+            "INTIMATE",
+            "PUBLISHED",
+            "RECYCLE"
+          ]
+        },
+        "summary": {
+          "type": "string"
+        },
+        "tagIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagDTO"
+          }
+        },
+        "template": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "topPriority": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "topped": {
+          "type": "boolean"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "visits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "wordCount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "PostDetailVO"
+    },
+    "PostListVO": {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CategoryDTO"
+          }
+        },
+        "commentCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "disallowComment": {
+          "type": "boolean"
+        },
+        "editTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "editorType": {
+          "type": "string",
+          "enum": [
+            "MARKDOWN",
+            "RICHTEXT"
+          ]
+        },
+        "fullPath": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "likes": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "metaDescription": {
+          "type": "string"
+        },
+        "metaKeywords": {
+          "type": "string"
+        },
+        "metas": {
+          "type": "object"
+        },
+        "password": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "DRAFT",
+            "INTIMATE",
+            "PUBLISHED",
+            "RECYCLE"
+          ]
+        },
+        "summary": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagDTO"
+          }
+        },
+        "template": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "topPriority": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "topped": {
+          "type": "boolean"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "visits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "wordCount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "PostListVO"
+    },
+    "SheetCommentParam": {
+      "type": "object",
+      "required": [
+        "author",
+        "content",
+        "email"
+      ],
+      "properties": {
+        "allowNotification": {
+          "type": "boolean"
+        },
+        "author": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 50
+        },
+        "authorUrl": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 255
+        },
+        "content": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 1023
+        },
+        "email": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 255
+        },
+        "parentId": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "postId": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "exclusiveMinimum": false
+        }
+      },
+      "title": "SheetCommentParam"
+    },
+    "SheetDetailVO": {
+      "type": "object",
+      "properties": {
+        "commentCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "disallowComment": {
+          "type": "boolean"
+        },
+        "editTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "editorType": {
+          "type": "string",
+          "enum": [
+            "MARKDOWN",
+            "RICHTEXT"
+          ]
+        },
+        "formatContent": {
+          "type": "string"
+        },
+        "fullPath": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "likes": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "metaDescription": {
+          "type": "string"
+        },
+        "metaIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "metaKeywords": {
+          "type": "string"
+        },
+        "metas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseMetaDTO"
+          }
+        },
+        "originalContent": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "DRAFT",
+            "INTIMATE",
+            "PUBLISHED",
+            "RECYCLE"
+          ]
+        },
+        "summary": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "topPriority": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "topped": {
+          "type": "boolean"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "visits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "wordCount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "SheetDetailVO"
+    },
+    "SheetListVO": {
+      "type": "object",
+      "properties": {
+        "commentCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "disallowComment": {
+          "type": "boolean"
+        },
+        "editTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "editorType": {
+          "type": "string",
+          "enum": [
+            "MARKDOWN",
+            "RICHTEXT"
+          ]
+        },
+        "fullPath": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "likes": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "metaDescription": {
+          "type": "string"
+        },
+        "metaKeywords": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "DRAFT",
+            "INTIMATE",
+            "PUBLISHED",
+            "RECYCLE"
+          ]
+        },
+        "summary": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "topPriority": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "topped": {
+          "type": "boolean"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "visits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "wordCount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "SheetListVO"
+    },
+    "Sort": {
+      "type": "object",
+      "properties": {
+        "sort": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "Sort"
+    },
+    "StatisticDTO": {
+      "type": "object",
+      "properties": {
+        "attachmentCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "birthday": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "categoryCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "commentCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "establishDays": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "journalCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "likeCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "linkCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "postCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "tagCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "visitCount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "StatisticDTO"
+    },
+    "StatisticWithUserDTO": {
+      "type": "object",
+      "properties": {
+        "attachmentCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "birthday": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "categoryCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "commentCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "establishDays": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "journalCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "likeCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "linkCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "postCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "tagCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user": {
+          "$ref": "#/definitions/UserDTO"
+        },
+        "visitCount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "StatisticWithUserDTO"
+    },
+    "TagDTO": {
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "fullPath": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        }
+      },
+      "title": "TagDTO"
+    },
+    "ThemeProperty": {
+      "type": "object",
+      "properties": {
+        "activated": {
+          "type": "boolean"
+        },
+        "author": {
+          "$ref": "#/definitions/Author"
+        },
+        "branch": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "folderName": {
+          "type": "string"
+        },
+        "hasOptions": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string"
+        },
+        "logo": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "postMetaField": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "repo": {
+          "type": "string"
+        },
+        "require": {
+          "type": "string"
+        },
+        "screenshots": {
+          "type": "string"
+        },
+        "sheetMetaField": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "themePath": {
+          "type": "string"
+        },
+        "updateStrategy": {
+          "type": "string",
+          "enum": [
+            "BRANCH",
+            "RELEASE"
+          ]
+        },
+        "version": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string"
+        }
+      },
+      "title": "ThemeProperty"
+    },
+    "UserDTO": {
+      "type": "object",
+      "properties": {
+        "avatar": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "description": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "mfaType": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "TFA_TOTP"
+          ]
+        },
+        "nickname": {
+          "type": "string"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "title": "UserDTO"
+    }
+  }
+}
