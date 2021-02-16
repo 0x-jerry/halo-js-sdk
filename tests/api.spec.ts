@@ -15,9 +15,17 @@ async function test() {
     sort: []
   })
 
-  assert(Array.isArray(res.content))
+  assert(Array.isArray(res.content), 'posts content')
 
-  assert(typeof res.empty === 'boolean')
+  const postId = res.content[0].id
+
+  const postRes = await api.content.postsPostIdGet({
+    postId: postId
+  })
+
+  assert(Array.isArray(postRes.categories), 'post categories')
+
+  assert(Array.isArray(postRes.tags), 'post tags')
 }
 
 test()
