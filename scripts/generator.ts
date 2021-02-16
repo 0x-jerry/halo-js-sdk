@@ -62,9 +62,14 @@ export function generateAPICode(
   const str = apis.map((api) => {
     const type = api.params
       .map((p) => {
-        return `${p.name}${p.required ? '' : '?'}: ${
+        return `
+      /**
+       * ${p.desc}
+       */
+        ${p.name}${p.required ? '' : '?'}: ${
           p.type ? typeToSting(p.type) : 'any'
-        }`
+        }
+        `
       })
       .join('\n')
 
@@ -92,6 +97,9 @@ export function generateAPICode(
     const optStr = type ? `opt: {${type}}` : ''
 
     return `
+    /**
+     * ${api.desc}
+     */
       "${functionName}"(${optStr}): Promise<${resType}> {
         return R.${methodKey}('${api.path}', ${optStr ? 'opt' : ''})
       }

@@ -16,6 +16,7 @@ export type Type = TypeName | IEnumType | IObjectType | IArrayType
 export interface Prop {
   name: string
   required: boolean
+  desc: string
   type: Type
 }
 
@@ -27,6 +28,7 @@ export interface Interface {
 export interface API {
   path: string
   method: 'get' | 'post' | 'put' | 'delete' | string
+  desc: string
   params: Prop[]
   data: Type
 }
@@ -50,6 +52,7 @@ export function parseAPIJson(json) {
       const api: API = {
         path: urlPath,
         method: method as any,
+        desc: methodData.summary,
         params: (methodData.parameters || []).map(parseParameter),
         data: 'void'
       }
@@ -81,6 +84,7 @@ function parseDefinition(defineData) {
 function parseParameter(paramData) {
   const param: Prop = {
     name: paramData.name,
+    desc: paramData.description || '',
     required: !!paramData.required,
     type: parseType(paramData)
   }
@@ -118,6 +122,7 @@ function parseType(typeData): Type {
 
             const p: Prop = {
               name: key,
+              desc: v.description,
               required: true,
               type: parseType(v)
             }
