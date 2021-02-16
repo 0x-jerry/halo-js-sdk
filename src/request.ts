@@ -1,13 +1,31 @@
-import axios from 'axios'
+import { configs } from './config'
 
-const axiosInstance = axios.create({
-  // baseURL:
-})
+function decodeResponseData(data: any) {
+  return data.data ? data.data : data
+}
 
-export function get(path: string, data?: any): any {}
+export async function get(path: string, data?: any) {
+  const res = await configs.axios.get(path, {
+    params: data
+  })
 
-export function post(path: string, data?: any): any {}
+  return decodeResponseData(res.data)
+}
 
-export function put(path: string, data?: any): any {}
+export async function post(path: string, data?: any) {
+  const res = await configs.axios.post(path, data)
 
-export function remove(path: string, data?: any): any {}
+  return decodeResponseData(res.data)
+}
+
+export async function put(path: string, data?: any) {
+  const res = await configs.axios.put(path, data)
+
+  return decodeResponseData(res.data)
+}
+
+export async function remove(path: string, data?: any) {
+  const res = await configs.axios.delete(path, { params: data })
+
+  return decodeResponseData(res.data)
+}
