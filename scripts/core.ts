@@ -55,9 +55,9 @@ function generateCodeFromJson(json, apiFileName) {
     .map((i) => i.name)
     .join(',')}} from './${apiFileName}Define'
     `
-  const apiCode = generateAPICode(apis)
+  const apiCode = generateAPICode(apis, { header: define })
 
-  toFile(`api/${apiFileName}.ts`, [define, apiCode].join('\n'))
+  toFile(`api/${apiFileName}.ts`, apiCode)
 }
 
 function toFile(fileName: string, source: string) {
