@@ -99,7 +99,7 @@ import {
 import * as R from "../request";
 
 export const api = {
-  ApiAdminAttachmentsGet(opt: {
+  attachmentsGet(opt: {
     attachmentType:
       | "ALIOSS"
       | "BAIDUBOS"
@@ -118,13 +118,13 @@ export const api = {
   }): Promise<PageAttachmentDTO> {
     return R.get("/api/admin/attachments", opt);
   },
-  ApiAdminAttachmentsRemove(opt: { ids: any }): Promise<Array<Attachment>> {
+  attachmentsRemove(opt: { ids: any }): Promise<Array<Attachment>> {
     return R.remove("/api/admin/attachments", opt);
   },
-  ApiAdminAttachmentsMedia_typesGet(): Promise<Array<string>> {
+  attachmentsMedia_typesGet(): Promise<Array<string>> {
     return R.get("/api/admin/attachments/media_types");
   },
-  ApiAdminAttachmentsTypesGet(): Promise<
+  attachmentsTypesGet(): Promise<
     Array<
       | "ALIOSS"
       | "BAIDUBOS"
@@ -139,123 +139,111 @@ export const api = {
   > {
     return R.get("/api/admin/attachments/types");
   },
-  ApiAdminAttachmentsUploadPost(opt: { file: any }): Promise<AttachmentDTO> {
+  attachmentsUploadPost(opt: { file: any }): Promise<AttachmentDTO> {
     return R.post("/api/admin/attachments/upload", opt);
   },
-  ApiAdminAttachmentsUploadsPost(opt: {
+  attachmentsUploadsPost(opt: {
     files: Array<any>;
   }): Promise<Array<AttachmentDTO>> {
     return R.post("/api/admin/attachments/uploads", opt);
   },
-  ApiAdminAttachmentsAttachmentIdPut(opt: {
+  attachmentsAttachmentIdPut(opt: {
     attachmentId: number;
     attachmentParam: any;
   }): Promise<AttachmentDTO> {
     return R.put("/api/admin/attachments/{attachmentId}", opt);
   },
-  ApiAdminAttachmentsIdGet(opt: { id: number }): Promise<AttachmentDTO> {
+  attachmentsIdGet(opt: { id: number }): Promise<AttachmentDTO> {
     return R.get("/api/admin/attachments/{id}", opt);
   },
-  ApiAdminAttachmentsIdRemove(opt: { id: number }): Promise<AttachmentDTO> {
+  attachmentsIdRemove(opt: { id: number }): Promise<AttachmentDTO> {
     return R.remove("/api/admin/attachments/{id}", opt);
   },
-  ApiAdminBackupsDataGet(): Promise<Array<BackupDTO>> {
+  backupsDataGet(): Promise<Array<BackupDTO>> {
     return R.get("/api/admin/backups/data");
   },
-  ApiAdminBackupsDataPost(): Promise<BackupDTO> {
+  backupsDataPost(): Promise<BackupDTO> {
     return R.post("/api/admin/backups/data");
   },
-  ApiAdminBackupsDataRemove(opt: { filename: string }): Promise<void> {
+  backupsDataRemove(opt: { filename: string }): Promise<void> {
     return R.remove("/api/admin/backups/data", opt);
   },
-  ApiAdminBackupsDataFileNameGet(opt: { fileName: string }): Promise<Resource> {
+  backupsDataFileNameGet(opt: { fileName: string }): Promise<Resource> {
     return R.get("/api/admin/backups/data/{fileName}", opt);
   },
-  ApiAdminBackupsMarkdownExportGet(): Promise<Array<BackupDTO>> {
+  backupsMarkdownExportGet(): Promise<Array<BackupDTO>> {
     return R.get("/api/admin/backups/markdown/export");
   },
-  ApiAdminBackupsMarkdownExportPost(opt: {
+  backupsMarkdownExportPost(opt: {
     postMarkdownParam: any;
   }): Promise<BackupDTO> {
     return R.post("/api/admin/backups/markdown/export", opt);
   },
-  ApiAdminBackupsMarkdownExportRemove(opt: {
-    filename: string;
-  }): Promise<void> {
+  backupsMarkdownExportRemove(opt: { filename: string }): Promise<void> {
     return R.remove("/api/admin/backups/markdown/export", opt);
   },
-  ApiAdminBackupsMarkdownExportFileNameGet(opt: {
+  backupsMarkdownExportFileNameGet(opt: {
     fileName: string;
   }): Promise<Resource> {
     return R.get("/api/admin/backups/markdown/export/{fileName}", opt);
   },
-  ApiAdminBackupsMarkdownImportPost(opt: {
-    file: any;
-  }): Promise<BasePostDetailDTO> {
+  backupsMarkdownImportPost(opt: { file: any }): Promise<BasePostDetailDTO> {
     return R.post("/api/admin/backups/markdown/import", opt);
   },
-  "ApiAdminBackupsWork-dirGet"(): Promise<Array<BackupDTO>> {
+  "backupsWork-dirGet"(): Promise<Array<BackupDTO>> {
     return R.get("/api/admin/backups/work-dir");
   },
-  "ApiAdminBackupsWork-dirPost"(): Promise<BackupDTO> {
+  "backupsWork-dirPost"(): Promise<BackupDTO> {
     return R.post("/api/admin/backups/work-dir");
   },
-  "ApiAdminBackupsWork-dirRemove"(opt: { filename: string }): Promise<void> {
+  "backupsWork-dirRemove"(opt: { filename: string }): Promise<void> {
     return R.remove("/api/admin/backups/work-dir", opt);
   },
-  "ApiAdminBackupsWork-dirFileNameGet"(opt: {
-    fileName: string;
-  }): Promise<Resource> {
+  "backupsWork-dirFileNameGet"(opt: { fileName: string }): Promise<Resource> {
     return R.get("/api/admin/backups/work-dir/{fileName}", opt);
   },
-  ApiAdminCategoriesGet(opt: {
+  categoriesGet(opt: {
     more: boolean;
     sort: Array<string>;
   }): Promise<Array<CategoryDTO>> {
     return R.get("/api/admin/categories", opt);
   },
-  ApiAdminCategoriesPost(opt: { categoryParam: any }): Promise<CategoryDTO> {
+  categoriesPost(opt: { categoryParam: any }): Promise<CategoryDTO> {
     return R.post("/api/admin/categories", opt);
   },
-  ApiAdminCategoriesTree_viewGet(opt: {
+  categoriesTree_viewGet(opt: {
     sort: Array<string>;
   }): Promise<Array<CategoryVO>> {
     return R.get("/api/admin/categories/tree_view", opt);
   },
-  ApiAdminCategoriesCategoryIdGet(opt: {
-    categoryId: number;
-  }): Promise<CategoryDTO> {
+  categoriesCategoryIdGet(opt: { categoryId: number }): Promise<CategoryDTO> {
     return R.get("/api/admin/categories/{categoryId}", opt);
   },
-  ApiAdminCategoriesCategoryIdPut(opt: {
+  categoriesCategoryIdPut(opt: {
     categoryId: number;
     categoryParam: any;
   }): Promise<CategoryDTO> {
     return R.put("/api/admin/categories/{categoryId}", opt);
   },
-  ApiAdminCategoriesCategoryIdRemove(opt: {
-    categoryId: number;
-  }): Promise<void> {
+  categoriesCategoryIdRemove(opt: { categoryId: number }): Promise<void> {
     return R.remove("/api/admin/categories/{categoryId}", opt);
   },
-  ApiAdminCountsGet(): Promise<StatisticDTO> {
+  countsGet(): Promise<StatisticDTO> {
     return R.get("/api/admin/counts");
   },
-  ApiAdminEnvironmentsGet(): Promise<EnvironmentDTO> {
+  environmentsGet(): Promise<EnvironmentDTO> {
     return R.get("/api/admin/environments");
   },
-  ApiAdminHaloLogfileGet(opt: { lines: number }): Promise<BaseResponsestring> {
+  haloLogfileGet(opt: { lines: number }): Promise<BaseResponsestring> {
     return R.get("/api/admin/halo/logfile", opt);
   },
-  ApiAdminInstallationsPost(opt: {
-    installParam: any;
-  }): Promise<BaseResponsestring> {
+  installationsPost(opt: { installParam: any }): Promise<BaseResponsestring> {
     return R.post("/api/admin/installations", opt);
   },
-  ApiAdminIs_installedGet(): Promise<boolean> {
+  is_installedGet(): Promise<boolean> {
     return R.get("/api/admin/is_installed");
   },
-  ApiAdminJournalsGet(opt: {
+  journalsGet(opt: {
     keyword: string;
     page: number;
     size: number;
@@ -264,10 +252,10 @@ export const api = {
   }): Promise<PageJournalWithCmtCountDTO> {
     return R.get("/api/admin/journals", opt);
   },
-  ApiAdminJournalsPost(opt: { journalParam: any }): Promise<JournalDTO> {
+  journalsPost(opt: { journalParam: any }): Promise<JournalDTO> {
     return R.post("/api/admin/journals", opt);
   },
-  ApiAdminJournalsCommentsGet(opt: {
+  journalsCommentsGet(opt: {
     keyword: string;
     page: number;
     size: number;
@@ -276,23 +264,23 @@ export const api = {
   }): Promise<PageJournalCommentWithJournalVO> {
     return R.get("/api/admin/journals/comments", opt);
   },
-  ApiAdminJournalsCommentsPost(opt: {
+  journalsCommentsPost(opt: {
     journalCommentParam: any;
   }): Promise<BaseCommentDTO> {
     return R.post("/api/admin/journals/comments", opt);
   },
-  ApiAdminJournalsCommentsLatestGet(opt: {
+  journalsCommentsLatestGet(opt: {
     status: "AUDITING" | "PUBLISHED" | "RECYCLE";
     top: number;
   }): Promise<Array<JournalCommentWithJournalVO>> {
     return R.get("/api/admin/journals/comments/latest", opt);
   },
-  ApiAdminJournalsCommentsCommentIdRemove(opt: {
+  journalsCommentsCommentIdRemove(opt: {
     commentId: number;
   }): Promise<BaseCommentDTO> {
     return R.remove("/api/admin/journals/comments/{commentId}", opt);
   },
-  ApiAdminJournalsCommentsCommentIdStatusStatusPut(opt: {
+  journalsCommentsCommentIdStatusStatusPut(opt: {
     commentId: number;
     status: "AUDITING" | "PUBLISHED" | "RECYCLE";
   }): Promise<BaseCommentDTO> {
@@ -301,135 +289,123 @@ export const api = {
       opt
     );
   },
-  ApiAdminJournalsCommentsJournalIdList_viewGet(opt: {
+  journalsCommentsJournalIdList_viewGet(opt: {
     journalId: number;
     page: number;
     sort: Array<string>;
   }): Promise<PageBaseCommentWithParentVO> {
     return R.get("/api/admin/journals/comments/{journalId}/list_view", opt);
   },
-  ApiAdminJournalsCommentsJournalIdTree_viewGet(opt: {
+  journalsCommentsJournalIdTree_viewGet(opt: {
     journalId: number;
     page: number;
     sort: Array<string>;
   }): Promise<PageBaseCommentVO> {
     return R.get("/api/admin/journals/comments/{journalId}/tree_view", opt);
   },
-  ApiAdminJournalsLatestGet(opt: {
+  journalsLatestGet(opt: {
     top: number;
   }): Promise<Array<JournalWithCmtCountDTO>> {
     return R.get("/api/admin/journals/latest", opt);
   },
-  ApiAdminJournalsIdPut(opt: {
-    id: number;
-    journalParam: any;
-  }): Promise<JournalDTO> {
+  journalsIdPut(opt: { id: number; journalParam: any }): Promise<JournalDTO> {
     return R.put("/api/admin/journals/{id}", opt);
   },
-  ApiAdminJournalsJournalIdRemove(opt: {
-    journalId: number;
-  }): Promise<JournalDTO> {
+  journalsJournalIdRemove(opt: { journalId: number }): Promise<JournalDTO> {
     return R.remove("/api/admin/journals/{journalId}", opt);
   },
-  ApiAdminLinksGet(opt: { sort: Array<string> }): Promise<Array<LinkDTO>> {
+  linksGet(opt: { sort: Array<string> }): Promise<Array<LinkDTO>> {
     return R.get("/api/admin/links", opt);
   },
-  ApiAdminLinksPost(opt: { linkParam: any }): Promise<LinkDTO> {
+  linksPost(opt: { linkParam: any }): Promise<LinkDTO> {
     return R.post("/api/admin/links", opt);
   },
-  ApiAdminLinksTeamsGet(): Promise<Array<string>> {
+  linksTeamsGet(): Promise<Array<string>> {
     return R.get("/api/admin/links/teams");
   },
-  ApiAdminLinksIdGet(opt: { id: number }): Promise<LinkDTO> {
+  linksIdGet(opt: { id: number }): Promise<LinkDTO> {
     return R.get("/api/admin/links/{id}", opt);
   },
-  ApiAdminLinksIdPut(opt: { id: number; linkParam: any }): Promise<LinkDTO> {
+  linksIdPut(opt: { id: number; linkParam: any }): Promise<LinkDTO> {
     return R.put("/api/admin/links/{id}", opt);
   },
-  ApiAdminLinksIdRemove(opt: { id: number }): Promise<void> {
+  linksIdRemove(opt: { id: number }): Promise<void> {
     return R.remove("/api/admin/links/{id}", opt);
   },
-  ApiAdminLoginPost(opt: { loginParam: any }): Promise<AuthToken> {
+  loginPost(opt: { loginParam: any }): Promise<AuthToken> {
     return R.post("/api/admin/login", opt);
   },
-  ApiAdminLoginPrecheckPost(opt: {
-    loginParam: any;
-  }): Promise<LoginPreCheckDTO> {
+  loginPrecheckPost(opt: { loginParam: any }): Promise<LoginPreCheckDTO> {
     return R.post("/api/admin/login/precheck", opt);
   },
-  ApiAdminLogoutPost(): Promise<void> {
+  logoutPost(): Promise<void> {
     return R.post("/api/admin/logout");
   },
-  ApiAdminLogsGet(opt: {
+  logsGet(opt: {
     page: number;
     size: number;
     sort: Array<string>;
   }): Promise<PageLogDTO> {
     return R.get("/api/admin/logs", opt);
   },
-  ApiAdminLogsClearGet(): Promise<void> {
+  logsClearGet(): Promise<void> {
     return R.get("/api/admin/logs/clear");
   },
-  ApiAdminLogsLatestGet(opt: { top: number }): Promise<Array<LogDTO>> {
+  logsLatestGet(opt: { top: number }): Promise<Array<LogDTO>> {
     return R.get("/api/admin/logs/latest", opt);
   },
-  ApiAdminMailsTestPost(opt: { mailParam: any }): Promise<BaseResponsestring> {
+  mailsTestPost(opt: { mailParam: any }): Promise<BaseResponsestring> {
     return R.post("/api/admin/mails/test", opt);
   },
-  ApiAdminMailsTestConnectionPost(): Promise<BaseResponsestring> {
+  mailsTestConnectionPost(): Promise<BaseResponsestring> {
     return R.post("/api/admin/mails/test/connection");
   },
-  ApiAdminMenusGet(opt: { sort: Array<string> }): Promise<Array<MenuDTO>> {
+  menusGet(opt: { sort: Array<string> }): Promise<Array<MenuDTO>> {
     return R.get("/api/admin/menus", opt);
   },
-  ApiAdminMenusPost(opt: { menuParam: any }): Promise<MenuDTO> {
+  menusPost(opt: { menuParam: any }): Promise<MenuDTO> {
     return R.post("/api/admin/menus", opt);
   },
-  ApiAdminMenusBatchPost(opt: { menuParams: any }): Promise<Array<MenuDTO>> {
+  menusBatchPost(opt: { menuParams: any }): Promise<Array<MenuDTO>> {
     return R.post("/api/admin/menus/batch", opt);
   },
-  ApiAdminMenusBatchPut(opt: { menuParams: any }): Promise<Array<MenuDTO>> {
+  menusBatchPut(opt: { menuParams: any }): Promise<Array<MenuDTO>> {
     return R.put("/api/admin/menus/batch", opt);
   },
-  ApiAdminMenusBatchRemove(opt: { menuIds: any }): Promise<Array<MenuDTO>> {
+  menusBatchRemove(opt: { menuIds: any }): Promise<Array<MenuDTO>> {
     return R.remove("/api/admin/menus/batch", opt);
   },
-  ApiAdminMenusTeamTree_viewGet(opt: {
+  menusTeamTree_viewGet(opt: {
     sort: Array<string>;
     team: string;
   }): Promise<Array<MenuVO>> {
     return R.get("/api/admin/menus/team/tree_view", opt);
   },
-  ApiAdminMenusTeamsGet(): Promise<Array<string>> {
+  menusTeamsGet(): Promise<Array<string>> {
     return R.get("/api/admin/menus/teams");
   },
-  ApiAdminMenusTree_viewGet(opt: {
-    sort: Array<string>;
-  }): Promise<Array<MenuVO>> {
+  menusTree_viewGet(opt: { sort: Array<string> }): Promise<Array<MenuVO>> {
     return R.get("/api/admin/menus/tree_view", opt);
   },
-  ApiAdminMenusMenuIdGet(opt: { menuId: number }): Promise<MenuDTO> {
+  menusMenuIdGet(opt: { menuId: number }): Promise<MenuDTO> {
     return R.get("/api/admin/menus/{menuId}", opt);
   },
-  ApiAdminMenusMenuIdPut(opt: {
-    menuId: number;
-    menuParam: any;
-  }): Promise<MenuDTO> {
+  menusMenuIdPut(opt: { menuId: number; menuParam: any }): Promise<MenuDTO> {
     return R.put("/api/admin/menus/{menuId}", opt);
   },
-  ApiAdminMenusMenuIdRemove(opt: { menuId: number }): Promise<MenuDTO> {
+  menusMenuIdRemove(opt: { menuId: number }): Promise<MenuDTO> {
     return R.remove("/api/admin/menus/{menuId}", opt);
   },
-  ApiAdminMigrationsHaloPost(opt: { file: any }): Promise<void> {
+  migrationsHaloPost(opt: { file: any }): Promise<void> {
     return R.post("/api/admin/migrations/halo", opt);
   },
-  ApiAdminOptionsGet(): Promise<Array<OptionDTO>> {
+  optionsGet(): Promise<Array<OptionDTO>> {
     return R.get("/api/admin/options");
   },
-  ApiAdminOptionsPost(opt: { optionParam: any }): Promise<void> {
+  optionsPost(opt: { optionParam: any }): Promise<void> {
     return R.post("/api/admin/options", opt);
   },
-  ApiAdminOptionsList_viewGet(opt: {
+  optionsList_viewGet(opt: {
     keyword: string;
     page: number;
     size: number;
@@ -438,37 +414,37 @@ export const api = {
   }): Promise<PageOptionSimpleDTO> {
     return R.get("/api/admin/options/list_view", opt);
   },
-  ApiAdminOptionsMap_viewGet(): Promise<any> {
+  optionsMap_viewGet(): Promise<any> {
     return R.get("/api/admin/options/map_view");
   },
-  ApiAdminOptionsMap_viewKeysPost(opt: { keys: any }): Promise<any> {
+  optionsMap_viewKeysPost(opt: { keys: any }): Promise<any> {
     return R.post("/api/admin/options/map_view/keys", opt);
   },
-  ApiAdminOptionsMap_viewSavingPost(opt: { optionMap: any }): Promise<void> {
+  optionsMap_viewSavingPost(opt: { optionMap: any }): Promise<void> {
     return R.post("/api/admin/options/map_view/saving", opt);
   },
-  ApiAdminOptionsSavingPost(opt: { optionParams: any }): Promise<void> {
+  optionsSavingPost(opt: { optionParams: any }): Promise<void> {
     return R.post("/api/admin/options/saving", opt);
   },
-  ApiAdminOptionsIdGet(opt: { id: number }): Promise<OptionSimpleDTO> {
+  optionsIdGet(opt: { id: number }): Promise<OptionSimpleDTO> {
     return R.get("/api/admin/options/{id}", opt);
   },
-  ApiAdminOptionsOptionIdPut(opt: {
+  optionsOptionIdPut(opt: {
     optionId: number;
     optionParam: any;
   }): Promise<void> {
     return R.put("/api/admin/options/{optionId}", opt);
   },
-  ApiAdminOptionsOptionIdRemove(opt: { optionId: number }): Promise<void> {
+  optionsOptionIdRemove(opt: { optionId: number }): Promise<void> {
     return R.remove("/api/admin/options/{optionId}", opt);
   },
-  ApiAdminPasswordCodePost(opt: { param: any }): Promise<void> {
+  passwordCodePost(opt: { param: any }): Promise<void> {
     return R.post("/api/admin/password/code", opt);
   },
-  ApiAdminPasswordResetPut(opt: { param: any }): Promise<void> {
+  passwordResetPut(opt: { param: any }): Promise<void> {
     return R.put("/api/admin/password/reset", opt);
   },
-  ApiAdminPhotosGet(opt: {
+  photosGet(opt: {
     keyword: string;
     page: number;
     size: number;
@@ -477,30 +453,28 @@ export const api = {
   }): Promise<PagePhotoDTO> {
     return R.get("/api/admin/photos", opt);
   },
-  ApiAdminPhotosPost(opt: { photoParam: any }): Promise<PhotoDTO> {
+  photosPost(opt: { photoParam: any }): Promise<PhotoDTO> {
     return R.post("/api/admin/photos", opt);
   },
-  ApiAdminPhotosLatestGet(opt: {
-    sort: Array<string>;
-  }): Promise<Array<PhotoDTO>> {
+  photosLatestGet(opt: { sort: Array<string> }): Promise<Array<PhotoDTO>> {
     return R.get("/api/admin/photos/latest", opt);
   },
-  ApiAdminPhotosTeamsGet(): Promise<Array<string>> {
+  photosTeamsGet(): Promise<Array<string>> {
     return R.get("/api/admin/photos/teams");
   },
-  ApiAdminPhotosPhotoIdGet(opt: { photoId: number }): Promise<PhotoDTO> {
+  photosPhotoIdGet(opt: { photoId: number }): Promise<PhotoDTO> {
     return R.get("/api/admin/photos/{photoId}", opt);
   },
-  ApiAdminPhotosPhotoIdPut(opt: {
+  photosPhotoIdPut(opt: {
     photoId: number;
     photoParam: any;
   }): Promise<PhotoDTO> {
     return R.put("/api/admin/photos/{photoId}", opt);
   },
-  ApiAdminPhotosPhotoIdRemove(opt: { photoId: number }): Promise<void> {
+  photosPhotoIdRemove(opt: { photoId: number }): Promise<void> {
     return R.remove("/api/admin/photos/{photoId}", opt);
   },
-  ApiAdminPostsGet(opt: {
+  postsGet(opt: {
     categoryId: number;
     keyword: string;
     more: boolean;
@@ -511,16 +485,13 @@ export const api = {
   }): Promise<PageBasePostSimpleDTO> {
     return R.get("/api/admin/posts", opt);
   },
-  ApiAdminPostsPost(opt: {
-    autoSave: boolean;
-    postParam: any;
-  }): Promise<PostDetailVO> {
+  postsPost(opt: { autoSave: boolean; postParam: any }): Promise<PostDetailVO> {
     return R.post("/api/admin/posts", opt);
   },
-  ApiAdminPostsRemove(opt: { ids: any }): Promise<Array<Post>> {
+  postsRemove(opt: { ids: any }): Promise<Array<Post>> {
     return R.remove("/api/admin/posts", opt);
   },
-  ApiAdminPostsCommentsGet(opt: {
+  postsCommentsGet(opt: {
     keyword: string;
     page: number;
     size: number;
@@ -529,71 +500,67 @@ export const api = {
   }): Promise<PagePostCommentWithPostVO> {
     return R.get("/api/admin/posts/comments", opt);
   },
-  ApiAdminPostsCommentsPost(opt: {
-    postCommentParam: any;
-  }): Promise<BaseCommentDTO> {
+  postsCommentsPost(opt: { postCommentParam: any }): Promise<BaseCommentDTO> {
     return R.post("/api/admin/posts/comments", opt);
   },
-  ApiAdminPostsCommentsRemove(opt: { ids: any }): Promise<Array<PostComment>> {
+  postsCommentsRemove(opt: { ids: any }): Promise<Array<PostComment>> {
     return R.remove("/api/admin/posts/comments", opt);
   },
-  ApiAdminPostsCommentsLatestGet(opt: {
+  postsCommentsLatestGet(opt: {
     status: "AUDITING" | "PUBLISHED" | "RECYCLE";
     top: number;
   }): Promise<Array<PostCommentWithPostVO>> {
     return R.get("/api/admin/posts/comments/latest", opt);
   },
-  ApiAdminPostsCommentsStatusStatusPut(opt: {
+  postsCommentsStatusStatusPut(opt: {
     ids: any;
     status: "AUDITING" | "PUBLISHED" | "RECYCLE";
   }): Promise<Array<BaseCommentDTO>> {
     return R.put("/api/admin/posts/comments/status/{status}", opt);
   },
-  ApiAdminPostsCommentsCommentIdGet(opt: {
+  postsCommentsCommentIdGet(opt: {
     commentId: number;
   }): Promise<PostCommentWithPostVO> {
     return R.get("/api/admin/posts/comments/{commentId}", opt);
   },
-  ApiAdminPostsCommentsCommentIdPut(opt: {
+  postsCommentsCommentIdPut(opt: {
     commentId: number;
     commentParam: any;
   }): Promise<BaseCommentDTO> {
     return R.put("/api/admin/posts/comments/{commentId}", opt);
   },
-  ApiAdminPostsCommentsCommentIdRemove(opt: {
+  postsCommentsCommentIdRemove(opt: {
     commentId: number;
   }): Promise<BaseCommentDTO> {
     return R.remove("/api/admin/posts/comments/{commentId}", opt);
   },
-  ApiAdminPostsCommentsCommentIdStatusStatusPut(opt: {
+  postsCommentsCommentIdStatusStatusPut(opt: {
     commentId: number;
     status: "AUDITING" | "PUBLISHED" | "RECYCLE";
   }): Promise<BaseCommentDTO> {
     return R.put("/api/admin/posts/comments/{commentId}/status/{status}", opt);
   },
-  ApiAdminPostsCommentsPostIdList_viewGet(opt: {
+  postsCommentsPostIdList_viewGet(opt: {
     page: number;
     postId: number;
     sort: Array<string>;
   }): Promise<PageBaseCommentWithParentVO> {
     return R.get("/api/admin/posts/comments/{postId}/list_view", opt);
   },
-  ApiAdminPostsCommentsPostIdTree_viewGet(opt: {
+  postsCommentsPostIdTree_viewGet(opt: {
     page: number;
     postId: number;
     sort: Array<string>;
   }): Promise<PageBaseCommentVO> {
     return R.get("/api/admin/posts/comments/{postId}/tree_view", opt);
   },
-  ApiAdminPostsLatestGet(opt: {
-    top: number;
-  }): Promise<Array<BasePostMinimalDTO>> {
+  postsLatestGet(opt: { top: number }): Promise<Array<BasePostMinimalDTO>> {
     return R.get("/api/admin/posts/latest", opt);
   },
-  ApiAdminPostsPreviewPostIdGet(opt: { postId: number }): Promise<string> {
+  postsPreviewPostIdGet(opt: { postId: number }): Promise<string> {
     return R.get("/api/admin/posts/preview/{postId}", opt);
   },
-  ApiAdminPostsStatusStatusGet(opt: {
+  postsStatusStatusGet(opt: {
     more: boolean;
     page: number;
     size: number;
@@ -602,62 +569,60 @@ export const api = {
   }): Promise<PageBasePostSimpleDTO> {
     return R.get("/api/admin/posts/status/{status}", opt);
   },
-  ApiAdminPostsStatusStatusPut(opt: {
+  postsStatusStatusPut(opt: {
     ids: any;
     status: "DRAFT" | "INTIMATE" | "PUBLISHED" | "RECYCLE";
   }): Promise<Array<Post>> {
     return R.put("/api/admin/posts/status/{status}", opt);
   },
-  ApiAdminPostsPostIdGet(opt: { postId: number }): Promise<PostDetailVO> {
+  postsPostIdGet(opt: { postId: number }): Promise<PostDetailVO> {
     return R.get("/api/admin/posts/{postId}", opt);
   },
-  ApiAdminPostsPostIdPut(opt: {
+  postsPostIdPut(opt: {
     autoSave: boolean;
     postId: number;
     postParam: any;
   }): Promise<PostDetailVO> {
     return R.put("/api/admin/posts/{postId}", opt);
   },
-  ApiAdminPostsPostIdRemove(opt: { postId: number }): Promise<void> {
+  postsPostIdRemove(opt: { postId: number }): Promise<void> {
     return R.remove("/api/admin/posts/{postId}", opt);
   },
-  ApiAdminPostsPostIdLikesPut(opt: { postId: number }): Promise<void> {
+  postsPostIdLikesPut(opt: { postId: number }): Promise<void> {
     return R.put("/api/admin/posts/{postId}/likes", opt);
   },
-  ApiAdminPostsPostIdPreviewGet(opt: { postId: number }): Promise<string> {
+  postsPostIdPreviewGet(opt: { postId: number }): Promise<string> {
     return R.get("/api/admin/posts/{postId}/preview", opt);
   },
-  ApiAdminPostsPostIdStatusDraftContentPut(opt: {
+  postsPostIdStatusDraftContentPut(opt: {
     contentParam: any;
     postId: number;
   }): Promise<BasePostDetailDTO> {
     return R.put("/api/admin/posts/{postId}/status/draft/content", opt);
   },
-  ApiAdminPostsPostIdStatusStatusPut(opt: {
+  postsPostIdStatusStatusPut(opt: {
     postId: number;
     status: "DRAFT" | "INTIMATE" | "PUBLISHED" | "RECYCLE";
   }): Promise<BasePostMinimalDTO> {
     return R.put("/api/admin/posts/{postId}/status/{status}", opt);
   },
-  ApiAdminRefreshRefreshTokenPost(opt: {
-    refreshToken: string;
-  }): Promise<AuthToken> {
+  refreshRefreshTokenPost(opt: { refreshToken: string }): Promise<AuthToken> {
     return R.post("/api/admin/refresh/{refreshToken}", opt);
   },
-  ApiAdminSheetsGet(opt: {
+  sheetsGet(opt: {
     page: number;
     size: number;
     sort: Array<string>;
   }): Promise<PageSheetListVO> {
     return R.get("/api/admin/sheets", opt);
   },
-  ApiAdminSheetsPost(opt: {
+  sheetsPost(opt: {
     autoSave: boolean;
     sheetParam: any;
   }): Promise<SheetDetailVO> {
     return R.post("/api/admin/sheets", opt);
   },
-  ApiAdminSheetsCommentsGet(opt: {
+  sheetsCommentsGet(opt: {
     keyword: string;
     page: number;
     size: number;
@@ -666,299 +631,273 @@ export const api = {
   }): Promise<PageSheetCommentWithSheetVO> {
     return R.get("/api/admin/sheets/comments", opt);
   },
-  ApiAdminSheetsCommentsPost(opt: {
-    commentParam: any;
-  }): Promise<BaseCommentDTO> {
+  sheetsCommentsPost(opt: { commentParam: any }): Promise<BaseCommentDTO> {
     return R.post("/api/admin/sheets/comments", opt);
   },
-  ApiAdminSheetsCommentsRemove(opt: {
-    ids: any;
-  }): Promise<Array<SheetComment>> {
+  sheetsCommentsRemove(opt: { ids: any }): Promise<Array<SheetComment>> {
     return R.remove("/api/admin/sheets/comments", opt);
   },
-  ApiAdminSheetsCommentsLatestGet(opt: {
+  sheetsCommentsLatestGet(opt: {
     status: "AUDITING" | "PUBLISHED" | "RECYCLE";
     top: number;
   }): Promise<Array<SheetCommentWithSheetVO>> {
     return R.get("/api/admin/sheets/comments/latest", opt);
   },
-  ApiAdminSheetsCommentsStatusStatusPut(opt: {
+  sheetsCommentsStatusStatusPut(opt: {
     ids: any;
     status: "AUDITING" | "PUBLISHED" | "RECYCLE";
   }): Promise<Array<BaseCommentDTO>> {
     return R.put("/api/admin/sheets/comments/status/{status}", opt);
   },
-  ApiAdminSheetsCommentsCommentIdGet(opt: {
+  sheetsCommentsCommentIdGet(opt: {
     commentId: number;
   }): Promise<SheetCommentWithSheetVO> {
     return R.get("/api/admin/sheets/comments/{commentId}", opt);
   },
-  ApiAdminSheetsCommentsCommentIdPut(opt: {
+  sheetsCommentsCommentIdPut(opt: {
     commentId: number;
     commentParam: any;
   }): Promise<BaseCommentDTO> {
     return R.put("/api/admin/sheets/comments/{commentId}", opt);
   },
-  ApiAdminSheetsCommentsCommentIdRemove(opt: {
+  sheetsCommentsCommentIdRemove(opt: {
     commentId: number;
   }): Promise<BaseCommentDTO> {
     return R.remove("/api/admin/sheets/comments/{commentId}", opt);
   },
-  ApiAdminSheetsCommentsCommentIdStatusStatusPut(opt: {
+  sheetsCommentsCommentIdStatusStatusPut(opt: {
     commentId: number;
     status: "AUDITING" | "PUBLISHED" | "RECYCLE";
   }): Promise<BaseCommentDTO> {
     return R.put("/api/admin/sheets/comments/{commentId}/status/{status}", opt);
   },
-  ApiAdminSheetsCommentsSheetIdList_viewGet(opt: {
+  sheetsCommentsSheetIdList_viewGet(opt: {
     page: number;
     sheetId: number;
     sort: Array<string>;
   }): Promise<PageBaseCommentWithParentVO> {
     return R.get("/api/admin/sheets/comments/{sheetId}/list_view", opt);
   },
-  ApiAdminSheetsCommentsSheetIdTree_viewGet(opt: {
+  sheetsCommentsSheetIdTree_viewGet(opt: {
     page: number;
     sheetId: number;
     sort: Array<string>;
   }): Promise<PageBaseCommentVO> {
     return R.get("/api/admin/sheets/comments/{sheetId}/tree_view", opt);
   },
-  ApiAdminSheetsIndependentGet(): Promise<Array<IndependentSheetDTO>> {
+  sheetsIndependentGet(): Promise<Array<IndependentSheetDTO>> {
     return R.get("/api/admin/sheets/independent");
   },
-  ApiAdminSheetsPreviewSheetIdGet(opt: { sheetId: number }): Promise<string> {
+  sheetsPreviewSheetIdGet(opt: { sheetId: number }): Promise<string> {
     return R.get("/api/admin/sheets/preview/{sheetId}", opt);
   },
-  ApiAdminSheetsSheetIdGet(opt: { sheetId: number }): Promise<SheetDetailVO> {
+  sheetsSheetIdGet(opt: { sheetId: number }): Promise<SheetDetailVO> {
     return R.get("/api/admin/sheets/{sheetId}", opt);
   },
-  ApiAdminSheetsSheetIdPut(opt: {
+  sheetsSheetIdPut(opt: {
     autoSave: boolean;
     sheetId: number;
     sheetParam: any;
   }): Promise<SheetDetailVO> {
     return R.put("/api/admin/sheets/{sheetId}", opt);
   },
-  ApiAdminSheetsSheetIdRemove(opt: {
-    sheetId: number;
-  }): Promise<SheetDetailVO> {
+  sheetsSheetIdRemove(opt: { sheetId: number }): Promise<SheetDetailVO> {
     return R.remove("/api/admin/sheets/{sheetId}", opt);
   },
-  ApiAdminSheetsSheetIdStatusDraftContentPut(opt: {
+  sheetsSheetIdStatusDraftContentPut(opt: {
     contentParam: any;
     sheetId: number;
   }): Promise<BasePostDetailDTO> {
     return R.put("/api/admin/sheets/{sheetId}/status/draft/content", opt);
   },
-  ApiAdminSheetsSheetIdStatusPut(opt: {
+  sheetsSheetIdStatusPut(opt: {
     sheetId: number;
     status: "DRAFT" | "INTIMATE" | "PUBLISHED" | "RECYCLE";
   }): Promise<void> {
     return R.put("/api/admin/sheets/{sheetId}/{status}", opt);
   },
-  ApiAdminStaticsGet(): Promise<Array<StaticFile>> {
+  staticsGet(): Promise<Array<StaticFile>> {
     return R.get("/api/admin/statics");
   },
-  ApiAdminStaticsPost(opt: {
-    basePath: string;
-    folderName: string;
-  }): Promise<void> {
+  staticsPost(opt: { basePath: string; folderName: string }): Promise<void> {
     return R.post("/api/admin/statics", opt);
   },
-  ApiAdminStaticsRemove(opt: { path: string }): Promise<void> {
+  staticsRemove(opt: { path: string }): Promise<void> {
     return R.remove("/api/admin/statics", opt);
   },
-  ApiAdminStaticsFilesPut(opt: { param: any }): Promise<void> {
+  staticsFilesPut(opt: { param: any }): Promise<void> {
     return R.put("/api/admin/statics/files", opt);
   },
-  ApiAdminStaticsRenamePost(opt: {
-    basePath: string;
-    newName: string;
-  }): Promise<void> {
+  staticsRenamePost(opt: { basePath: string; newName: string }): Promise<void> {
     return R.post("/api/admin/statics/rename", opt);
   },
-  ApiAdminStaticsUploadPost(opt: {
-    basePath: string;
-    file: any;
-  }): Promise<void> {
+  staticsUploadPost(opt: { basePath: string; file: any }): Promise<void> {
     return R.post("/api/admin/statics/upload", opt);
   },
-  ApiAdminStatisticsGet(): Promise<StatisticDTO> {
+  statisticsGet(): Promise<StatisticDTO> {
     return R.get("/api/admin/statistics");
   },
-  ApiAdminStatisticsUserGet(): Promise<StatisticWithUserDTO> {
+  statisticsUserGet(): Promise<StatisticWithUserDTO> {
     return R.get("/api/admin/statistics/user");
   },
-  ApiAdminTagsGet(opt: {
-    more: boolean;
-    sort: Array<string>;
-  }): Promise<Array<TagDTO>> {
+  tagsGet(opt: { more: boolean; sort: Array<string> }): Promise<Array<TagDTO>> {
     return R.get("/api/admin/tags", opt);
   },
-  ApiAdminTagsPost(opt: { tagParam: any }): Promise<TagDTO> {
+  tagsPost(opt: { tagParam: any }): Promise<TagDTO> {
     return R.post("/api/admin/tags", opt);
   },
-  ApiAdminTagsTagIdGet(opt: { tagId: number }): Promise<TagDTO> {
+  tagsTagIdGet(opt: { tagId: number }): Promise<TagDTO> {
     return R.get("/api/admin/tags/{tagId}", opt);
   },
-  ApiAdminTagsTagIdPut(opt: { tagId: number; tagParam: any }): Promise<TagDTO> {
+  tagsTagIdPut(opt: { tagId: number; tagParam: any }): Promise<TagDTO> {
     return R.put("/api/admin/tags/{tagId}", opt);
   },
-  ApiAdminTagsTagIdRemove(opt: { tagId: number }): Promise<TagDTO> {
+  tagsTagIdRemove(opt: { tagId: number }): Promise<TagDTO> {
     return R.remove("/api/admin/tags/{tagId}", opt);
   },
-  ApiAdminThemesGet(): Promise<Array<ThemeProperty>> {
+  themesGet(): Promise<Array<ThemeProperty>> {
     return R.get("/api/admin/themes");
   },
-  ApiAdminThemesActivationGet(): Promise<ThemeProperty> {
+  themesActivationGet(): Promise<ThemeProperty> {
     return R.get("/api/admin/themes/activation");
   },
-  ApiAdminThemesActivationConfigurationsGet(): Promise<BaseResponseobject> {
+  themesActivationConfigurationsGet(): Promise<BaseResponseobject> {
     return R.get("/api/admin/themes/activation/configurations");
   },
-  ApiAdminThemesActivationFilesGet(): Promise<Array<ThemeFile>> {
+  themesActivationFilesGet(): Promise<Array<ThemeFile>> {
     return R.get("/api/admin/themes/activation/files");
   },
-  ApiAdminThemesActivationSettingsGet(): Promise<any> {
+  themesActivationSettingsGet(): Promise<any> {
     return R.get("/api/admin/themes/activation/settings");
   },
-  ApiAdminThemesActivationSettingsPost(opt: { settings: any }): Promise<void> {
+  themesActivationSettingsPost(opt: { settings: any }): Promise<void> {
     return R.post("/api/admin/themes/activation/settings", opt);
   },
-  ApiAdminThemesActivationTemplateCustomPostGet(): Promise<Array<string>> {
+  themesActivationTemplateCustomPostGet(): Promise<Array<string>> {
     return R.get("/api/admin/themes/activation/template/custom/post");
   },
-  ApiAdminThemesActivationTemplateCustomSheetGet(): Promise<Array<string>> {
+  themesActivationTemplateCustomSheetGet(): Promise<Array<string>> {
     return R.get("/api/admin/themes/activation/template/custom/sheet");
   },
-  ApiAdminThemesActivationTemplateExistsGet(opt: {
+  themesActivationTemplateExistsGet(opt: {
     template: string;
   }): Promise<BaseResponseboolean> {
     return R.get("/api/admin/themes/activation/template/exists", opt);
   },
-  ApiAdminThemesFetchBranchGet(opt: {
+  themesFetchBranchGet(opt: {
     branch: string;
     uri: string;
   }): Promise<ThemeProperty> {
     return R.get("/api/admin/themes/fetchBranch", opt);
   },
-  ApiAdminThemesFetchLatestReleaseGet(opt: {
-    uri: string;
-  }): Promise<ThemeProperty> {
+  themesFetchLatestReleaseGet(opt: { uri: string }): Promise<ThemeProperty> {
     return R.get("/api/admin/themes/fetchLatestRelease", opt);
   },
-  ApiAdminThemesFetchingPost(opt: { uri: string }): Promise<ThemeProperty> {
+  themesFetchingPost(opt: { uri: string }): Promise<ThemeProperty> {
     return R.post("/api/admin/themes/fetching", opt);
   },
-  ApiAdminThemesFetchingGitBranchesPost(opt: {
+  themesFetchingGitBranchesPost(opt: {
     uri: string;
   }): Promise<Array<ThemeProperty>> {
     return R.post("/api/admin/themes/fetching/git/branches", opt);
   },
-  ApiAdminThemesFetchingThemeIdPut(opt: {
-    themeId: string;
-  }): Promise<ThemeProperty> {
+  themesFetchingThemeIdPut(opt: { themeId: string }): Promise<ThemeProperty> {
     return R.put("/api/admin/themes/fetching/{themeId}", opt);
   },
-  ApiAdminThemesFetchingBranchesPost(opt: {
+  themesFetchingBranchesPost(opt: {
     uri: string;
   }): Promise<Array<ThemeProperty>> {
     return R.post("/api/admin/themes/fetchingBranches", opt);
   },
-  ApiAdminThemesFetchingReleaseGet(opt: {
+  themesFetchingReleaseGet(opt: {
     tag: string;
     uri: string;
   }): Promise<ThemeProperty> {
     return R.get("/api/admin/themes/fetchingRelease", opt);
   },
-  ApiAdminThemesFetchingReleasesPost(opt: {
+  themesFetchingReleasesPost(opt: {
     uri: string;
   }): Promise<Array<ThemeProperty>> {
     return R.post("/api/admin/themes/fetchingReleases", opt);
   },
-  ApiAdminThemesFilesContentGet(opt: {
-    path: string;
-  }): Promise<BaseResponsestring> {
+  themesFilesContentGet(opt: { path: string }): Promise<BaseResponsestring> {
     return R.get("/api/admin/themes/files/content", opt);
   },
-  ApiAdminThemesFilesContentPut(opt: { param: any }): Promise<void> {
+  themesFilesContentPut(opt: { param: any }): Promise<void> {
     return R.put("/api/admin/themes/files/content", opt);
   },
-  ApiAdminThemesReloadPost(): Promise<void> {
+  themesReloadPost(): Promise<void> {
     return R.post("/api/admin/themes/reload");
   },
-  ApiAdminThemesUploadPost(opt: { file: any }): Promise<ThemeProperty> {
+  themesUploadPost(opt: { file: any }): Promise<ThemeProperty> {
     return R.post("/api/admin/themes/upload", opt);
   },
-  ApiAdminThemesUploadThemeIdPut(opt: {
+  themesUploadThemeIdPut(opt: {
     file: any;
     themeId: string;
   }): Promise<ThemeProperty> {
     return R.put("/api/admin/themes/upload/{themeId}", opt);
   },
-  ApiAdminThemesThemeIdGet(opt: { themeId: string }): Promise<ThemeProperty> {
+  themesThemeIdGet(opt: { themeId: string }): Promise<ThemeProperty> {
     return R.get("/api/admin/themes/{themeId}", opt);
   },
-  ApiAdminThemesThemeIdRemove(opt: {
+  themesThemeIdRemove(opt: {
     deleteSettings: boolean;
     themeId: string;
   }): Promise<void> {
     return R.remove("/api/admin/themes/{themeId}", opt);
   },
-  ApiAdminThemesThemeIdActivationPost(opt: {
+  themesThemeIdActivationPost(opt: {
     themeId: string;
   }): Promise<ThemeProperty> {
     return R.post("/api/admin/themes/{themeId}/activation", opt);
   },
-  ApiAdminThemesThemeIdConfigurationsGet(opt: {
+  themesThemeIdConfigurationsGet(opt: {
     themeId: string;
   }): Promise<Array<Group>> {
     return R.get("/api/admin/themes/{themeId}/configurations", opt);
   },
-  ApiAdminThemesThemeIdFilesGet(opt: {
-    themeId: string;
-  }): Promise<Array<ThemeFile>> {
+  themesThemeIdFilesGet(opt: { themeId: string }): Promise<Array<ThemeFile>> {
     return R.get("/api/admin/themes/{themeId}/files", opt);
   },
-  ApiAdminThemesThemeIdFilesContentGet(opt: {
+  themesThemeIdFilesContentGet(opt: {
     path: string;
     themeId: string;
   }): Promise<BaseResponsestring> {
     return R.get("/api/admin/themes/{themeId}/files/content", opt);
   },
-  ApiAdminThemesThemeIdFilesContentPut(opt: {
+  themesThemeIdFilesContentPut(opt: {
     param: any;
     themeId: string;
   }): Promise<void> {
     return R.put("/api/admin/themes/{themeId}/files/content", opt);
   },
-  ApiAdminThemesThemeIdSettingsGet(opt: { themeId: string }): Promise<any> {
+  themesThemeIdSettingsGet(opt: { themeId: string }): Promise<any> {
     return R.get("/api/admin/themes/{themeId}/settings", opt);
   },
-  ApiAdminThemesThemeIdSettingsPost(opt: {
+  themesThemeIdSettingsPost(opt: {
     settings: any;
     themeId: string;
   }): Promise<void> {
     return R.post("/api/admin/themes/{themeId}/settings", opt);
   },
-  ApiAdminUsersMfaGeneratePut(opt: {
+  usersMfaGeneratePut(opt: {
     multiFactorAuthParam: any;
   }): Promise<MultiFactorAuthVO> {
     return R.put("/api/admin/users/mfa/generate", opt);
   },
-  ApiAdminUsersMfaUpdatePut(opt: {
+  usersMfaUpdatePut(opt: {
     multiFactorAuthParam: any;
   }): Promise<MultiFactorAuthVO> {
     return R.put("/api/admin/users/mfa/update", opt);
   },
-  ApiAdminUsersProfilesGet(): Promise<UserDTO> {
+  usersProfilesGet(): Promise<UserDTO> {
     return R.get("/api/admin/users/profiles");
   },
-  ApiAdminUsersProfilesPut(opt: { userParam: any }): Promise<UserDTO> {
+  usersProfilesPut(opt: { userParam: any }): Promise<UserDTO> {
     return R.put("/api/admin/users/profiles", opt);
   },
-  ApiAdminUsersProfilesPasswordPut(opt: {
+  usersProfilesPasswordPut(opt: {
     passwordParam: any;
   }): Promise<BaseResponsestring> {
     return R.put("/api/admin/users/profiles/password", opt);

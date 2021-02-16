@@ -68,8 +68,8 @@ export function generateAPICode(
 
     const functionName =
       api.path
-        .replace('/api/content/', '')
         .split('/')
+        .slice(3)
         .map((n, i) => {
           const name = n.startsWith('{') ? n.slice(1, n.length - 1) : n
           if (i > 0) {
