@@ -20,6 +20,13 @@ export function main(force = false) {
     const data = await getSource(url, force)
 
     generateCodeFromJson(data, name)
+    const info = `
+    export const apiInfo = {
+      version: "${data.info.version}"
+    }
+    `
+
+    toFile(`api/apiInfo.ts`, info)
     console.log('Generate code for', url)
   })
 }
