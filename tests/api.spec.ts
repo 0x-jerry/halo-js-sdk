@@ -1,15 +1,15 @@
 import { assert } from 'console'
-import api from '../src'
+import { initConfig, postsGet, postsPostIdGet } from '../src/contentApi'
 
 require('dotenv').config()
 
-api.initConfig({
+initConfig({
   target: process.env.TEST_TARGET,
   accessKey: process.env.TEST_ACCESS_KEY
 })
 
 async function test() {
-  const res = await api.content.postsGet({
+  const res = await postsGet({
     page: 0,
     size: 0,
     sort: []
@@ -19,7 +19,7 @@ async function test() {
 
   const postId = res.content[0].id
 
-  const postRes = await api.content.postsPostIdGet({
+  const postRes = await postsPostIdGet({
     postId: postId
   })
 

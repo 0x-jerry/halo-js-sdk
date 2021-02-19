@@ -20,15 +20,15 @@ export function main(force = false) {
     const data = await getSource(url, force)
 
     generateCodeFromJson(data, name)
-    const info = `
-    export const apiInfo = {
-      version: "${data.info.version}"
-    }
-    `
-
-    toFile(`api/apiInfo.ts`, info)
     console.log('Generate code for', url)
   })
+}
+
+function getAuthKey(data: any) {
+  const defines = data.securityDefinitions
+  const o: any = Object.keys(defines).find((k) => defines[k].in === 'header')
+
+  return defines[o].name || 'Authorization'
 }
 
 async function getSource(url: string, update = false) {
@@ -56,15 +56,21 @@ async function getSource(url: string, update = false) {
 function generateCodeFromJson(json, apiFileName) {
   const { apis, interfaces } = parseAPIJson(json)
 
-  toFile(`api/${apiFileName}Define.d.ts`, generateDefinesCode(interfaces))
+  toFile(`${apiFileName}Define.d.ts`, generateDefinesCode(interfaces))
 
   const define = `import {${interfaces
     .map((i) => i.name)
     .join(',')}} from './${apiFileName}Define'
+
+    export const apiInfo = {
+      version: "${json.info.version}",
+      authKey: "${getAuthKey(json)}"
+    }
+
     `
   const apiCode = generateAPICode(apis, { header: define })
 
-  toFile(`api/${apiFileName}.ts`, apiCode)
+  toFile(`${apiFileName}.ts`, apiCode)
 }
 
 function toFile(fileName: string, source: string) {
@@ -75,6 +81,7 @@ function toFile(fileName: string, source: string) {
       try {
         return prettier.format(source, { parser: 'typescript' })
       } catch (error) {
+        console.log('format error:', fileName, error)
         return source
       }
     } else {
