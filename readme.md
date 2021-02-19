@@ -5,6 +5,35 @@
 - `https://api.halo.run/data/admin-api.json`
 - `https://api.halo.run/data/content-api.json`
 
+使用方式
+
+直接复制 src 中的代码即可。
+
+示例代码；
+
+```ts
+import { initConfig, postsGet, postsPostIdGet } from './contentApi'
+
+initConfig({
+  target: 'https://blog.xxx.com', // 替换成自己的域名
+  accessKey: 'xxxx' // 替换成自己的 access key
+})
+
+async function test() {
+  const postsData = await postsGet()
+
+  const postId = postsData.content[0].id
+
+  const postResult = await postsPostIdGet({
+    postId: postId
+  })
+
+  console.log(postResult)
+}
+
+test()
+```
+
 ## 开发
 
 添加 `.env` 文件，并填写如下内容
