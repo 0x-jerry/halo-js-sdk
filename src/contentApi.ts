@@ -140,12 +140,12 @@ export function categoriesGet(opt: {
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * more
    */
-  more?: any;
+  more?: boolean;
 }): Promise<Array<CategoryDTO>> {
   return get("/api/content/categories", opt);
 }
@@ -157,27 +157,27 @@ export function categoriesSlugPostsGet(opt: {
   /**
    *
    */
-  page?: any;
+  page?: number;
 
   /**
    *
    */
-  size?: any;
+  size?: number;
 
   /**
    * slug
    */
-  slug: any;
+  slug: string;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * password
    */
-  password?: any;
+  password?: string;
 }): Promise<CustomizedPageOfPostListVO> {
   return get("/api/content/categories/{slug}/posts", opt);
 }
@@ -189,17 +189,17 @@ export function journalsGet(opt: {
   /**
    *
    */
-  page?: any;
+  page?: number;
 
   /**
    *
    */
-  size?: any;
+  size?: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 }): Promise<CustomizedPageOfJournalWithCmtCountDTO> {
   return get("/api/content/journals", opt);
 }
@@ -218,7 +218,7 @@ export function journalsIdLikesPost(opt: {
   /**
    * id
    */
-  id: any;
+  id: number;
 }): Promise<void> {
   return post("/api/content/journals/{id}/likes", opt);
 }
@@ -230,7 +230,7 @@ export function journalsJournalIdGet(opt: {
   /**
    * journalId
    */
-  journalId: any;
+  journalId: number;
 }): Promise<JournalDTO> {
   return get("/api/content/journals/{journalId}", opt);
 }
@@ -242,17 +242,17 @@ export function journalsJournalIdCommentsList_viewGet(opt: {
   /**
    * journalId
    */
-  journalId: any;
+  journalId: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * page
    */
-  page?: any;
+  page?: number;
 }): Promise<CustomizedPageOfBaseCommentWithParentVO> {
   return get("/api/content/journals/{journalId}/comments/list_view", opt);
 }
@@ -264,17 +264,17 @@ export function journalsJournalIdCommentsTop_viewGet(opt: {
   /**
    * journalId
    */
-  journalId: any;
+  journalId: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * page
    */
-  page?: any;
+  page?: number;
 }): Promise<CustomizedPageOfCommentWithHasChildrenVO> {
   return get("/api/content/journals/{journalId}/comments/top_view", opt);
 }
@@ -286,17 +286,17 @@ export function journalsJournalIdCommentsTree_viewGet(opt: {
   /**
    * journalId
    */
-  journalId: any;
+  journalId: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * page
    */
-  page?: any;
+  page?: number;
 }): Promise<CustomizedPageOfBaseCommentVO> {
   return get("/api/content/journals/{journalId}/comments/tree_view", opt);
 }
@@ -308,17 +308,17 @@ export function journalsJournalIdCommentsCommentParentIdChildrenGet(opt: {
   /**
    * journalId
    */
-  journalId: any;
+  journalId: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * commentParentId
    */
-  commentParentId: any;
+  commentParentId: number;
 }): Promise<Array<BaseCommentDTO>> {
   return get(
     "/api/content/journals/{journalId}/comments/{commentParentId}/children",
@@ -333,7 +333,7 @@ export function linksGet(opt: {
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 }): Promise<Array<LinkDTO>> {
   return get("/api/content/links", opt);
 }
@@ -345,7 +345,7 @@ export function linksTeam_viewGet(opt: {
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 }): Promise<Array<LinkTeamVO>> {
   return get("/api/content/links/team_view", opt);
 }
@@ -357,7 +357,7 @@ export function menusGet(opt: {
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 }): Promise<Array<MenuDTO>> {
   return get("/api/content/menus", opt);
 }
@@ -369,7 +369,7 @@ export function menusTree_viewGet(opt: {
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 }): Promise<Array<MenuVO>> {
   return get("/api/content/menus/tree_view", opt);
 }
@@ -388,7 +388,7 @@ export function optionsKeysKeyGet(opt: {
   /**
    * key
    */
-  key: any;
+  key: string;
 }): Promise<BaseResponseOfobject> {
   return get("/api/content/options/keys/{key}", opt);
 }
@@ -407,7 +407,7 @@ export function optionsMap_viewGet(opt: {
   /**
    * key
    */
-  key?: any;
+  key?: string;
 }): Promise<any> {
   return get("/api/content/options/map_view", opt);
 }
@@ -419,27 +419,27 @@ export function photosGet(opt: {
   /**
    *
    */
-  keyword?: any;
+  keyword?: string;
 
   /**
    *
    */
-  page?: any;
+  page?: number;
 
   /**
    *
    */
-  size?: any;
+  size?: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    *
    */
-  team?: any;
+  team?: string;
 }): Promise<CustomizedPageOfPhotoDTO> {
   return get("/api/content/photos", opt);
 }
@@ -451,7 +451,7 @@ export function photosLatestGet(opt: {
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 }): Promise<Array<PhotoDTO>> {
   return get("/api/content/photos/latest", opt);
 }
@@ -463,17 +463,17 @@ export function postsGet(opt: {
   /**
    *
    */
-  page?: any;
+  page?: number;
 
   /**
    *
    */
-  size?: any;
+  size?: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 }): Promise<CustomizedPageOfPostListVO> {
   return get("/api/content/posts", opt);
 }
@@ -492,22 +492,22 @@ export function postsSearchPost(opt: {
   /**
    * keyword
    */
-  keyword: any;
+  keyword: string;
 
   /**
    *
    */
-  page?: any;
+  page?: number;
 
   /**
    *
    */
-  size?: any;
+  size?: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 }): Promise<CustomizedPageOfBasePostSimpleDTO> {
   return post("/api/content/posts/search", opt);
 }
@@ -519,17 +519,17 @@ export function postsSlugGet(opt: {
   /**
    * slug
    */
-  slug: any;
+  slug: string;
 
   /**
    * formatDisabled
    */
-  formatDisabled?: any;
+  formatDisabled?: boolean;
 
   /**
    * sourceDisabled
    */
-  sourceDisabled?: any;
+  sourceDisabled?: boolean;
 }): Promise<PostDetailVO> {
   return get("/api/content/posts/slug", opt);
 }
@@ -541,17 +541,17 @@ export function postsPostIdGet(opt: {
   /**
    * postId
    */
-  postId: any;
+  postId: number;
 
   /**
    * formatDisabled
    */
-  formatDisabled?: any;
+  formatDisabled?: boolean;
 
   /**
    * sourceDisabled
    */
-  sourceDisabled?: any;
+  sourceDisabled?: boolean;
 }): Promise<PostDetailVO> {
   return get("/api/content/posts/{postId}", opt);
 }
@@ -563,17 +563,17 @@ export function postsPostIdCommentsList_viewGet(opt: {
   /**
    * postId
    */
-  postId: any;
+  postId: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * page
    */
-  page?: any;
+  page?: number;
 }): Promise<CustomizedPageOfBaseCommentWithParentVO> {
   return get("/api/content/posts/{postId}/comments/list_view", opt);
 }
@@ -585,17 +585,17 @@ export function postsPostIdCommentsTop_viewGet(opt: {
   /**
    * postId
    */
-  postId: any;
+  postId: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * page
    */
-  page?: any;
+  page?: number;
 }): Promise<CustomizedPageOfCommentWithHasChildrenVO> {
   return get("/api/content/posts/{postId}/comments/top_view", opt);
 }
@@ -607,17 +607,17 @@ export function postsPostIdCommentsTree_viewGet(opt: {
   /**
    * postId
    */
-  postId: any;
+  postId: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * page
    */
-  page?: any;
+  page?: number;
 }): Promise<CustomizedPageOfBaseCommentVO> {
   return get("/api/content/posts/{postId}/comments/tree_view", opt);
 }
@@ -629,17 +629,17 @@ export function postsPostIdCommentsCommentParentIdChildrenGet(opt: {
   /**
    * postId
    */
-  postId: any;
+  postId: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * commentParentId
    */
-  commentParentId: any;
+  commentParentId: number;
 }): Promise<Array<BaseCommentDTO>> {
   return get(
     "/api/content/posts/{postId}/comments/{commentParentId}/children",
@@ -654,7 +654,7 @@ export function postsPostIdLikesPost(opt: {
   /**
    * postId
    */
-  postId: any;
+  postId: number;
 }): Promise<void> {
   return post("/api/content/posts/{postId}/likes", opt);
 }
@@ -666,7 +666,7 @@ export function postsPostIdNextGet(opt: {
   /**
    * postId
    */
-  postId: any;
+  postId: number;
 }): Promise<PostDetailVO> {
   return get("/api/content/posts/{postId}/next", opt);
 }
@@ -678,7 +678,7 @@ export function postsPostIdPrevGet(opt: {
   /**
    * postId
    */
-  postId: any;
+  postId: number;
 }): Promise<PostDetailVO> {
   return get("/api/content/posts/{postId}/prev", opt);
 }
@@ -690,17 +690,17 @@ export function sheetsGet(opt: {
   /**
    *
    */
-  page?: any;
+  page?: number;
 
   /**
    *
    */
-  size?: any;
+  size?: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 }): Promise<CustomizedPageOfSheetListVO> {
   return get("/api/content/sheets", opt);
 }
@@ -719,17 +719,17 @@ export function sheetsSlugGet(opt: {
   /**
    * slug
    */
-  slug: any;
+  slug: string;
 
   /**
    * formatDisabled
    */
-  formatDisabled?: any;
+  formatDisabled?: boolean;
 
   /**
    * sourceDisabled
    */
-  sourceDisabled?: any;
+  sourceDisabled?: boolean;
 }): Promise<SheetDetailVO> {
   return get("/api/content/sheets/slug", opt);
 }
@@ -741,17 +741,17 @@ export function sheetsSheetIdGet(opt: {
   /**
    * sheetId
    */
-  sheetId: any;
+  sheetId: number;
 
   /**
    * formatDisabled
    */
-  formatDisabled?: any;
+  formatDisabled?: boolean;
 
   /**
    * sourceDisabled
    */
-  sourceDisabled?: any;
+  sourceDisabled?: boolean;
 }): Promise<SheetDetailVO> {
   return get("/api/content/sheets/{sheetId}", opt);
 }
@@ -763,17 +763,17 @@ export function sheetsSheetIdCommentsList_viewGet(opt: {
   /**
    * sheetId
    */
-  sheetId: any;
+  sheetId: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * page
    */
-  page?: any;
+  page?: number;
 }): Promise<CustomizedPageOfBaseCommentWithParentVO> {
   return get("/api/content/sheets/{sheetId}/comments/list_view", opt);
 }
@@ -785,17 +785,17 @@ export function sheetsSheetIdCommentsTop_viewGet(opt: {
   /**
    * sheetId
    */
-  sheetId: any;
+  sheetId: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * page
    */
-  page?: any;
+  page?: number;
 }): Promise<CustomizedPageOfCommentWithHasChildrenVO> {
   return get("/api/content/sheets/{sheetId}/comments/top_view", opt);
 }
@@ -807,17 +807,17 @@ export function sheetsSheetIdCommentsTree_viewGet(opt: {
   /**
    * sheetId
    */
-  sheetId: any;
+  sheetId: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * page
    */
-  page?: any;
+  page?: number;
 }): Promise<CustomizedPageOfBaseCommentVO> {
   return get("/api/content/sheets/{sheetId}/comments/tree_view", opt);
 }
@@ -829,17 +829,17 @@ export function sheetsSheetIdCommentsCommentParentIdChildrenGet(opt: {
   /**
    * sheetId
    */
-  sheetId: any;
+  sheetId: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * commentParentId
    */
-  commentParentId: any;
+  commentParentId: number;
 }): Promise<Array<BaseCommentDTO>> {
   return get(
     "/api/content/sheets/{sheetId}/comments/{commentParentId}/children",
@@ -868,12 +868,12 @@ export function tagsGet(opt: {
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * If the param is true, post count of tag will be returned
    */
-  more?: any;
+  more?: boolean;
 }): Promise<Array<TagDTO>> {
   return get("/api/content/tags", opt);
 }
@@ -885,22 +885,22 @@ export function tagsSlugPostsGet(opt: {
   /**
    *
    */
-  page?: any;
+  page?: number;
 
   /**
    *
    */
-  size?: any;
+  size?: number;
 
   /**
    * slug
    */
-  slug: any;
+  slug: string;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 }): Promise<CustomizedPageOfPostListVO> {
   return get("/api/content/tags/{slug}/posts", opt);
 }

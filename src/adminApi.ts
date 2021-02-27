@@ -190,7 +190,7 @@ export function haloLogfileGet(opt: {
   /**
    * lines
    */
-  lines: any;
+  lines: number;
 }): Promise<BaseResponseOfstring> {
   return get("/api/admin/halo/logfile", opt);
 }
@@ -244,7 +244,7 @@ export function refreshRefreshTokenPost(opt: {
   /**
    * refreshToken
    */
-  refreshToken: any;
+  refreshToken: string;
 }): Promise<AuthToken> {
   return post("/api/admin/refresh/{refreshToken}", opt);
 }
@@ -256,32 +256,41 @@ export function attachmentsGet(opt: {
   /**
    *
    */
-  attachmentType?: any;
+  attachmentType?:
+    | "ALIOSS"
+    | "BAIDUBOS"
+    | "HUAWEIOBS"
+    | "LOCAL"
+    | "MINIO"
+    | "QINIUOSS"
+    | "SMMS"
+    | "TENCENTCOS"
+    | "UPOSS";
 
   /**
    *
    */
-  keyword?: any;
+  keyword?: string;
 
   /**
    *
    */
-  mediaType?: any;
+  mediaType?: string;
 
   /**
    *
    */
-  page?: any;
+  page?: number;
 
   /**
    *
    */
-  size?: any;
+  size?: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 }): Promise<CustomizedPageOfAttachmentDTO> {
   return get("/api/admin/attachments", opt);
 }
@@ -328,7 +337,7 @@ export function attachmentsAttachmentIdPut(opt: {
   /**
    * attachmentId
    */
-  attachmentId: any;
+  attachmentId: number;
 }): Promise<AttachmentDTO> {
   return put("/api/admin/attachments/{attachmentId}", opt);
 }
@@ -340,7 +349,7 @@ export function attachmentsIdGet(opt: {
   /**
    * id
    */
-  id: any;
+  id: number;
 }): Promise<AttachmentDTO> {
   return get("/api/admin/attachments/{id}", opt);
 }
@@ -352,7 +361,7 @@ export function attachmentsIdRemove(opt: {
   /**
    * id
    */
-  id: any;
+  id: number;
 }): Promise<AttachmentDTO> {
   return remove("/api/admin/attachments/{id}", opt);
 }
@@ -378,7 +387,7 @@ export function backupsDataRemove(opt: {
   /**
    * filename
    */
-  filename: any;
+  filename: string;
 }): Promise<void> {
   return remove("/api/admin/backups/data", opt);
 }
@@ -390,7 +399,7 @@ export function backupsDataFetchGet(opt: {
   /**
    * filename
    */
-  filename: any;
+  filename: string;
 }): Promise<BackupDTO> {
   return get("/api/admin/backups/data/fetch", opt);
 }
@@ -402,7 +411,7 @@ export function backupsDataFileNameGet(opt: {
   /**
    * fileName
    */
-  fileName: any;
+  fileName: string;
 }): Promise<Resource> {
   return get("/api/admin/backups/data/{fileName}", opt);
 }
@@ -428,7 +437,7 @@ export function backupsMarkdownExportRemove(opt: {
   /**
    * filename
    */
-  filename: any;
+  filename: string;
 }): Promise<void> {
   return remove("/api/admin/backups/markdown/export", opt);
 }
@@ -440,7 +449,7 @@ export function backupsMarkdownExportFileNameGet(opt: {
   /**
    * fileName
    */
-  fileName: any;
+  fileName: string;
 }): Promise<Resource> {
   return get("/api/admin/backups/markdown/export/{fileName}", opt);
 }
@@ -452,7 +461,7 @@ export function backupsMarkdownFetchGet(opt: {
   /**
    * filename
    */
-  filename: any;
+  filename: string;
 }): Promise<BackupDTO> {
   return get("/api/admin/backups/markdown/fetch", opt);
 }
@@ -485,7 +494,7 @@ export function backupsWorkDirRemove(opt: {
   /**
    * filename
    */
-  filename: any;
+  filename: string;
 }): Promise<void> {
   return remove("/api/admin/backups/work-dir", opt);
 }
@@ -497,7 +506,7 @@ export function backupsWorkDirFetchGet(opt: {
   /**
    * filename
    */
-  filename: any;
+  filename: string;
 }): Promise<BackupDTO> {
   return get("/api/admin/backups/work-dir/fetch", opt);
 }
@@ -509,7 +518,7 @@ export function backupsWorkDirFilenameGet(opt: {
   /**
    * filename
    */
-  filename: any;
+  filename: string;
 }): Promise<Resource> {
   return get("/api/admin/backups/work-dir/{filename}", opt);
 }
@@ -521,12 +530,12 @@ export function categoriesGet(opt: {
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * more
    */
-  more?: any;
+  more?: boolean;
 }): Promise<Array<CategoryDTO>> {
   return get("/api/admin/categories", opt);
 }
@@ -545,7 +554,7 @@ export function categoriesTree_viewGet(opt: {
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 }): Promise<Array<CategoryVO>> {
   return get("/api/admin/categories/tree_view", opt);
 }
@@ -557,7 +566,7 @@ export function categoriesCategoryIdGet(opt: {
   /**
    * categoryId
    */
-  categoryId: any;
+  categoryId: number;
 }): Promise<CategoryDTO> {
   return get("/api/admin/categories/{categoryId}", opt);
 }
@@ -569,7 +578,7 @@ export function categoriesCategoryIdPut(opt: {
   /**
    * categoryId
    */
-  categoryId: any;
+  categoryId: number;
 }): Promise<CategoryDTO> {
   return put("/api/admin/categories/{categoryId}", opt);
 }
@@ -581,7 +590,7 @@ export function categoriesCategoryIdRemove(opt: {
   /**
    * categoryId
    */
-  categoryId: any;
+  categoryId: number;
 }): Promise<void> {
   return remove("/api/admin/categories/{categoryId}", opt);
 }
@@ -600,27 +609,27 @@ export function journalsCommentsGet(opt: {
   /**
    *
    */
-  keyword?: any;
+  keyword?: string;
 
   /**
    *
    */
-  page?: any;
+  page?: number;
 
   /**
    *
    */
-  size?: any;
+  size?: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    *
    */
-  status?: any;
+  status?: "AUDITING" | "PUBLISHED" | "RECYCLE";
 }): Promise<CustomizedPageOfJournalCommentWithJournalVO> {
   return get("/api/admin/journals/comments", opt);
 }
@@ -639,12 +648,12 @@ export function journalsCommentsLatestGet(opt: {
   /**
    * top
    */
-  top?: any;
+  top?: number;
 
   /**
    * status
    */
-  status?: any;
+  status?: "AUDITING" | "PUBLISHED" | "RECYCLE";
 }): Promise<Array<JournalCommentWithJournalVO>> {
   return get("/api/admin/journals/comments/latest", opt);
 }
@@ -656,7 +665,7 @@ export function journalsCommentsCommentIdRemove(opt: {
   /**
    * commentId
    */
-  commentId: any;
+  commentId: number;
 }): Promise<BaseCommentDTO> {
   return remove("/api/admin/journals/comments/{commentId}", opt);
 }
@@ -668,12 +677,12 @@ export function journalsCommentsCommentIdStatusStatusPut(opt: {
   /**
    * commentId
    */
-  commentId: any;
+  commentId: number;
 
   /**
    * status
    */
-  status: any;
+  status: "AUDITING" | "PUBLISHED" | "RECYCLE";
 }): Promise<BaseCommentDTO> {
   return put("/api/admin/journals/comments/{commentId}/status/{status}", opt);
 }
@@ -685,17 +694,17 @@ export function journalsCommentsJournalIdList_viewGet(opt: {
   /**
    * journalId
    */
-  journalId: any;
+  journalId: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * page
    */
-  page?: any;
+  page?: number;
 }): Promise<CustomizedPageOfBaseCommentWithParentVO> {
   return get("/api/admin/journals/comments/{journalId}/list_view", opt);
 }
@@ -707,17 +716,17 @@ export function journalsCommentsJournalIdTree_viewGet(opt: {
   /**
    * journalId
    */
-  journalId: any;
+  journalId: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * page
    */
-  page?: any;
+  page?: number;
 }): Promise<CustomizedPageOfBaseCommentVO> {
   return get("/api/admin/journals/comments/{journalId}/tree_view", opt);
 }
@@ -729,27 +738,27 @@ export function journalsGet(opt: {
   /**
    *
    */
-  keyword?: any;
+  keyword?: string;
 
   /**
    *
    */
-  page?: any;
+  page?: number;
 
   /**
    *
    */
-  size?: any;
+  size?: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    *
    */
-  type?: any;
+  type?: "INTIMATE" | "PUBLIC";
 }): Promise<CustomizedPageOfJournalWithCmtCountDTO> {
   return get("/api/admin/journals", opt);
 }
@@ -768,7 +777,7 @@ export function journalsLatestGet(opt: {
   /**
    * top
    */
-  top?: any;
+  top?: number;
 }): Promise<Array<JournalWithCmtCountDTO>> {
   return get("/api/admin/journals/latest", opt);
 }
@@ -780,7 +789,7 @@ export function journalsIdPut(opt: {
   /**
    * id
    */
-  id: any;
+  id: number;
 }): Promise<JournalDTO> {
   return put("/api/admin/journals/{id}", opt);
 }
@@ -792,7 +801,7 @@ export function journalsJournalIdRemove(opt: {
   /**
    * journalId
    */
-  journalId: any;
+  journalId: number;
 }): Promise<JournalDTO> {
   return remove("/api/admin/journals/{journalId}", opt);
 }
@@ -804,7 +813,7 @@ export function linksGet(opt: {
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 }): Promise<Array<LinkDTO>> {
   return get("/api/admin/links", opt);
 }
@@ -830,7 +839,7 @@ export function linksIdGet(opt: {
   /**
    * id
    */
-  id: any;
+  id: number;
 }): Promise<LinkDTO> {
   return get("/api/admin/links/{id}", opt);
 }
@@ -842,7 +851,7 @@ export function linksIdPut(opt: {
   /**
    * id
    */
-  id: any;
+  id: number;
 }): Promise<LinkDTO> {
   return put("/api/admin/links/{id}", opt);
 }
@@ -854,7 +863,7 @@ export function linksIdRemove(opt: {
   /**
    * id
    */
-  id: any;
+  id: number;
 }): Promise<void> {
   return remove("/api/admin/links/{id}", opt);
 }
@@ -866,17 +875,17 @@ export function logsGet(opt: {
   /**
    *
    */
-  page?: any;
+  page?: number;
 
   /**
    *
    */
-  size?: any;
+  size?: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 }): Promise<CustomizedPageOfLogDTO> {
   return get("/api/admin/logs", opt);
 }
@@ -895,7 +904,7 @@ export function logsLatestGet(opt: {
   /**
    * top
    */
-  top?: any;
+  top?: number;
 }): Promise<Array<LogDTO>> {
   return get("/api/admin/logs/latest", opt);
 }
@@ -921,7 +930,7 @@ export function menusGet(opt: {
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 }): Promise<Array<MenuDTO>> {
   return get("/api/admin/menus", opt);
 }
@@ -961,12 +970,12 @@ export function menusTeamTree_viewGet(opt: {
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * team
    */
-  team: any;
+  team: string;
 }): Promise<Array<MenuVO>> {
   return get("/api/admin/menus/team/tree_view", opt);
 }
@@ -985,7 +994,7 @@ export function menusTree_viewGet(opt: {
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 }): Promise<Array<MenuVO>> {
   return get("/api/admin/menus/tree_view", opt);
 }
@@ -997,7 +1006,7 @@ export function menusMenuIdGet(opt: {
   /**
    * menuId
    */
-  menuId: any;
+  menuId: number;
 }): Promise<MenuDTO> {
   return get("/api/admin/menus/{menuId}", opt);
 }
@@ -1009,7 +1018,7 @@ export function menusMenuIdPut(opt: {
   /**
    * menuId
    */
-  menuId: any;
+  menuId: number;
 }): Promise<MenuDTO> {
   return put("/api/admin/menus/{menuId}", opt);
 }
@@ -1021,7 +1030,7 @@ export function menusMenuIdRemove(opt: {
   /**
    * menuId
    */
-  menuId: any;
+  menuId: number;
 }): Promise<MenuDTO> {
   return remove("/api/admin/menus/{menuId}", opt);
 }
@@ -1054,27 +1063,27 @@ export function optionsList_viewGet(opt: {
   /**
    *
    */
-  keyword?: any;
+  keyword?: string;
 
   /**
    *
    */
-  page?: any;
+  page?: number;
 
   /**
    *
    */
-  size?: any;
+  size?: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    *
    */
-  type?: any;
+  type?: "CUSTOM" | "INTERNAL";
 }): Promise<CustomizedPageOfOptionSimpleDTO> {
   return get("/api/admin/options/list_view", opt);
 }
@@ -1114,7 +1123,7 @@ export function optionsIdGet(opt: {
   /**
    * id
    */
-  id: any;
+  id: number;
 }): Promise<OptionSimpleDTO> {
   return get("/api/admin/options/{id}", opt);
 }
@@ -1126,7 +1135,7 @@ export function optionsOptionIdPut(opt: {
   /**
    * optionId
    */
-  optionId: any;
+  optionId: number;
 }): Promise<void> {
   return put("/api/admin/options/{optionId}", opt);
 }
@@ -1138,7 +1147,7 @@ export function optionsOptionIdRemove(opt: {
   /**
    * optionId
    */
-  optionId: any;
+  optionId: number;
 }): Promise<void> {
   return remove("/api/admin/options/{optionId}", opt);
 }
@@ -1150,27 +1159,27 @@ export function photosGet(opt: {
   /**
    *
    */
-  keyword?: any;
+  keyword?: string;
 
   /**
    *
    */
-  page?: any;
+  page?: number;
 
   /**
    *
    */
-  size?: any;
+  size?: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    *
    */
-  team?: any;
+  team?: string;
 }): Promise<CustomizedPageOfPhotoDTO> {
   return get("/api/admin/photos", opt);
 }
@@ -1189,7 +1198,7 @@ export function photosLatestGet(opt: {
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 }): Promise<Array<PhotoDTO>> {
   return get("/api/admin/photos/latest", opt);
 }
@@ -1208,7 +1217,7 @@ export function photosPhotoIdGet(opt: {
   /**
    * photoId
    */
-  photoId: any;
+  photoId: number;
 }): Promise<PhotoDTO> {
   return get("/api/admin/photos/{photoId}", opt);
 }
@@ -1220,7 +1229,7 @@ export function photosPhotoIdPut(opt: {
   /**
    * photoId
    */
-  photoId: any;
+  photoId: number;
 }): Promise<PhotoDTO> {
   return put("/api/admin/photos/{photoId}", opt);
 }
@@ -1232,7 +1241,7 @@ export function photosPhotoIdRemove(opt: {
   /**
    * photoId
    */
-  photoId: any;
+  photoId: number;
 }): Promise<void> {
   return remove("/api/admin/photos/{photoId}", opt);
 }
@@ -1244,27 +1253,27 @@ export function postsCommentsGet(opt: {
   /**
    *
    */
-  keyword?: any;
+  keyword?: string;
 
   /**
    *
    */
-  page?: any;
+  page?: number;
 
   /**
    *
    */
-  size?: any;
+  size?: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    *
    */
-  status?: any;
+  status?: "AUDITING" | "PUBLISHED" | "RECYCLE";
 }): Promise<CustomizedPageOfPostCommentWithPostVO> {
   return get("/api/admin/posts/comments", opt);
 }
@@ -1290,12 +1299,12 @@ export function postsCommentsLatestGet(opt: {
   /**
    * top
    */
-  top?: any;
+  top?: number;
 
   /**
    * status
    */
-  status?: any;
+  status?: "AUDITING" | "PUBLISHED" | "RECYCLE";
 }): Promise<Array<PostCommentWithPostVO>> {
   return get("/api/admin/posts/comments/latest", opt);
 }
@@ -1307,7 +1316,7 @@ export function postsCommentsStatusStatusPut(opt: {
   /**
    * status
    */
-  status: any;
+  status: "AUDITING" | "PUBLISHED" | "RECYCLE";
 }): Promise<Array<BaseCommentDTO>> {
   return put("/api/admin/posts/comments/status/{status}", opt);
 }
@@ -1319,7 +1328,7 @@ export function postsCommentsCommentIdGet(opt: {
   /**
    * commentId
    */
-  commentId: any;
+  commentId: number;
 }): Promise<PostCommentWithPostVO> {
   return get("/api/admin/posts/comments/{commentId}", opt);
 }
@@ -1331,7 +1340,7 @@ export function postsCommentsCommentIdPut(opt: {
   /**
    * commentId
    */
-  commentId: any;
+  commentId: number;
 }): Promise<BaseCommentDTO> {
   return put("/api/admin/posts/comments/{commentId}", opt);
 }
@@ -1343,7 +1352,7 @@ export function postsCommentsCommentIdRemove(opt: {
   /**
    * commentId
    */
-  commentId: any;
+  commentId: number;
 }): Promise<BaseCommentDTO> {
   return remove("/api/admin/posts/comments/{commentId}", opt);
 }
@@ -1355,12 +1364,12 @@ export function postsCommentsCommentIdStatusStatusPut(opt: {
   /**
    * commentId
    */
-  commentId: any;
+  commentId: number;
 
   /**
    * status
    */
-  status: any;
+  status: "AUDITING" | "PUBLISHED" | "RECYCLE";
 }): Promise<BaseCommentDTO> {
   return put("/api/admin/posts/comments/{commentId}/status/{status}", opt);
 }
@@ -1372,17 +1381,17 @@ export function postsCommentsPostIdList_viewGet(opt: {
   /**
    * postId
    */
-  postId: any;
+  postId: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * page
    */
-  page?: any;
+  page?: number;
 }): Promise<CustomizedPageOfBaseCommentWithParentVO> {
   return get("/api/admin/posts/comments/{postId}/list_view", opt);
 }
@@ -1394,17 +1403,17 @@ export function postsCommentsPostIdTree_viewGet(opt: {
   /**
    * postId
    */
-  postId: any;
+  postId: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * page
    */
-  page?: any;
+  page?: number;
 }): Promise<CustomizedPageOfBaseCommentVO> {
   return get("/api/admin/posts/comments/{postId}/tree_view", opt);
 }
@@ -1416,37 +1425,37 @@ export function postsGet(opt: {
   /**
    *
    */
-  categoryId?: any;
+  categoryId?: number;
 
   /**
    *
    */
-  keyword?: any;
+  keyword?: string;
 
   /**
    *
    */
-  page?: any;
+  page?: number;
 
   /**
    *
    */
-  size?: any;
+  size?: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    *
    */
-  status?: any;
+  status?: "DRAFT" | "INTIMATE" | "PUBLISHED" | "RECYCLE";
 
   /**
    * more
    */
-  more?: any;
+  more?: boolean;
 }): Promise<CustomizedPageOfBasePostSimpleDTO> {
   return get("/api/admin/posts", opt);
 }
@@ -1458,7 +1467,7 @@ export function postsPost(opt: {
   /**
    * autoSave
    */
-  autoSave?: any;
+  autoSave?: boolean;
 }): Promise<PostDetailVO> {
   return post("/api/admin/posts", opt);
 }
@@ -1477,7 +1486,7 @@ export function postsLatestGet(opt: {
   /**
    * top
    */
-  top?: any;
+  top?: number;
 }): Promise<Array<BasePostMinimalDTO>> {
   return get("/api/admin/posts/latest", opt);
 }
@@ -1489,7 +1498,7 @@ export function postsPreviewPostIdGet(opt: {
   /**
    * postId
    */
-  postId: any;
+  postId: number;
 }): Promise<string> {
   return get("/api/admin/posts/preview/{postId}", opt);
 }
@@ -1501,27 +1510,27 @@ export function postsStatusStatusGet(opt: {
   /**
    *
    */
-  page?: any;
+  page?: number;
 
   /**
    *
    */
-  size?: any;
+  size?: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * status
    */
-  status: any;
+  status: "DRAFT" | "INTIMATE" | "PUBLISHED" | "RECYCLE";
 
   /**
    * more
    */
-  more?: any;
+  more?: boolean;
 }): Promise<CustomizedPageOfBasePostSimpleDTO> {
   return get("/api/admin/posts/status/{status}", opt);
 }
@@ -1533,7 +1542,7 @@ export function postsStatusStatusPut(opt: {
   /**
    * status
    */
-  status: any;
+  status: "DRAFT" | "INTIMATE" | "PUBLISHED" | "RECYCLE";
 }): Promise<Array<Post>> {
   return put("/api/admin/posts/status/{status}", opt);
 }
@@ -1545,7 +1554,7 @@ export function postsPostIdGet(opt: {
   /**
    * postId
    */
-  postId: any;
+  postId: number;
 }): Promise<PostDetailVO> {
   return get("/api/admin/posts/{postId}", opt);
 }
@@ -1557,12 +1566,12 @@ export function postsPostIdPut(opt: {
   /**
    * postId
    */
-  postId: any;
+  postId: number;
 
   /**
    * autoSave
    */
-  autoSave?: any;
+  autoSave?: boolean;
 }): Promise<PostDetailVO> {
   return put("/api/admin/posts/{postId}", opt);
 }
@@ -1574,7 +1583,7 @@ export function postsPostIdRemove(opt: {
   /**
    * postId
    */
-  postId: any;
+  postId: number;
 }): Promise<void> {
   return remove("/api/admin/posts/{postId}", opt);
 }
@@ -1586,7 +1595,7 @@ export function postsPostIdLikesPut(opt: {
   /**
    * postId
    */
-  postId: any;
+  postId: number;
 }): Promise<void> {
   return put("/api/admin/posts/{postId}/likes", opt);
 }
@@ -1598,7 +1607,7 @@ export function postsPostIdPreviewGet(opt: {
   /**
    * postId
    */
-  postId: any;
+  postId: number;
 }): Promise<string> {
   return get("/api/admin/posts/{postId}/preview", opt);
 }
@@ -1610,7 +1619,7 @@ export function postsPostIdStatusDraftContentPut(opt: {
   /**
    * postId
    */
-  postId: any;
+  postId: number;
 }): Promise<BasePostDetailDTO> {
   return put("/api/admin/posts/{postId}/status/draft/content", opt);
 }
@@ -1622,12 +1631,12 @@ export function postsPostIdStatusStatusPut(opt: {
   /**
    * postId
    */
-  postId: any;
+  postId: number;
 
   /**
    * status
    */
-  status: any;
+  status: "DRAFT" | "INTIMATE" | "PUBLISHED" | "RECYCLE";
 }): Promise<BasePostMinimalDTO> {
   return put("/api/admin/posts/{postId}/status/{status}", opt);
 }
@@ -1639,27 +1648,27 @@ export function sheetsCommentsGet(opt: {
   /**
    *
    */
-  keyword?: any;
+  keyword?: string;
 
   /**
    *
    */
-  page?: any;
+  page?: number;
 
   /**
    *
    */
-  size?: any;
+  size?: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    *
    */
-  status?: any;
+  status?: "AUDITING" | "PUBLISHED" | "RECYCLE";
 }): Promise<CustomizedPageOfSheetCommentWithSheetVO> {
   return get("/api/admin/sheets/comments", opt);
 }
@@ -1685,12 +1694,12 @@ export function sheetsCommentsLatestGet(opt: {
   /**
    * top
    */
-  top?: any;
+  top?: number;
 
   /**
    * status
    */
-  status?: any;
+  status?: "AUDITING" | "PUBLISHED" | "RECYCLE";
 }): Promise<Array<SheetCommentWithSheetVO>> {
   return get("/api/admin/sheets/comments/latest", opt);
 }
@@ -1702,7 +1711,7 @@ export function sheetsCommentsStatusStatusPut(opt: {
   /**
    * status
    */
-  status: any;
+  status: "AUDITING" | "PUBLISHED" | "RECYCLE";
 }): Promise<Array<BaseCommentDTO>> {
   return put("/api/admin/sheets/comments/status/{status}", opt);
 }
@@ -1714,7 +1723,7 @@ export function sheetsCommentsCommentIdGet(opt: {
   /**
    * commentId
    */
-  commentId: any;
+  commentId: number;
 }): Promise<SheetCommentWithSheetVO> {
   return get("/api/admin/sheets/comments/{commentId}", opt);
 }
@@ -1726,7 +1735,7 @@ export function sheetsCommentsCommentIdPut(opt: {
   /**
    * commentId
    */
-  commentId: any;
+  commentId: number;
 }): Promise<BaseCommentDTO> {
   return put("/api/admin/sheets/comments/{commentId}", opt);
 }
@@ -1738,7 +1747,7 @@ export function sheetsCommentsCommentIdRemove(opt: {
   /**
    * commentId
    */
-  commentId: any;
+  commentId: number;
 }): Promise<BaseCommentDTO> {
   return remove("/api/admin/sheets/comments/{commentId}", opt);
 }
@@ -1750,12 +1759,12 @@ export function sheetsCommentsCommentIdStatusStatusPut(opt: {
   /**
    * commentId
    */
-  commentId: any;
+  commentId: number;
 
   /**
    * status
    */
-  status: any;
+  status: "AUDITING" | "PUBLISHED" | "RECYCLE";
 }): Promise<BaseCommentDTO> {
   return put("/api/admin/sheets/comments/{commentId}/status/{status}", opt);
 }
@@ -1767,17 +1776,17 @@ export function sheetsCommentsSheetIdList_viewGet(opt: {
   /**
    * sheetId
    */
-  sheetId: any;
+  sheetId: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * page
    */
-  page?: any;
+  page?: number;
 }): Promise<CustomizedPageOfBaseCommentWithParentVO> {
   return get("/api/admin/sheets/comments/{sheetId}/list_view", opt);
 }
@@ -1789,17 +1798,17 @@ export function sheetsCommentsSheetIdTree_viewGet(opt: {
   /**
    * sheetId
    */
-  sheetId: any;
+  sheetId: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * page
    */
-  page?: any;
+  page?: number;
 }): Promise<CustomizedPageOfBaseCommentVO> {
   return get("/api/admin/sheets/comments/{sheetId}/tree_view", opt);
 }
@@ -1811,17 +1820,17 @@ export function sheetsGet(opt: {
   /**
    *
    */
-  page?: any;
+  page?: number;
 
   /**
    *
    */
-  size?: any;
+  size?: number;
 
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 }): Promise<CustomizedPageOfSheetListVO> {
   return get("/api/admin/sheets", opt);
 }
@@ -1833,7 +1842,7 @@ export function sheetsPost(opt: {
   /**
    * autoSave
    */
-  autoSave?: any;
+  autoSave?: boolean;
 }): Promise<SheetDetailVO> {
   return post("/api/admin/sheets", opt);
 }
@@ -1852,7 +1861,7 @@ export function sheetsPreviewSheetIdGet(opt: {
   /**
    * sheetId
    */
-  sheetId: any;
+  sheetId: number;
 }): Promise<string> {
   return get("/api/admin/sheets/preview/{sheetId}", opt);
 }
@@ -1864,7 +1873,7 @@ export function sheetsSheetIdGet(opt: {
   /**
    * sheetId
    */
-  sheetId: any;
+  sheetId: number;
 }): Promise<SheetDetailVO> {
   return get("/api/admin/sheets/{sheetId}", opt);
 }
@@ -1876,12 +1885,12 @@ export function sheetsSheetIdPut(opt: {
   /**
    * sheetId
    */
-  sheetId: any;
+  sheetId: number;
 
   /**
    * autoSave
    */
-  autoSave?: any;
+  autoSave?: boolean;
 }): Promise<SheetDetailVO> {
   return put("/api/admin/sheets/{sheetId}", opt);
 }
@@ -1893,7 +1902,7 @@ export function sheetsSheetIdRemove(opt: {
   /**
    * sheetId
    */
-  sheetId: any;
+  sheetId: number;
 }): Promise<SheetDetailVO> {
   return remove("/api/admin/sheets/{sheetId}", opt);
 }
@@ -1905,7 +1914,7 @@ export function sheetsSheetIdStatusDraftContentPut(opt: {
   /**
    * sheetId
    */
-  sheetId: any;
+  sheetId: number;
 }): Promise<BasePostDetailDTO> {
   return put("/api/admin/sheets/{sheetId}/status/draft/content", opt);
 }
@@ -1917,12 +1926,12 @@ export function sheetsSheetIdStatusPut(opt: {
   /**
    * sheetId
    */
-  sheetId: any;
+  sheetId: number;
 
   /**
    * status
    */
-  status: any;
+  status: "DRAFT" | "INTIMATE" | "PUBLISHED" | "RECYCLE";
 }): Promise<void> {
   return put("/api/admin/sheets/{sheetId}/{status}", opt);
 }
@@ -1941,12 +1950,12 @@ export function staticsPost(opt: {
   /**
    * basePath
    */
-  basePath?: any;
+  basePath?: string;
 
   /**
    * folderName
    */
-  folderName: any;
+  folderName: string;
 }): Promise<void> {
   return post("/api/admin/statics", opt);
 }
@@ -1958,7 +1967,7 @@ export function staticsRemove(opt: {
   /**
    * path
    */
-  path: any;
+  path: string;
 }): Promise<void> {
   return remove("/api/admin/statics", opt);
 }
@@ -1977,12 +1986,12 @@ export function staticsRenamePost(opt: {
   /**
    * basePath
    */
-  basePath?: any;
+  basePath?: string;
 
   /**
    * newName
    */
-  newName?: any;
+  newName?: string;
 }): Promise<void> {
   return post("/api/admin/statics/rename", opt);
 }
@@ -1994,7 +2003,7 @@ export function staticsUploadPost(opt: {
   /**
    * basePath
    */
-  basePath?: any;
+  basePath?: string;
 }): Promise<void> {
   return post("/api/admin/statics/upload", opt);
 }
@@ -2020,12 +2029,12 @@ export function tagsGet(opt: {
   /**
    *
    */
-  sort?: any;
+  sort?: Array<string>;
 
   /**
    * Return more information(post count) if it is set
    */
-  more?: any;
+  more?: boolean;
 }): Promise<Array<TagDTO>> {
   return get("/api/admin/tags", opt);
 }
@@ -2044,7 +2053,7 @@ export function tagsTagIdGet(opt: {
   /**
    * tagId
    */
-  tagId: any;
+  tagId: number;
 }): Promise<TagDTO> {
   return get("/api/admin/tags/{tagId}", opt);
 }
@@ -2056,7 +2065,7 @@ export function tagsTagIdPut(opt: {
   /**
    * tagId
    */
-  tagId: any;
+  tagId: number;
 }): Promise<TagDTO> {
   return put("/api/admin/tags/{tagId}", opt);
 }
@@ -2068,7 +2077,7 @@ export function tagsTagIdRemove(opt: {
   /**
    * tagId
    */
-  tagId: any;
+  tagId: number;
 }): Promise<TagDTO> {
   return remove("/api/admin/tags/{tagId}", opt);
 }
@@ -2140,7 +2149,7 @@ export function themesActivationTemplateExistsGet(opt: {
   /**
    * template
    */
-  template: any;
+  template: string;
 }): Promise<BaseResponseOfboolean> {
   return get("/api/admin/themes/activation/template/exists", opt);
 }
@@ -2152,12 +2161,12 @@ export function themesFetchBranchGet(opt: {
   /**
    * uri
    */
-  uri: any;
+  uri: string;
 
   /**
    * branch
    */
-  branch: any;
+  branch: string;
 }): Promise<ThemeProperty> {
   return get("/api/admin/themes/fetchBranch", opt);
 }
@@ -2169,7 +2178,7 @@ export function themesFetchLatestReleaseGet(opt: {
   /**
    * uri
    */
-  uri: any;
+  uri: string;
 }): Promise<ThemeProperty> {
   return get("/api/admin/themes/fetchLatestRelease", opt);
 }
@@ -2181,7 +2190,7 @@ export function themesFetchingPost(opt: {
   /**
    * uri
    */
-  uri: any;
+  uri: string;
 }): Promise<ThemeProperty> {
   return post("/api/admin/themes/fetching", opt);
 }
@@ -2193,7 +2202,7 @@ export function themesFetchingGitBranchesPost(opt: {
   /**
    * uri
    */
-  uri: any;
+  uri: string;
 }): Promise<Array<ThemeProperty>> {
   return post("/api/admin/themes/fetching/git/branches", opt);
 }
@@ -2205,7 +2214,7 @@ export function themesFetchingThemeIdPut(opt: {
   /**
    * themeId
    */
-  themeId: any;
+  themeId: string;
 }): Promise<ThemeProperty> {
   return put("/api/admin/themes/fetching/{themeId}", opt);
 }
@@ -2217,7 +2226,7 @@ export function themesFetchingBranchesPost(opt: {
   /**
    * uri
    */
-  uri: any;
+  uri: string;
 }): Promise<Array<ThemeProperty>> {
   return post("/api/admin/themes/fetchingBranches", opt);
 }
@@ -2229,12 +2238,12 @@ export function themesFetchingReleaseGet(opt: {
   /**
    * uri
    */
-  uri: any;
+  uri: string;
 
   /**
    * tag
    */
-  tag: any;
+  tag: string;
 }): Promise<ThemeProperty> {
   return get("/api/admin/themes/fetchingRelease", opt);
 }
@@ -2246,7 +2255,7 @@ export function themesFetchingReleasesPost(opt: {
   /**
    * uri
    */
-  uri: any;
+  uri: string;
 }): Promise<Array<ThemeProperty>> {
   return post("/api/admin/themes/fetchingReleases", opt);
 }
@@ -2258,7 +2267,7 @@ export function themesFilesContentGet(opt: {
   /**
    * path
    */
-  path: any;
+  path: string;
 }): Promise<BaseResponseOfstring> {
   return get("/api/admin/themes/files/content", opt);
 }
@@ -2291,7 +2300,7 @@ export function themesUploadThemeIdPut(opt: {
   /**
    * themeId
    */
-  themeId: any;
+  themeId: string;
 }): Promise<ThemeProperty> {
   return put("/api/admin/themes/upload/{themeId}", opt);
 }
@@ -2303,7 +2312,7 @@ export function themesThemeIdGet(opt: {
   /**
    * themeId
    */
-  themeId: any;
+  themeId: string;
 }): Promise<ThemeProperty> {
   return get("/api/admin/themes/{themeId}", opt);
 }
@@ -2315,12 +2324,12 @@ export function themesThemeIdRemove(opt: {
   /**
    * themeId
    */
-  themeId: any;
+  themeId: string;
 
   /**
    * deleteSettings
    */
-  deleteSettings?: any;
+  deleteSettings?: boolean;
 }): Promise<void> {
   return remove("/api/admin/themes/{themeId}", opt);
 }
@@ -2332,7 +2341,7 @@ export function themesThemeIdActivationPost(opt: {
   /**
    * themeId
    */
-  themeId: any;
+  themeId: string;
 }): Promise<ThemeProperty> {
   return post("/api/admin/themes/{themeId}/activation", opt);
 }
@@ -2344,7 +2353,7 @@ export function themesThemeIdConfigurationsGet(opt: {
   /**
    * themeId
    */
-  themeId: any;
+  themeId: string;
 }): Promise<Array<Group>> {
   return get("/api/admin/themes/{themeId}/configurations", opt);
 }
@@ -2356,7 +2365,7 @@ export function themesThemeIdFilesGet(opt: {
   /**
    * themeId
    */
-  themeId: any;
+  themeId: string;
 }): Promise<Array<ThemeFile>> {
   return get("/api/admin/themes/{themeId}/files", opt);
 }
@@ -2368,12 +2377,12 @@ export function themesThemeIdFilesContentGet(opt: {
   /**
    * themeId
    */
-  themeId: any;
+  themeId: string;
 
   /**
    * path
    */
-  path: any;
+  path: string;
 }): Promise<BaseResponseOfstring> {
   return get("/api/admin/themes/{themeId}/files/content", opt);
 }
@@ -2385,7 +2394,7 @@ export function themesThemeIdFilesContentPut(opt: {
   /**
    * themeId
    */
-  themeId: any;
+  themeId: string;
 }): Promise<void> {
   return put("/api/admin/themes/{themeId}/files/content", opt);
 }
@@ -2397,7 +2406,7 @@ export function themesThemeIdSettingsGet(opt: {
   /**
    * themeId
    */
-  themeId: any;
+  themeId: string;
 }): Promise<any> {
   return get("/api/admin/themes/{themeId}/settings", opt);
 }
@@ -2409,7 +2418,7 @@ export function themesThemeIdSettingsPost(opt: {
   /**
    * themeId
    */
-  themeId: any;
+  themeId: string;
 }): Promise<void> {
   return post("/api/admin/themes/{themeId}/settings", opt);
 }

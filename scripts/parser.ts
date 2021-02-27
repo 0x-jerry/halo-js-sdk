@@ -88,7 +88,7 @@ function parseParameter(paramData) {
     name: paramData.name,
     desc: paramData.description || '',
     required: !!paramData.required,
-    type: parseType(paramData)
+    type: parseType(paramData.schema)
   }
 
   return param
