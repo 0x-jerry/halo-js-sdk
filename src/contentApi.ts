@@ -93,7 +93,7 @@ function decodeResponseData(data: any) {
   return data.data ? data.data : data;
 }
 
-async function get(path: string, data?: any) {
+async function get(path: string, data?: any = {}) {
   const { __body, ...other } = data;
 
   const res = await configs.axios.get(path, { params: other, data: __body });
@@ -101,7 +101,7 @@ async function get(path: string, data?: any) {
   return decodeResponseData(res.data);
 }
 
-async function post(path: string, data?: any) {
+async function post(path: string, data?: any = {}) {
   const { __body, ...other } = data;
 
   const res = await configs.axios.post(path, { params: other, data: __body });
@@ -109,7 +109,7 @@ async function post(path: string, data?: any) {
   return decodeResponseData(res.data);
 }
 
-async function put(path: string, data?: any) {
+async function put(path: string, data?: any = {}) {
   const { __body, ...other } = data;
 
   const res = await configs.axios.put(path, { params: other, data: __body });
