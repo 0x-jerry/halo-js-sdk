@@ -25,7 +25,7 @@ export function main(force = false) {
 }
 
 function getAuthKey(data: any) {
-  const defines = data.securityDefinitions
+  const defines = data.components.securitySchemes
   const o: any = Object.keys(defines).find((k) => defines[k].in === 'header')
 
   return defines[o].name || 'Authorization'

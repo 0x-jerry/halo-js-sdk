@@ -37,8 +37,10 @@ export function parseAPIJson(json) {
   const interfaces: Interface[] = []
   const apis: API[] = []
 
-  Object.keys(json.definitions).forEach((key) => {
-    const v = json.definitions[key]
+  const defineSchemas = json.components.schemas
+
+  Object.keys(defineSchemas).forEach((key) => {
+    const v = defineSchemas[key]
     const i = parseDefinition(v)
     interfaces.push(i)
   })
@@ -57,7 +59,7 @@ export function parseAPIJson(json) {
         data: 'void'
       }
 
-      const resType = methodData.responses[200].schema
+      const resType = methodData.responses[200].content?.['*/*'].schema
       if (resType) {
         api.data = parseType(resType)
       }

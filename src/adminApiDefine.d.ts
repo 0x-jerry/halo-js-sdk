@@ -199,21 +199,21 @@ export interface BasePostSimpleDTO {
   wordCount: number;
 }
 
-export interface BaseResponseboolean {
+export interface BaseResponseOfboolean {
   data: boolean;
   devMessage: string;
   message: string;
   status: number;
 }
 
-export interface BaseResponseobject {
+export interface BaseResponseOfobject {
   data: any;
   devMessage: string;
   message: string;
   status: number;
 }
 
-export interface BaseResponsestring {
+export interface BaseResponseOfstring {
   data: string;
   devMessage: string;
   message: string;
@@ -227,6 +227,7 @@ export interface CategoryDTO {
   id: number;
   name: string;
   parentId: number;
+  password: string;
   slug: string;
   thumbnail: string;
 }
@@ -235,6 +236,7 @@ export interface CategoryParam {
   description: string;
   name: string;
   parentId: number;
+  password: string;
   slug: string;
   thumbnail: string;
 }
@@ -247,8 +249,165 @@ export interface CategoryVO {
   id: number;
   name: string;
   parentId: number;
+  password: string;
   slug: string;
   thumbnail: string;
+}
+
+export interface CustomizedPageOfAttachmentDTO {
+  content: Array<AttachmentDTO>;
+  hasContent: boolean;
+  hasNext: boolean;
+  hasPrevious: boolean;
+  isEmpty: boolean;
+  isFirst: boolean;
+  page: number;
+  pages: number;
+  rpp: number;
+  total: number;
+}
+
+export interface CustomizedPageOfBaseCommentVO {
+  content: Array<BaseCommentVO>;
+  hasContent: boolean;
+  hasNext: boolean;
+  hasPrevious: boolean;
+  isEmpty: boolean;
+  isFirst: boolean;
+  page: number;
+  pages: number;
+  rpp: number;
+  total: number;
+}
+
+export interface CustomizedPageOfBaseCommentWithParentVO {
+  content: Array<BaseCommentWithParentVO>;
+  hasContent: boolean;
+  hasNext: boolean;
+  hasPrevious: boolean;
+  isEmpty: boolean;
+  isFirst: boolean;
+  page: number;
+  pages: number;
+  rpp: number;
+  total: number;
+}
+
+export interface CustomizedPageOfBasePostSimpleDTO {
+  content: Array<BasePostSimpleDTO>;
+  hasContent: boolean;
+  hasNext: boolean;
+  hasPrevious: boolean;
+  isEmpty: boolean;
+  isFirst: boolean;
+  page: number;
+  pages: number;
+  rpp: number;
+  total: number;
+}
+
+export interface CustomizedPageOfJournalCommentWithJournalVO {
+  content: Array<JournalCommentWithJournalVO>;
+  hasContent: boolean;
+  hasNext: boolean;
+  hasPrevious: boolean;
+  isEmpty: boolean;
+  isFirst: boolean;
+  page: number;
+  pages: number;
+  rpp: number;
+  total: number;
+}
+
+export interface CustomizedPageOfJournalWithCmtCountDTO {
+  content: Array<JournalWithCmtCountDTO>;
+  hasContent: boolean;
+  hasNext: boolean;
+  hasPrevious: boolean;
+  isEmpty: boolean;
+  isFirst: boolean;
+  page: number;
+  pages: number;
+  rpp: number;
+  total: number;
+}
+
+export interface CustomizedPageOfLogDTO {
+  content: Array<LogDTO>;
+  hasContent: boolean;
+  hasNext: boolean;
+  hasPrevious: boolean;
+  isEmpty: boolean;
+  isFirst: boolean;
+  page: number;
+  pages: number;
+  rpp: number;
+  total: number;
+}
+
+export interface CustomizedPageOfOptionSimpleDTO {
+  content: Array<OptionSimpleDTO>;
+  hasContent: boolean;
+  hasNext: boolean;
+  hasPrevious: boolean;
+  isEmpty: boolean;
+  isFirst: boolean;
+  page: number;
+  pages: number;
+  rpp: number;
+  total: number;
+}
+
+export interface CustomizedPageOfPhotoDTO {
+  content: Array<PhotoDTO>;
+  hasContent: boolean;
+  hasNext: boolean;
+  hasPrevious: boolean;
+  isEmpty: boolean;
+  isFirst: boolean;
+  page: number;
+  pages: number;
+  rpp: number;
+  total: number;
+}
+
+export interface CustomizedPageOfPostCommentWithPostVO {
+  content: Array<PostCommentWithPostVO>;
+  hasContent: boolean;
+  hasNext: boolean;
+  hasPrevious: boolean;
+  isEmpty: boolean;
+  isFirst: boolean;
+  page: number;
+  pages: number;
+  rpp: number;
+  total: number;
+}
+
+export interface CustomizedPageOfSheetCommentWithSheetVO {
+  content: Array<SheetCommentWithSheetVO>;
+  hasContent: boolean;
+  hasNext: boolean;
+  hasPrevious: boolean;
+  isEmpty: boolean;
+  isFirst: boolean;
+  page: number;
+  pages: number;
+  rpp: number;
+  total: number;
+}
+
+export interface CustomizedPageOfSheetListVO {
+  content: Array<SheetListVO>;
+  hasContent: boolean;
+  hasNext: boolean;
+  hasPrevious: boolean;
+  isEmpty: boolean;
+  isFirst: boolean;
+  page: number;
+  pages: number;
+  rpp: number;
+  total: number;
 }
 
 export interface EnvironmentDTO {
@@ -486,180 +645,6 @@ export interface OptionSimpleDTO {
   value: any;
 }
 
-export interface Pageable {
-  page: number;
-  size: number;
-  sort: Array<string>;
-}
-
-export interface PageAttachmentDTO {
-  content: Array<AttachmentDTO>;
-  empty: boolean;
-  first: boolean;
-  last: boolean;
-  number: number;
-  numberOfElements: number;
-  pageable: Pageable;
-  size: number;
-  sort: Sort;
-  totalElements: number;
-  totalPages: number;
-}
-
-export interface PageBaseCommentVO {
-  content: Array<BaseCommentVO>;
-  empty: boolean;
-  first: boolean;
-  last: boolean;
-  number: number;
-  numberOfElements: number;
-  pageable: Pageable;
-  size: number;
-  sort: Sort;
-  totalElements: number;
-  totalPages: number;
-}
-
-export interface PageBaseCommentWithParentVO {
-  content: Array<BaseCommentWithParentVO>;
-  empty: boolean;
-  first: boolean;
-  last: boolean;
-  number: number;
-  numberOfElements: number;
-  pageable: Pageable;
-  size: number;
-  sort: Sort;
-  totalElements: number;
-  totalPages: number;
-}
-
-export interface PageBasePostSimpleDTO {
-  content: Array<BasePostSimpleDTO>;
-  empty: boolean;
-  first: boolean;
-  last: boolean;
-  number: number;
-  numberOfElements: number;
-  pageable: Pageable;
-  size: number;
-  sort: Sort;
-  totalElements: number;
-  totalPages: number;
-}
-
-export interface PageJournalCommentWithJournalVO {
-  content: Array<JournalCommentWithJournalVO>;
-  empty: boolean;
-  first: boolean;
-  last: boolean;
-  number: number;
-  numberOfElements: number;
-  pageable: Pageable;
-  size: number;
-  sort: Sort;
-  totalElements: number;
-  totalPages: number;
-}
-
-export interface PageJournalWithCmtCountDTO {
-  content: Array<JournalWithCmtCountDTO>;
-  empty: boolean;
-  first: boolean;
-  last: boolean;
-  number: number;
-  numberOfElements: number;
-  pageable: Pageable;
-  size: number;
-  sort: Sort;
-  totalElements: number;
-  totalPages: number;
-}
-
-export interface PageLogDTO {
-  content: Array<LogDTO>;
-  empty: boolean;
-  first: boolean;
-  last: boolean;
-  number: number;
-  numberOfElements: number;
-  pageable: Pageable;
-  size: number;
-  sort: Sort;
-  totalElements: number;
-  totalPages: number;
-}
-
-export interface PageOptionSimpleDTO {
-  content: Array<OptionSimpleDTO>;
-  empty: boolean;
-  first: boolean;
-  last: boolean;
-  number: number;
-  numberOfElements: number;
-  pageable: Pageable;
-  size: number;
-  sort: Sort;
-  totalElements: number;
-  totalPages: number;
-}
-
-export interface PagePhotoDTO {
-  content: Array<PhotoDTO>;
-  empty: boolean;
-  first: boolean;
-  last: boolean;
-  number: number;
-  numberOfElements: number;
-  pageable: Pageable;
-  size: number;
-  sort: Sort;
-  totalElements: number;
-  totalPages: number;
-}
-
-export interface PagePostCommentWithPostVO {
-  content: Array<PostCommentWithPostVO>;
-  empty: boolean;
-  first: boolean;
-  last: boolean;
-  number: number;
-  numberOfElements: number;
-  pageable: Pageable;
-  size: number;
-  sort: Sort;
-  totalElements: number;
-  totalPages: number;
-}
-
-export interface PageSheetCommentWithSheetVO {
-  content: Array<SheetCommentWithSheetVO>;
-  empty: boolean;
-  first: boolean;
-  last: boolean;
-  number: number;
-  numberOfElements: number;
-  pageable: Pageable;
-  size: number;
-  sort: Sort;
-  totalElements: number;
-  totalPages: number;
-}
-
-export interface PageSheetListVO {
-  content: Array<SheetListVO>;
-  empty: boolean;
-  first: boolean;
-  last: boolean;
-  number: number;
-  numberOfElements: number;
-  pageable: Pageable;
-  size: number;
-  sort: Sort;
-  totalElements: number;
-  totalPages: number;
-}
-
 export interface PasswordParam {
   newPassword: string;
   oldPassword: string;
@@ -833,7 +818,7 @@ export interface ResetPasswordParam {
 
 export interface Resource {
   description: string;
-  file: any;
+  file: string;
   filename: string;
   inputStream: InputStream;
   open: boolean;
@@ -964,10 +949,6 @@ export interface SheetParam {
   thumbnail: string;
   title: string;
   topPriority: number;
-}
-
-export interface Sort {
-  sort: Array<string>;
 }
 
 export interface StaticContentParam {

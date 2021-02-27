@@ -18,12 +18,24 @@ import {
   BasePostDetailDTO,
   BasePostMinimalDTO,
   BasePostSimpleDTO,
-  BaseResponseboolean,
-  BaseResponseobject,
-  BaseResponsestring,
+  BaseResponseOfboolean,
+  BaseResponseOfobject,
+  BaseResponseOfstring,
   CategoryDTO,
   CategoryParam,
   CategoryVO,
+  CustomizedPageOfAttachmentDTO,
+  CustomizedPageOfBaseCommentVO,
+  CustomizedPageOfBaseCommentWithParentVO,
+  CustomizedPageOfBasePostSimpleDTO,
+  CustomizedPageOfJournalCommentWithJournalVO,
+  CustomizedPageOfJournalWithCmtCountDTO,
+  CustomizedPageOfLogDTO,
+  CustomizedPageOfOptionSimpleDTO,
+  CustomizedPageOfPhotoDTO,
+  CustomizedPageOfPostCommentWithPostVO,
+  CustomizedPageOfSheetCommentWithSheetVO,
+  CustomizedPageOfSheetListVO,
   EnvironmentDTO,
   Group,
   IndependentSheetDTO,
@@ -50,19 +62,6 @@ import {
   OptionDTO,
   OptionParam,
   OptionSimpleDTO,
-  Pageable,
-  PageAttachmentDTO,
-  PageBaseCommentVO,
-  PageBaseCommentWithParentVO,
-  PageBasePostSimpleDTO,
-  PageJournalCommentWithJournalVO,
-  PageJournalWithCmtCountDTO,
-  PageLogDTO,
-  PageOptionSimpleDTO,
-  PagePhotoDTO,
-  PagePostCommentWithPostVO,
-  PageSheetCommentWithSheetVO,
-  PageSheetListVO,
   PasswordParam,
   PhotoDTO,
   PhotoParam,
@@ -84,7 +83,6 @@ import {
   SheetListVO,
   SheetMetaParam,
   SheetParam,
-  Sort,
   StaticContentParam,
   StaticFile,
   StatisticDTO,
@@ -99,7 +97,7 @@ import {
 } from "./adminApiDefine";
 
 export const apiInfo = {
-  version: "1.4.3",
+  version: "1.4.5",
   authKey: "ADMIN-Authorization",
 };
 
@@ -172,61 +170,127 @@ async function remove(path: string, data?: any) {
 }
 
 /**
+ * Gets count info
+ */
+export function countsGet(): Promise<StatisticDTO> {
+  return get("/api/admin/counts");
+}
+
+/**
+ * Gets environments info
+ */
+export function environmentsGet(): Promise<EnvironmentDTO> {
+  return get("/api/admin/environments");
+}
+
+/**
+ * Gets halo log file content
+ */
+export function haloLogfileGet(opt: {
+  /**
+   * lines
+   */
+  lines: any;
+}): Promise<BaseResponseOfstring> {
+  return get("/api/admin/halo/logfile", opt);
+}
+
+/**
+ * Checks Installation status
+ */
+export function is_installedGet(): Promise<boolean> {
+  return get("/api/admin/is_installed");
+}
+
+/**
+ * Login
+ */
+export function loginPost(): Promise<AuthToken> {
+  return post("/api/admin/login");
+}
+
+/**
+ * Login
+ */
+export function loginPrecheckPost(): Promise<LoginPreCheckDTO> {
+  return post("/api/admin/login/precheck");
+}
+
+/**
+ * Logs out (Clear session)
+ */
+export function logoutPost(): Promise<void> {
+  return post("/api/admin/logout");
+}
+
+/**
+ * Sends reset password verify code
+ */
+export function passwordCodePost(): Promise<void> {
+  return post("/api/admin/password/code");
+}
+
+/**
+ * Resets password by verify code
+ */
+export function passwordResetPut(): Promise<void> {
+  return put("/api/admin/password/reset");
+}
+
+/**
+ * Refreshes token
+ */
+export function refreshRefreshTokenPost(opt: {
+  /**
+   * refreshToken
+   */
+  refreshToken: any;
+}): Promise<AuthToken> {
+  return post("/api/admin/refresh/{refreshToken}", opt);
+}
+
+/**
  * pageBy
  */
 export function attachmentsGet(opt: {
   /**
    *
    */
-  attachmentType?:
-    | "ALIOSS"
-    | "BAIDUBOS"
-    | "HUAWEIOBS"
-    | "LOCAL"
-    | "MINIO"
-    | "QINIUOSS"
-    | "SMMS"
-    | "TENCENTCOS"
-    | "UPOSS";
+  attachmentType?: any;
 
   /**
    *
    */
-  keyword?: string;
+  keyword?: any;
 
   /**
    *
    */
-  mediaType?: string;
+  mediaType?: any;
 
   /**
    *
    */
-  page?: number;
+  page?: any;
 
   /**
    *
    */
-  size?: number;
+  size?: any;
 
   /**
    *
    */
-  sort?: Array<string>;
-}): Promise<PageAttachmentDTO> {
+  sort?: any;
+}): Promise<CustomizedPageOfAttachmentDTO> {
   return get("/api/admin/attachments", opt);
 }
 
 /**
  * Deletes attachments permanently in batch by id array
  */
-export function attachmentsRemove(opt: {
-  /**
-   * ids
-   */
-  ids: any;
-}): Promise<Array<Attachment>> {
-  return remove("/api/admin/attachments", opt);
+export function attachmentsRemove(): Promise<Array<Attachment>> {
+  return remove("/api/admin/attachments");
 }
 
 /**
@@ -239,44 +303,22 @@ export function attachmentsMedia_typesGet(): Promise<Array<string>> {
 /**
  * Lists all of types.
  */
-export function attachmentsTypesGet(): Promise<
-  Array<
-    | "ALIOSS"
-    | "BAIDUBOS"
-    | "HUAWEIOBS"
-    | "LOCAL"
-    | "MINIO"
-    | "QINIUOSS"
-    | "SMMS"
-    | "TENCENTCOS"
-    | "UPOSS"
-  >
-> {
+export function attachmentsTypesGet(): Promise<Array<string>> {
   return get("/api/admin/attachments/types");
 }
 
 /**
  * Uploads single file
  */
-export function attachmentsUploadPost(opt: {
-  /**
-   *
-   */
-  file?: any;
-}): Promise<AttachmentDTO> {
-  return post("/api/admin/attachments/upload", opt);
+export function attachmentsUploadPost(): Promise<AttachmentDTO> {
+  return post("/api/admin/attachments/upload");
 }
 
 /**
  * Uploads multi files (Invalid in Swagger UI)
  */
-export function attachmentsUploadsPost(opt: {
-  /**
-   *
-   */
-  files?: Array<any>;
-}): Promise<Array<AttachmentDTO>> {
-  return post("/api/admin/attachments/uploads", opt);
+export function attachmentsUploadsPost(): Promise<Array<AttachmentDTO>> {
+  return post("/api/admin/attachments/uploads");
 }
 
 /**
@@ -286,12 +328,7 @@ export function attachmentsAttachmentIdPut(opt: {
   /**
    * attachmentId
    */
-  attachmentId: number;
-
-  /**
-   * attachmentParam
-   */
-  attachmentParam: any;
+  attachmentId: any;
 }): Promise<AttachmentDTO> {
   return put("/api/admin/attachments/{attachmentId}", opt);
 }
@@ -303,7 +340,7 @@ export function attachmentsIdGet(opt: {
   /**
    * id
    */
-  id: number;
+  id: any;
 }): Promise<AttachmentDTO> {
   return get("/api/admin/attachments/{id}", opt);
 }
@@ -315,7 +352,7 @@ export function attachmentsIdRemove(opt: {
   /**
    * id
    */
-  id: number;
+  id: any;
 }): Promise<AttachmentDTO> {
   return remove("/api/admin/attachments/{id}", opt);
 }
@@ -341,9 +378,21 @@ export function backupsDataRemove(opt: {
   /**
    * filename
    */
-  filename: string;
+  filename: any;
 }): Promise<void> {
   return remove("/api/admin/backups/data", opt);
+}
+
+/**
+ * getDataBackup
+ */
+export function backupsDataFetchGet(opt: {
+  /**
+   * filename
+   */
+  filename: any;
+}): Promise<BackupDTO> {
+  return get("/api/admin/backups/data/fetch", opt);
 }
 
 /**
@@ -353,7 +402,7 @@ export function backupsDataFileNameGet(opt: {
   /**
    * fileName
    */
-  fileName: string;
+  fileName: any;
 }): Promise<Resource> {
   return get("/api/admin/backups/data/{fileName}", opt);
 }
@@ -368,13 +417,8 @@ export function backupsMarkdownExportGet(): Promise<Array<BackupDTO>> {
 /**
  * Exports markdowns
  */
-export function backupsMarkdownExportPost(opt: {
-  /**
-   * postMarkdownParam
-   */
-  postMarkdownParam: any;
-}): Promise<BackupDTO> {
-  return post("/api/admin/backups/markdown/export", opt);
+export function backupsMarkdownExportPost(): Promise<BackupDTO> {
+  return post("/api/admin/backups/markdown/export");
 }
 
 /**
@@ -384,7 +428,7 @@ export function backupsMarkdownExportRemove(opt: {
   /**
    * filename
    */
-  filename: string;
+  filename: any;
 }): Promise<void> {
   return remove("/api/admin/backups/markdown/export", opt);
 }
@@ -396,21 +440,28 @@ export function backupsMarkdownExportFileNameGet(opt: {
   /**
    * fileName
    */
-  fileName: string;
+  fileName: any;
 }): Promise<Resource> {
   return get("/api/admin/backups/markdown/export/{fileName}", opt);
 }
 
 /**
+ * getMarkdownBackup
+ */
+export function backupsMarkdownFetchGet(opt: {
+  /**
+   * filename
+   */
+  filename: any;
+}): Promise<BackupDTO> {
+  return get("/api/admin/backups/markdown/fetch", opt);
+}
+
+/**
  * Imports markdown
  */
-export function backupsMarkdownImportPost(opt: {
-  /**
-   *
-   */
-  file?: any;
-}): Promise<BasePostDetailDTO> {
-  return post("/api/admin/backups/markdown/import", opt);
+export function backupsMarkdownImportPost(): Promise<BasePostDetailDTO> {
+  return post("/api/admin/backups/markdown/import");
 }
 
 /**
@@ -434,21 +485,33 @@ export function backupsWorkDirRemove(opt: {
   /**
    * filename
    */
-  filename: string;
+  filename: any;
 }): Promise<void> {
   return remove("/api/admin/backups/work-dir", opt);
 }
 
 /**
+ * getWorkDirBackup
+ */
+export function backupsWorkDirFetchGet(opt: {
+  /**
+   * filename
+   */
+  filename: any;
+}): Promise<BackupDTO> {
+  return get("/api/admin/backups/work-dir/fetch", opt);
+}
+
+/**
  * Downloads a work directory backup file
  */
-export function backupsWorkDirFileNameGet(opt: {
+export function backupsWorkDirFilenameGet(opt: {
   /**
-   * fileName
+   * filename
    */
-  fileName: string;
+  filename: any;
 }): Promise<Resource> {
-  return get("/api/admin/backups/work-dir/{fileName}", opt);
+  return get("/api/admin/backups/work-dir/{filename}", opt);
 }
 
 /**
@@ -456,14 +519,14 @@ export function backupsWorkDirFileNameGet(opt: {
  */
 export function categoriesGet(opt: {
   /**
-   * more
-   */
-  more?: boolean;
-
-  /**
    *
    */
-  sort?: Array<string>;
+  sort?: any;
+
+  /**
+   * more
+   */
+  more?: any;
 }): Promise<Array<CategoryDTO>> {
   return get("/api/admin/categories", opt);
 }
@@ -471,13 +534,8 @@ export function categoriesGet(opt: {
 /**
  * Creates category
  */
-export function categoriesPost(opt: {
-  /**
-   * categoryParam
-   */
-  categoryParam: any;
-}): Promise<CategoryDTO> {
-  return post("/api/admin/categories", opt);
+export function categoriesPost(): Promise<CategoryDTO> {
+  return post("/api/admin/categories");
 }
 
 /**
@@ -487,7 +545,7 @@ export function categoriesTree_viewGet(opt: {
   /**
    *
    */
-  sort?: Array<string>;
+  sort?: any;
 }): Promise<Array<CategoryVO>> {
   return get("/api/admin/categories/tree_view", opt);
 }
@@ -499,7 +557,7 @@ export function categoriesCategoryIdGet(opt: {
   /**
    * categoryId
    */
-  categoryId: number;
+  categoryId: any;
 }): Promise<CategoryDTO> {
   return get("/api/admin/categories/{categoryId}", opt);
 }
@@ -511,12 +569,7 @@ export function categoriesCategoryIdPut(opt: {
   /**
    * categoryId
    */
-  categoryId: number;
-
-  /**
-   * categoryParam
-   */
-  categoryParam: any;
+  categoryId: any;
 }): Promise<CategoryDTO> {
   return put("/api/admin/categories/{categoryId}", opt);
 }
@@ -528,98 +581,16 @@ export function categoriesCategoryIdRemove(opt: {
   /**
    * categoryId
    */
-  categoryId: number;
+  categoryId: any;
 }): Promise<void> {
   return remove("/api/admin/categories/{categoryId}", opt);
 }
 
 /**
- * Gets count info
- */
-export function countsGet(): Promise<StatisticDTO> {
-  return get("/api/admin/counts");
-}
-
-/**
- * Gets environments info
- */
-export function environmentsGet(): Promise<EnvironmentDTO> {
-  return get("/api/admin/environments");
-}
-
-/**
- * Gets halo log file content
- */
-export function haloLogfileGet(opt: {
-  /**
-   * lines
-   */
-  lines: number;
-}): Promise<BaseResponsestring> {
-  return get("/api/admin/halo/logfile", opt);
-}
-
-/**
  * Initializes the blog
  */
-export function installationsPost(opt: {
-  /**
-   * installParam
-   */
-  installParam: any;
-}): Promise<BaseResponsestring> {
-  return post("/api/admin/installations", opt);
-}
-
-/**
- * Checks Installation status
- */
-export function is_installedGet(): Promise<boolean> {
-  return get("/api/admin/is_installed");
-}
-
-/**
- * Lists journals
- */
-export function journalsGet(opt: {
-  /**
-   *
-   */
-  keyword?: string;
-
-  /**
-   *
-   */
-  page?: number;
-
-  /**
-   *
-   */
-  size?: number;
-
-  /**
-   *
-   */
-  sort?: Array<string>;
-
-  /**
-   *
-   */
-  type?: "INTIMATE" | "PUBLIC";
-}): Promise<PageJournalWithCmtCountDTO> {
-  return get("/api/admin/journals", opt);
-}
-
-/**
- * Creates a journal
- */
-export function journalsPost(opt: {
-  /**
-   * journalParam
-   */
-  journalParam: any;
-}): Promise<JournalDTO> {
-  return post("/api/admin/journals", opt);
+export function installationsPost(): Promise<BaseResponseOfstring> {
+  return post("/api/admin/installations");
 }
 
 /**
@@ -629,41 +600,36 @@ export function journalsCommentsGet(opt: {
   /**
    *
    */
-  keyword?: string;
+  keyword?: any;
 
   /**
    *
    */
-  page?: number;
+  page?: any;
 
   /**
    *
    */
-  size?: number;
+  size?: any;
 
   /**
    *
    */
-  sort?: Array<string>;
+  sort?: any;
 
   /**
    *
    */
-  status?: "AUDITING" | "PUBLISHED" | "RECYCLE";
-}): Promise<PageJournalCommentWithJournalVO> {
+  status?: any;
+}): Promise<CustomizedPageOfJournalCommentWithJournalVO> {
   return get("/api/admin/journals/comments", opt);
 }
 
 /**
  * Creates a journal comment
  */
-export function journalsCommentsPost(opt: {
-  /**
-   * journalCommentParam
-   */
-  journalCommentParam: any;
-}): Promise<BaseCommentDTO> {
-  return post("/api/admin/journals/comments", opt);
+export function journalsCommentsPost(): Promise<BaseCommentDTO> {
+  return post("/api/admin/journals/comments");
 }
 
 /**
@@ -671,14 +637,14 @@ export function journalsCommentsPost(opt: {
  */
 export function journalsCommentsLatestGet(opt: {
   /**
-   * status
-   */
-  status?: "AUDITING" | "PUBLISHED" | "RECYCLE";
-
-  /**
    * top
    */
-  top?: number;
+  top?: any;
+
+  /**
+   * status
+   */
+  status?: any;
 }): Promise<Array<JournalCommentWithJournalVO>> {
   return get("/api/admin/journals/comments/latest", opt);
 }
@@ -690,7 +656,7 @@ export function journalsCommentsCommentIdRemove(opt: {
   /**
    * commentId
    */
-  commentId: number;
+  commentId: any;
 }): Promise<BaseCommentDTO> {
   return remove("/api/admin/journals/comments/{commentId}", opt);
 }
@@ -702,12 +668,12 @@ export function journalsCommentsCommentIdStatusStatusPut(opt: {
   /**
    * commentId
    */
-  commentId: number;
+  commentId: any;
 
   /**
    * status
    */
-  status: "AUDITING" | "PUBLISHED" | "RECYCLE";
+  status: any;
 }): Promise<BaseCommentDTO> {
   return put("/api/admin/journals/comments/{commentId}/status/{status}", opt);
 }
@@ -719,18 +685,18 @@ export function journalsCommentsJournalIdList_viewGet(opt: {
   /**
    * journalId
    */
-  journalId: number;
-
-  /**
-   * page
-   */
-  page?: number;
+  journalId: any;
 
   /**
    *
    */
-  sort?: Array<string>;
-}): Promise<PageBaseCommentWithParentVO> {
+  sort?: any;
+
+  /**
+   * page
+   */
+  page?: any;
+}): Promise<CustomizedPageOfBaseCommentWithParentVO> {
   return get("/api/admin/journals/comments/{journalId}/list_view", opt);
 }
 
@@ -741,19 +707,58 @@ export function journalsCommentsJournalIdTree_viewGet(opt: {
   /**
    * journalId
    */
-  journalId: number;
-
-  /**
-   * page
-   */
-  page?: number;
+  journalId: any;
 
   /**
    *
    */
-  sort?: Array<string>;
-}): Promise<PageBaseCommentVO> {
+  sort?: any;
+
+  /**
+   * page
+   */
+  page?: any;
+}): Promise<CustomizedPageOfBaseCommentVO> {
   return get("/api/admin/journals/comments/{journalId}/tree_view", opt);
+}
+
+/**
+ * Lists journals
+ */
+export function journalsGet(opt: {
+  /**
+   *
+   */
+  keyword?: any;
+
+  /**
+   *
+   */
+  page?: any;
+
+  /**
+   *
+   */
+  size?: any;
+
+  /**
+   *
+   */
+  sort?: any;
+
+  /**
+   *
+   */
+  type?: any;
+}): Promise<CustomizedPageOfJournalWithCmtCountDTO> {
+  return get("/api/admin/journals", opt);
+}
+
+/**
+ * Creates a journal
+ */
+export function journalsPost(): Promise<JournalDTO> {
+  return post("/api/admin/journals");
 }
 
 /**
@@ -763,7 +768,7 @@ export function journalsLatestGet(opt: {
   /**
    * top
    */
-  top?: number;
+  top?: any;
 }): Promise<Array<JournalWithCmtCountDTO>> {
   return get("/api/admin/journals/latest", opt);
 }
@@ -775,12 +780,7 @@ export function journalsIdPut(opt: {
   /**
    * id
    */
-  id: number;
-
-  /**
-   * journalParam
-   */
-  journalParam: any;
+  id: any;
 }): Promise<JournalDTO> {
   return put("/api/admin/journals/{id}", opt);
 }
@@ -792,7 +792,7 @@ export function journalsJournalIdRemove(opt: {
   /**
    * journalId
    */
-  journalId: number;
+  journalId: any;
 }): Promise<JournalDTO> {
   return remove("/api/admin/journals/{journalId}", opt);
 }
@@ -804,7 +804,7 @@ export function linksGet(opt: {
   /**
    *
    */
-  sort?: Array<string>;
+  sort?: any;
 }): Promise<Array<LinkDTO>> {
   return get("/api/admin/links", opt);
 }
@@ -812,13 +812,8 @@ export function linksGet(opt: {
 /**
  * Creates a link
  */
-export function linksPost(opt: {
-  /**
-   * linkParam
-   */
-  linkParam: any;
-}): Promise<LinkDTO> {
-  return post("/api/admin/links", opt);
+export function linksPost(): Promise<LinkDTO> {
+  return post("/api/admin/links");
 }
 
 /**
@@ -835,7 +830,7 @@ export function linksIdGet(opt: {
   /**
    * id
    */
-  id: number;
+  id: any;
 }): Promise<LinkDTO> {
   return get("/api/admin/links/{id}", opt);
 }
@@ -847,12 +842,7 @@ export function linksIdPut(opt: {
   /**
    * id
    */
-  id: number;
-
-  /**
-   * linkParam
-   */
-  linkParam: any;
+  id: any;
 }): Promise<LinkDTO> {
   return put("/api/admin/links/{id}", opt);
 }
@@ -864,40 +854,9 @@ export function linksIdRemove(opt: {
   /**
    * id
    */
-  id: number;
+  id: any;
 }): Promise<void> {
   return remove("/api/admin/links/{id}", opt);
-}
-
-/**
- * Login
- */
-export function loginPost(opt: {
-  /**
-   * loginParam
-   */
-  loginParam: any;
-}): Promise<AuthToken> {
-  return post("/api/admin/login", opt);
-}
-
-/**
- * Login
- */
-export function loginPrecheckPost(opt: {
-  /**
-   * loginParam
-   */
-  loginParam: any;
-}): Promise<LoginPreCheckDTO> {
-  return post("/api/admin/login/precheck", opt);
-}
-
-/**
- * Logs out (Clear session)
- */
-export function logoutPost(): Promise<void> {
-  return post("/api/admin/logout");
 }
 
 /**
@@ -907,18 +866,18 @@ export function logsGet(opt: {
   /**
    *
    */
-  page?: number;
+  page?: any;
 
   /**
    *
    */
-  size?: number;
+  size?: any;
 
   /**
    *
    */
-  sort?: Array<string>;
-}): Promise<PageLogDTO> {
+  sort?: any;
+}): Promise<CustomizedPageOfLogDTO> {
   return get("/api/admin/logs", opt);
 }
 
@@ -936,7 +895,7 @@ export function logsLatestGet(opt: {
   /**
    * top
    */
-  top?: number;
+  top?: any;
 }): Promise<Array<LogDTO>> {
   return get("/api/admin/logs/latest", opt);
 }
@@ -944,19 +903,14 @@ export function logsLatestGet(opt: {
 /**
  * Tests the SMTP service
  */
-export function mailsTestPost(opt: {
-  /**
-   * mailParam
-   */
-  mailParam: any;
-}): Promise<BaseResponsestring> {
-  return post("/api/admin/mails/test", opt);
+export function mailsTestPost(): Promise<BaseResponseOfstring> {
+  return post("/api/admin/mails/test");
 }
 
 /**
  * Test connection with email server
  */
-export function mailsTestConnectionPost(): Promise<BaseResponsestring> {
+export function mailsTestConnectionPost(): Promise<BaseResponseOfstring> {
   return post("/api/admin/mails/test/connection");
 }
 
@@ -967,7 +921,7 @@ export function menusGet(opt: {
   /**
    *
    */
-  sort?: Array<string>;
+  sort?: any;
 }): Promise<Array<MenuDTO>> {
   return get("/api/admin/menus", opt);
 }
@@ -975,49 +929,29 @@ export function menusGet(opt: {
 /**
  * Creates a menu
  */
-export function menusPost(opt: {
-  /**
-   * menuParam
-   */
-  menuParam: any;
-}): Promise<MenuDTO> {
-  return post("/api/admin/menus", opt);
-}
-
-/**
- * createBatchBy
- */
-export function menusBatchPost(opt: {
-  /**
-   * menuParams
-   */
-  menuParams: any;
-}): Promise<Array<MenuDTO>> {
-  return post("/api/admin/menus/batch", opt);
+export function menusPost(): Promise<MenuDTO> {
+  return post("/api/admin/menus");
 }
 
 /**
  * updateBatchBy
  */
-export function menusBatchPut(opt: {
-  /**
-   * menuParams
-   */
-  menuParams: any;
-}): Promise<Array<MenuDTO>> {
-  return put("/api/admin/menus/batch", opt);
+export function menusBatchPut(): Promise<Array<MenuDTO>> {
+  return put("/api/admin/menus/batch");
+}
+
+/**
+ * createBatchBy
+ */
+export function menusBatchPost(): Promise<Array<MenuDTO>> {
+  return post("/api/admin/menus/batch");
 }
 
 /**
  * deleteBatchBy
  */
-export function menusBatchRemove(opt: {
-  /**
-   * menuIds
-   */
-  menuIds: any;
-}): Promise<Array<MenuDTO>> {
-  return remove("/api/admin/menus/batch", opt);
+export function menusBatchRemove(): Promise<Array<MenuDTO>> {
+  return remove("/api/admin/menus/batch");
 }
 
 /**
@@ -1027,12 +961,12 @@ export function menusTeamTree_viewGet(opt: {
   /**
    *
    */
-  sort?: Array<string>;
+  sort?: any;
 
   /**
    * team
    */
-  team: string;
+  team: any;
 }): Promise<Array<MenuVO>> {
   return get("/api/admin/menus/team/tree_view", opt);
 }
@@ -1051,7 +985,7 @@ export function menusTree_viewGet(opt: {
   /**
    *
    */
-  sort?: Array<string>;
+  sort?: any;
 }): Promise<Array<MenuVO>> {
   return get("/api/admin/menus/tree_view", opt);
 }
@@ -1063,7 +997,7 @@ export function menusMenuIdGet(opt: {
   /**
    * menuId
    */
-  menuId: number;
+  menuId: any;
 }): Promise<MenuDTO> {
   return get("/api/admin/menus/{menuId}", opt);
 }
@@ -1075,12 +1009,7 @@ export function menusMenuIdPut(opt: {
   /**
    * menuId
    */
-  menuId: number;
-
-  /**
-   * menuParam
-   */
-  menuParam: any;
+  menuId: any;
 }): Promise<MenuDTO> {
   return put("/api/admin/menus/{menuId}", opt);
 }
@@ -1092,7 +1021,7 @@ export function menusMenuIdRemove(opt: {
   /**
    * menuId
    */
-  menuId: number;
+  menuId: any;
 }): Promise<MenuDTO> {
   return remove("/api/admin/menus/{menuId}", opt);
 }
@@ -1100,13 +1029,8 @@ export function menusMenuIdRemove(opt: {
 /**
  * Migrate from Halo
  */
-export function migrationsHaloPost(opt: {
-  /**
-   *
-   */
-  file?: any;
-}): Promise<void> {
-  return post("/api/admin/migrations/halo", opt);
+export function migrationsHaloPost(): Promise<void> {
+  return post("/api/admin/migrations/halo");
 }
 
 /**
@@ -1119,13 +1043,8 @@ export function optionsGet(): Promise<Array<OptionDTO>> {
 /**
  * Creates option
  */
-export function optionsPost(opt: {
-  /**
-   * optionParam
-   */
-  optionParam: any;
-}): Promise<void> {
-  return post("/api/admin/options", opt);
+export function optionsPost(): Promise<void> {
+  return post("/api/admin/options");
 }
 
 /**
@@ -1135,28 +1054,28 @@ export function optionsList_viewGet(opt: {
   /**
    *
    */
-  keyword?: string;
+  keyword?: any;
 
   /**
    *
    */
-  page?: number;
+  page?: any;
 
   /**
    *
    */
-  size?: number;
+  size?: any;
 
   /**
    *
    */
-  sort?: Array<string>;
+  sort?: any;
 
   /**
    *
    */
-  type?: "CUSTOM" | "INTERNAL";
-}): Promise<PageOptionSimpleDTO> {
+  type?: any;
+}): Promise<CustomizedPageOfOptionSimpleDTO> {
   return get("/api/admin/options/list_view", opt);
 }
 
@@ -1170,37 +1089,22 @@ export function optionsMap_viewGet(): Promise<any> {
 /**
  * Lists options with map view by keys
  */
-export function optionsMap_viewKeysPost(opt: {
-  /**
-   * keys
-   */
-  keys: any;
-}): Promise<any> {
-  return post("/api/admin/options/map_view/keys", opt);
+export function optionsMap_viewKeysPost(): Promise<any> {
+  return post("/api/admin/options/map_view/keys");
 }
 
 /**
  * Saves options by option map
  */
-export function optionsMap_viewSavingPost(opt: {
-  /**
-   * optionMap
-   */
-  optionMap: any;
-}): Promise<void> {
-  return post("/api/admin/options/map_view/saving", opt);
+export function optionsMap_viewSavingPost(): Promise<void> {
+  return post("/api/admin/options/map_view/saving");
 }
 
 /**
  * Saves options
  */
-export function optionsSavingPost(opt: {
-  /**
-   * optionParams
-   */
-  optionParams: any;
-}): Promise<void> {
-  return post("/api/admin/options/saving", opt);
+export function optionsSavingPost(): Promise<void> {
+  return post("/api/admin/options/saving");
 }
 
 /**
@@ -1210,7 +1114,7 @@ export function optionsIdGet(opt: {
   /**
    * id
    */
-  id: number;
+  id: any;
 }): Promise<OptionSimpleDTO> {
   return get("/api/admin/options/{id}", opt);
 }
@@ -1222,12 +1126,7 @@ export function optionsOptionIdPut(opt: {
   /**
    * optionId
    */
-  optionId: number;
-
-  /**
-   * optionParam
-   */
-  optionParam: any;
+  optionId: any;
 }): Promise<void> {
   return put("/api/admin/options/{optionId}", opt);
 }
@@ -1239,33 +1138,9 @@ export function optionsOptionIdRemove(opt: {
   /**
    * optionId
    */
-  optionId: number;
+  optionId: any;
 }): Promise<void> {
   return remove("/api/admin/options/{optionId}", opt);
-}
-
-/**
- * Sends reset password verify code
- */
-export function passwordCodePost(opt: {
-  /**
-   * param
-   */
-  param: any;
-}): Promise<void> {
-  return post("/api/admin/password/code", opt);
-}
-
-/**
- * Resets password by verify code
- */
-export function passwordResetPut(opt: {
-  /**
-   * param
-   */
-  param: any;
-}): Promise<void> {
-  return put("/api/admin/password/reset", opt);
 }
 
 /**
@@ -1275,41 +1150,36 @@ export function photosGet(opt: {
   /**
    *
    */
-  keyword?: string;
+  keyword?: any;
 
   /**
    *
    */
-  page?: number;
+  page?: any;
 
   /**
    *
    */
-  size?: number;
+  size?: any;
 
   /**
    *
    */
-  sort?: Array<string>;
+  sort?: any;
 
   /**
    *
    */
-  team?: string;
-}): Promise<PagePhotoDTO> {
+  team?: any;
+}): Promise<CustomizedPageOfPhotoDTO> {
   return get("/api/admin/photos", opt);
 }
 
 /**
  * Creates a photo
  */
-export function photosPost(opt: {
-  /**
-   * photoParam
-   */
-  photoParam: any;
-}): Promise<PhotoDTO> {
-  return post("/api/admin/photos", opt);
+export function photosPost(): Promise<PhotoDTO> {
+  return post("/api/admin/photos");
 }
 
 /**
@@ -1319,7 +1189,7 @@ export function photosLatestGet(opt: {
   /**
    *
    */
-  sort?: Array<string>;
+  sort?: any;
 }): Promise<Array<PhotoDTO>> {
   return get("/api/admin/photos/latest", opt);
 }
@@ -1338,7 +1208,7 @@ export function photosPhotoIdGet(opt: {
   /**
    * photoId
    */
-  photoId: number;
+  photoId: any;
 }): Promise<PhotoDTO> {
   return get("/api/admin/photos/{photoId}", opt);
 }
@@ -1350,12 +1220,7 @@ export function photosPhotoIdPut(opt: {
   /**
    * photoId
    */
-  photoId: number;
-
-  /**
-   * photoParam
-   */
-  photoParam: any;
+  photoId: any;
 }): Promise<PhotoDTO> {
   return put("/api/admin/photos/{photoId}", opt);
 }
@@ -1367,80 +1232,9 @@ export function photosPhotoIdRemove(opt: {
   /**
    * photoId
    */
-  photoId: number;
+  photoId: any;
 }): Promise<void> {
   return remove("/api/admin/photos/{photoId}", opt);
-}
-
-/**
- * Lists posts
- */
-export function postsGet(opt: {
-  /**
-   *
-   */
-  categoryId?: number;
-
-  /**
-   *
-   */
-  keyword?: string;
-
-  /**
-   * more
-   */
-  more?: boolean;
-
-  /**
-   *
-   */
-  page?: number;
-
-  /**
-   *
-   */
-  size?: number;
-
-  /**
-   *
-   */
-  sort?: Array<string>;
-
-  /**
-   *
-   */
-  status?: "DRAFT" | "INTIMATE" | "PUBLISHED" | "RECYCLE";
-}): Promise<PageBasePostSimpleDTO> {
-  return get("/api/admin/posts", opt);
-}
-
-/**
- * Creates a post
- */
-export function postsPost(opt: {
-  /**
-   * autoSave
-   */
-  autoSave?: boolean;
-
-  /**
-   * postParam
-   */
-  postParam: any;
-}): Promise<PostDetailVO> {
-  return post("/api/admin/posts", opt);
-}
-
-/**
- * Deletes posts permanently in batch by id array
- */
-export function postsRemove(opt: {
-  /**
-   * ids
-   */
-  ids: any;
-}): Promise<Array<Post>> {
-  return remove("/api/admin/posts", opt);
 }
 
 /**
@@ -1450,53 +1244,43 @@ export function postsCommentsGet(opt: {
   /**
    *
    */
-  keyword?: string;
+  keyword?: any;
 
   /**
    *
    */
-  page?: number;
+  page?: any;
 
   /**
    *
    */
-  size?: number;
+  size?: any;
 
   /**
    *
    */
-  sort?: Array<string>;
+  sort?: any;
 
   /**
    *
    */
-  status?: "AUDITING" | "PUBLISHED" | "RECYCLE";
-}): Promise<PagePostCommentWithPostVO> {
+  status?: any;
+}): Promise<CustomizedPageOfPostCommentWithPostVO> {
   return get("/api/admin/posts/comments", opt);
 }
 
 /**
  * Creates a post comment (new or reply)
  */
-export function postsCommentsPost(opt: {
-  /**
-   * postCommentParam
-   */
-  postCommentParam: any;
-}): Promise<BaseCommentDTO> {
-  return post("/api/admin/posts/comments", opt);
+export function postsCommentsPost(): Promise<BaseCommentDTO> {
+  return post("/api/admin/posts/comments");
 }
 
 /**
  * Delete post comments permanently in batch by id array
  */
-export function postsCommentsRemove(opt: {
-  /**
-   * ids
-   */
-  ids: any;
-}): Promise<Array<PostComment>> {
-  return remove("/api/admin/posts/comments", opt);
+export function postsCommentsRemove(): Promise<Array<PostComment>> {
+  return remove("/api/admin/posts/comments");
 }
 
 /**
@@ -1504,14 +1288,14 @@ export function postsCommentsRemove(opt: {
  */
 export function postsCommentsLatestGet(opt: {
   /**
-   * status
-   */
-  status?: "AUDITING" | "PUBLISHED" | "RECYCLE";
-
-  /**
    * top
    */
-  top?: number;
+  top?: any;
+
+  /**
+   * status
+   */
+  status?: any;
 }): Promise<Array<PostCommentWithPostVO>> {
   return get("/api/admin/posts/comments/latest", opt);
 }
@@ -1521,14 +1305,9 @@ export function postsCommentsLatestGet(opt: {
  */
 export function postsCommentsStatusStatusPut(opt: {
   /**
-   * ids
-   */
-  ids: any;
-
-  /**
    * status
    */
-  status: "AUDITING" | "PUBLISHED" | "RECYCLE";
+  status: any;
 }): Promise<Array<BaseCommentDTO>> {
   return put("/api/admin/posts/comments/status/{status}", opt);
 }
@@ -1540,7 +1319,7 @@ export function postsCommentsCommentIdGet(opt: {
   /**
    * commentId
    */
-  commentId: number;
+  commentId: any;
 }): Promise<PostCommentWithPostVO> {
   return get("/api/admin/posts/comments/{commentId}", opt);
 }
@@ -1552,12 +1331,7 @@ export function postsCommentsCommentIdPut(opt: {
   /**
    * commentId
    */
-  commentId: number;
-
-  /**
-   * commentParam
-   */
-  commentParam: any;
+  commentId: any;
 }): Promise<BaseCommentDTO> {
   return put("/api/admin/posts/comments/{commentId}", opt);
 }
@@ -1569,7 +1343,7 @@ export function postsCommentsCommentIdRemove(opt: {
   /**
    * commentId
    */
-  commentId: number;
+  commentId: any;
 }): Promise<BaseCommentDTO> {
   return remove("/api/admin/posts/comments/{commentId}", opt);
 }
@@ -1581,12 +1355,12 @@ export function postsCommentsCommentIdStatusStatusPut(opt: {
   /**
    * commentId
    */
-  commentId: number;
+  commentId: any;
 
   /**
    * status
    */
-  status: "AUDITING" | "PUBLISHED" | "RECYCLE";
+  status: any;
 }): Promise<BaseCommentDTO> {
   return put("/api/admin/posts/comments/{commentId}/status/{status}", opt);
 }
@@ -1596,20 +1370,20 @@ export function postsCommentsCommentIdStatusStatusPut(opt: {
  */
 export function postsCommentsPostIdList_viewGet(opt: {
   /**
-   * page
-   */
-  page?: number;
-
-  /**
    * postId
    */
-  postId: number;
+  postId: any;
 
   /**
    *
    */
-  sort?: Array<string>;
-}): Promise<PageBaseCommentWithParentVO> {
+  sort?: any;
+
+  /**
+   * page
+   */
+  page?: any;
+}): Promise<CustomizedPageOfBaseCommentWithParentVO> {
   return get("/api/admin/posts/comments/{postId}/list_view", opt);
 }
 
@@ -1618,21 +1392,82 @@ export function postsCommentsPostIdList_viewGet(opt: {
  */
 export function postsCommentsPostIdTree_viewGet(opt: {
   /**
-   * page
-   */
-  page?: number;
-
-  /**
    * postId
    */
-  postId: number;
+  postId: any;
 
   /**
    *
    */
-  sort?: Array<string>;
-}): Promise<PageBaseCommentVO> {
+  sort?: any;
+
+  /**
+   * page
+   */
+  page?: any;
+}): Promise<CustomizedPageOfBaseCommentVO> {
   return get("/api/admin/posts/comments/{postId}/tree_view", opt);
+}
+
+/**
+ * Lists posts
+ */
+export function postsGet(opt: {
+  /**
+   *
+   */
+  categoryId?: any;
+
+  /**
+   *
+   */
+  keyword?: any;
+
+  /**
+   *
+   */
+  page?: any;
+
+  /**
+   *
+   */
+  size?: any;
+
+  /**
+   *
+   */
+  sort?: any;
+
+  /**
+   *
+   */
+  status?: any;
+
+  /**
+   * more
+   */
+  more?: any;
+}): Promise<CustomizedPageOfBasePostSimpleDTO> {
+  return get("/api/admin/posts", opt);
+}
+
+/**
+ * Creates a post
+ */
+export function postsPost(opt: {
+  /**
+   * autoSave
+   */
+  autoSave?: any;
+}): Promise<PostDetailVO> {
+  return post("/api/admin/posts", opt);
+}
+
+/**
+ * Deletes posts permanently in batch by id array
+ */
+export function postsRemove(): Promise<Array<Post>> {
+  return remove("/api/admin/posts");
 }
 
 /**
@@ -1642,7 +1477,7 @@ export function postsLatestGet(opt: {
   /**
    * top
    */
-  top?: number;
+  top?: any;
 }): Promise<Array<BasePostMinimalDTO>> {
   return get("/api/admin/posts/latest", opt);
 }
@@ -1654,7 +1489,7 @@ export function postsPreviewPostIdGet(opt: {
   /**
    * postId
    */
-  postId: number;
+  postId: any;
 }): Promise<string> {
   return get("/api/admin/posts/preview/{postId}", opt);
 }
@@ -1664,30 +1499,30 @@ export function postsPreviewPostIdGet(opt: {
  */
 export function postsStatusStatusGet(opt: {
   /**
-   * more
+   *
    */
-  more?: boolean;
+  page?: any;
 
   /**
    *
    */
-  page?: number;
+  size?: any;
 
   /**
    *
    */
-  size?: number;
-
-  /**
-   *
-   */
-  sort?: Array<string>;
+  sort?: any;
 
   /**
    * status
    */
-  status: "DRAFT" | "INTIMATE" | "PUBLISHED" | "RECYCLE";
-}): Promise<PageBasePostSimpleDTO> {
+  status: any;
+
+  /**
+   * more
+   */
+  more?: any;
+}): Promise<CustomizedPageOfBasePostSimpleDTO> {
   return get("/api/admin/posts/status/{status}", opt);
 }
 
@@ -1696,14 +1531,9 @@ export function postsStatusStatusGet(opt: {
  */
 export function postsStatusStatusPut(opt: {
   /**
-   * ids
-   */
-  ids: any;
-
-  /**
    * status
    */
-  status: "DRAFT" | "INTIMATE" | "PUBLISHED" | "RECYCLE";
+  status: any;
 }): Promise<Array<Post>> {
   return put("/api/admin/posts/status/{status}", opt);
 }
@@ -1715,7 +1545,7 @@ export function postsPostIdGet(opt: {
   /**
    * postId
    */
-  postId: number;
+  postId: any;
 }): Promise<PostDetailVO> {
   return get("/api/admin/posts/{postId}", opt);
 }
@@ -1725,19 +1555,14 @@ export function postsPostIdGet(opt: {
  */
 export function postsPostIdPut(opt: {
   /**
-   * autoSave
-   */
-  autoSave?: boolean;
-
-  /**
    * postId
    */
-  postId: number;
+  postId: any;
 
   /**
-   * postParam
+   * autoSave
    */
-  postParam: any;
+  autoSave?: any;
 }): Promise<PostDetailVO> {
   return put("/api/admin/posts/{postId}", opt);
 }
@@ -1749,7 +1574,7 @@ export function postsPostIdRemove(opt: {
   /**
    * postId
    */
-  postId: number;
+  postId: any;
 }): Promise<void> {
   return remove("/api/admin/posts/{postId}", opt);
 }
@@ -1761,7 +1586,7 @@ export function postsPostIdLikesPut(opt: {
   /**
    * postId
    */
-  postId: number;
+  postId: any;
 }): Promise<void> {
   return put("/api/admin/posts/{postId}/likes", opt);
 }
@@ -1773,7 +1598,7 @@ export function postsPostIdPreviewGet(opt: {
   /**
    * postId
    */
-  postId: number;
+  postId: any;
 }): Promise<string> {
   return get("/api/admin/posts/{postId}/preview", opt);
 }
@@ -1783,14 +1608,9 @@ export function postsPostIdPreviewGet(opt: {
  */
 export function postsPostIdStatusDraftContentPut(opt: {
   /**
-   * contentParam
-   */
-  contentParam: any;
-
-  /**
    * postId
    */
-  postId: number;
+  postId: any;
 }): Promise<BasePostDetailDTO> {
   return put("/api/admin/posts/{postId}/status/draft/content", opt);
 }
@@ -1802,65 +1622,14 @@ export function postsPostIdStatusStatusPut(opt: {
   /**
    * postId
    */
-  postId: number;
+  postId: any;
 
   /**
    * status
    */
-  status: "DRAFT" | "INTIMATE" | "PUBLISHED" | "RECYCLE";
+  status: any;
 }): Promise<BasePostMinimalDTO> {
   return put("/api/admin/posts/{postId}/status/{status}", opt);
-}
-
-/**
- * Refreshes token
- */
-export function refreshRefreshTokenPost(opt: {
-  /**
-   * refreshToken
-   */
-  refreshToken: string;
-}): Promise<AuthToken> {
-  return post("/api/admin/refresh/{refreshToken}", opt);
-}
-
-/**
- * Gets a page of sheet
- */
-export function sheetsGet(opt: {
-  /**
-   *
-   */
-  page?: number;
-
-  /**
-   *
-   */
-  size?: number;
-
-  /**
-   *
-   */
-  sort?: Array<string>;
-}): Promise<PageSheetListVO> {
-  return get("/api/admin/sheets", opt);
-}
-
-/**
- * Creates a sheet
- */
-export function sheetsPost(opt: {
-  /**
-   * autoSave
-   */
-  autoSave?: boolean;
-
-  /**
-   * sheetParam
-   */
-  sheetParam: any;
-}): Promise<SheetDetailVO> {
-  return post("/api/admin/sheets", opt);
 }
 
 /**
@@ -1870,53 +1639,43 @@ export function sheetsCommentsGet(opt: {
   /**
    *
    */
-  keyword?: string;
+  keyword?: any;
 
   /**
    *
    */
-  page?: number;
+  page?: any;
 
   /**
    *
    */
-  size?: number;
+  size?: any;
 
   /**
    *
    */
-  sort?: Array<string>;
+  sort?: any;
 
   /**
    *
    */
-  status?: "AUDITING" | "PUBLISHED" | "RECYCLE";
-}): Promise<PageSheetCommentWithSheetVO> {
+  status?: any;
+}): Promise<CustomizedPageOfSheetCommentWithSheetVO> {
   return get("/api/admin/sheets/comments", opt);
 }
 
 /**
  * Creates a sheet comment (new or reply)
  */
-export function sheetsCommentsPost(opt: {
-  /**
-   * commentParam
-   */
-  commentParam: any;
-}): Promise<BaseCommentDTO> {
-  return post("/api/admin/sheets/comments", opt);
+export function sheetsCommentsPost(): Promise<BaseCommentDTO> {
+  return post("/api/admin/sheets/comments");
 }
 
 /**
  * Deletes sheet comments permanently in batch by id array
  */
-export function sheetsCommentsRemove(opt: {
-  /**
-   * ids
-   */
-  ids: any;
-}): Promise<Array<SheetComment>> {
-  return remove("/api/admin/sheets/comments", opt);
+export function sheetsCommentsRemove(): Promise<Array<SheetComment>> {
+  return remove("/api/admin/sheets/comments");
 }
 
 /**
@@ -1924,14 +1683,14 @@ export function sheetsCommentsRemove(opt: {
  */
 export function sheetsCommentsLatestGet(opt: {
   /**
-   * status
-   */
-  status?: "AUDITING" | "PUBLISHED" | "RECYCLE";
-
-  /**
    * top
    */
-  top?: number;
+  top?: any;
+
+  /**
+   * status
+   */
+  status?: any;
 }): Promise<Array<SheetCommentWithSheetVO>> {
   return get("/api/admin/sheets/comments/latest", opt);
 }
@@ -1941,14 +1700,9 @@ export function sheetsCommentsLatestGet(opt: {
  */
 export function sheetsCommentsStatusStatusPut(opt: {
   /**
-   * ids
-   */
-  ids: any;
-
-  /**
    * status
    */
-  status: "AUDITING" | "PUBLISHED" | "RECYCLE";
+  status: any;
 }): Promise<Array<BaseCommentDTO>> {
   return put("/api/admin/sheets/comments/status/{status}", opt);
 }
@@ -1960,7 +1714,7 @@ export function sheetsCommentsCommentIdGet(opt: {
   /**
    * commentId
    */
-  commentId: number;
+  commentId: any;
 }): Promise<SheetCommentWithSheetVO> {
   return get("/api/admin/sheets/comments/{commentId}", opt);
 }
@@ -1972,12 +1726,7 @@ export function sheetsCommentsCommentIdPut(opt: {
   /**
    * commentId
    */
-  commentId: number;
-
-  /**
-   * commentParam
-   */
-  commentParam: any;
+  commentId: any;
 }): Promise<BaseCommentDTO> {
   return put("/api/admin/sheets/comments/{commentId}", opt);
 }
@@ -1989,7 +1738,7 @@ export function sheetsCommentsCommentIdRemove(opt: {
   /**
    * commentId
    */
-  commentId: number;
+  commentId: any;
 }): Promise<BaseCommentDTO> {
   return remove("/api/admin/sheets/comments/{commentId}", opt);
 }
@@ -2001,12 +1750,12 @@ export function sheetsCommentsCommentIdStatusStatusPut(opt: {
   /**
    * commentId
    */
-  commentId: number;
+  commentId: any;
 
   /**
    * status
    */
-  status: "AUDITING" | "PUBLISHED" | "RECYCLE";
+  status: any;
 }): Promise<BaseCommentDTO> {
   return put("/api/admin/sheets/comments/{commentId}/status/{status}", opt);
 }
@@ -2016,20 +1765,20 @@ export function sheetsCommentsCommentIdStatusStatusPut(opt: {
  */
 export function sheetsCommentsSheetIdList_viewGet(opt: {
   /**
-   * page
-   */
-  page?: number;
-
-  /**
    * sheetId
    */
-  sheetId: number;
+  sheetId: any;
 
   /**
    *
    */
-  sort?: Array<string>;
-}): Promise<PageBaseCommentWithParentVO> {
+  sort?: any;
+
+  /**
+   * page
+   */
+  page?: any;
+}): Promise<CustomizedPageOfBaseCommentWithParentVO> {
   return get("/api/admin/sheets/comments/{sheetId}/list_view", opt);
 }
 
@@ -2038,21 +1787,55 @@ export function sheetsCommentsSheetIdList_viewGet(opt: {
  */
 export function sheetsCommentsSheetIdTree_viewGet(opt: {
   /**
-   * page
-   */
-  page?: number;
-
-  /**
    * sheetId
    */
-  sheetId: number;
+  sheetId: any;
 
   /**
    *
    */
-  sort?: Array<string>;
-}): Promise<PageBaseCommentVO> {
+  sort?: any;
+
+  /**
+   * page
+   */
+  page?: any;
+}): Promise<CustomizedPageOfBaseCommentVO> {
   return get("/api/admin/sheets/comments/{sheetId}/tree_view", opt);
+}
+
+/**
+ * Gets a page of sheet
+ */
+export function sheetsGet(opt: {
+  /**
+   *
+   */
+  page?: any;
+
+  /**
+   *
+   */
+  size?: any;
+
+  /**
+   *
+   */
+  sort?: any;
+}): Promise<CustomizedPageOfSheetListVO> {
+  return get("/api/admin/sheets", opt);
+}
+
+/**
+ * Creates a sheet
+ */
+export function sheetsPost(opt: {
+  /**
+   * autoSave
+   */
+  autoSave?: any;
+}): Promise<SheetDetailVO> {
+  return post("/api/admin/sheets", opt);
 }
 
 /**
@@ -2069,7 +1852,7 @@ export function sheetsPreviewSheetIdGet(opt: {
   /**
    * sheetId
    */
-  sheetId: number;
+  sheetId: any;
 }): Promise<string> {
   return get("/api/admin/sheets/preview/{sheetId}", opt);
 }
@@ -2081,7 +1864,7 @@ export function sheetsSheetIdGet(opt: {
   /**
    * sheetId
    */
-  sheetId: number;
+  sheetId: any;
 }): Promise<SheetDetailVO> {
   return get("/api/admin/sheets/{sheetId}", opt);
 }
@@ -2091,19 +1874,14 @@ export function sheetsSheetIdGet(opt: {
  */
 export function sheetsSheetIdPut(opt: {
   /**
-   * autoSave
-   */
-  autoSave?: boolean;
-
-  /**
    * sheetId
    */
-  sheetId: number;
+  sheetId: any;
 
   /**
-   * sheetParam
+   * autoSave
    */
-  sheetParam: any;
+  autoSave?: any;
 }): Promise<SheetDetailVO> {
   return put("/api/admin/sheets/{sheetId}", opt);
 }
@@ -2115,7 +1893,7 @@ export function sheetsSheetIdRemove(opt: {
   /**
    * sheetId
    */
-  sheetId: number;
+  sheetId: any;
 }): Promise<SheetDetailVO> {
   return remove("/api/admin/sheets/{sheetId}", opt);
 }
@@ -2125,14 +1903,9 @@ export function sheetsSheetIdRemove(opt: {
  */
 export function sheetsSheetIdStatusDraftContentPut(opt: {
   /**
-   * contentParam
-   */
-  contentParam: any;
-
-  /**
    * sheetId
    */
-  sheetId: number;
+  sheetId: any;
 }): Promise<BasePostDetailDTO> {
   return put("/api/admin/sheets/{sheetId}/status/draft/content", opt);
 }
@@ -2144,12 +1917,12 @@ export function sheetsSheetIdStatusPut(opt: {
   /**
    * sheetId
    */
-  sheetId: number;
+  sheetId: any;
 
   /**
    * status
    */
-  status: "DRAFT" | "INTIMATE" | "PUBLISHED" | "RECYCLE";
+  status: any;
 }): Promise<void> {
   return put("/api/admin/sheets/{sheetId}/{status}", opt);
 }
@@ -2168,12 +1941,12 @@ export function staticsPost(opt: {
   /**
    * basePath
    */
-  basePath?: string;
+  basePath?: any;
 
   /**
    * folderName
    */
-  folderName: string;
+  folderName: any;
 }): Promise<void> {
   return post("/api/admin/statics", opt);
 }
@@ -2185,7 +1958,7 @@ export function staticsRemove(opt: {
   /**
    * path
    */
-  path: string;
+  path: any;
 }): Promise<void> {
   return remove("/api/admin/statics", opt);
 }
@@ -2193,13 +1966,8 @@ export function staticsRemove(opt: {
 /**
  * Save static file
  */
-export function staticsFilesPut(opt: {
-  /**
-   * param
-   */
-  param: any;
-}): Promise<void> {
-  return put("/api/admin/statics/files", opt);
+export function staticsFilesPut(): Promise<void> {
+  return put("/api/admin/statics/files");
 }
 
 /**
@@ -2209,12 +1977,12 @@ export function staticsRenamePost(opt: {
   /**
    * basePath
    */
-  basePath?: string;
+  basePath?: any;
 
   /**
    * newName
    */
-  newName?: string;
+  newName?: any;
 }): Promise<void> {
   return post("/api/admin/statics/rename", opt);
 }
@@ -2226,12 +1994,7 @@ export function staticsUploadPost(opt: {
   /**
    * basePath
    */
-  basePath?: string;
-
-  /**
-   *
-   */
-  file?: any;
+  basePath?: any;
 }): Promise<void> {
   return post("/api/admin/statics/upload", opt);
 }
@@ -2255,14 +2018,14 @@ export function statisticsUserGet(): Promise<StatisticWithUserDTO> {
  */
 export function tagsGet(opt: {
   /**
-   * Return more information(post count) if it is set
-   */
-  more?: boolean;
-
-  /**
    *
    */
-  sort?: Array<string>;
+  sort?: any;
+
+  /**
+   * Return more information(post count) if it is set
+   */
+  more?: any;
 }): Promise<Array<TagDTO>> {
   return get("/api/admin/tags", opt);
 }
@@ -2270,13 +2033,8 @@ export function tagsGet(opt: {
 /**
  * Creates a tag
  */
-export function tagsPost(opt: {
-  /**
-   * tagParam
-   */
-  tagParam: any;
-}): Promise<TagDTO> {
-  return post("/api/admin/tags", opt);
+export function tagsPost(): Promise<TagDTO> {
+  return post("/api/admin/tags");
 }
 
 /**
@@ -2286,7 +2044,7 @@ export function tagsTagIdGet(opt: {
   /**
    * tagId
    */
-  tagId: number;
+  tagId: any;
 }): Promise<TagDTO> {
   return get("/api/admin/tags/{tagId}", opt);
 }
@@ -2298,12 +2056,7 @@ export function tagsTagIdPut(opt: {
   /**
    * tagId
    */
-  tagId: number;
-
-  /**
-   * tagParam
-   */
-  tagParam: any;
+  tagId: any;
 }): Promise<TagDTO> {
   return put("/api/admin/tags/{tagId}", opt);
 }
@@ -2315,7 +2068,7 @@ export function tagsTagIdRemove(opt: {
   /**
    * tagId
    */
-  tagId: number;
+  tagId: any;
 }): Promise<TagDTO> {
   return remove("/api/admin/tags/{tagId}", opt);
 }
@@ -2337,7 +2090,7 @@ export function themesActivationGet(): Promise<ThemeProperty> {
 /**
  * Fetches activated theme configuration
  */
-export function themesActivationConfigurationsGet(): Promise<BaseResponseobject> {
+export function themesActivationConfigurationsGet(): Promise<BaseResponseOfobject> {
   return get("/api/admin/themes/activation/configurations");
 }
 
@@ -2358,13 +2111,8 @@ export function themesActivationSettingsGet(): Promise<any> {
 /**
  * Saves theme settings
  */
-export function themesActivationSettingsPost(opt: {
-  /**
-   * settings
-   */
-  settings: any;
-}): Promise<void> {
-  return post("/api/admin/themes/activation/settings", opt);
+export function themesActivationSettingsPost(): Promise<void> {
+  return post("/api/admin/themes/activation/settings");
 }
 
 /**
@@ -2392,8 +2140,8 @@ export function themesActivationTemplateExistsGet(opt: {
   /**
    * template
    */
-  template: string;
-}): Promise<BaseResponseboolean> {
+  template: any;
+}): Promise<BaseResponseOfboolean> {
   return get("/api/admin/themes/activation/template/exists", opt);
 }
 
@@ -2402,14 +2150,14 @@ export function themesActivationTemplateExistsGet(opt: {
  */
 export function themesFetchBranchGet(opt: {
   /**
-   * branch
-   */
-  branch: string;
-
-  /**
    * uri
    */
-  uri: string;
+  uri: any;
+
+  /**
+   * branch
+   */
+  branch: any;
 }): Promise<ThemeProperty> {
   return get("/api/admin/themes/fetchBranch", opt);
 }
@@ -2421,7 +2169,7 @@ export function themesFetchLatestReleaseGet(opt: {
   /**
    * uri
    */
-  uri: string;
+  uri: any;
 }): Promise<ThemeProperty> {
   return get("/api/admin/themes/fetchLatestRelease", opt);
 }
@@ -2433,7 +2181,7 @@ export function themesFetchingPost(opt: {
   /**
    * uri
    */
-  uri: string;
+  uri: any;
 }): Promise<ThemeProperty> {
   return post("/api/admin/themes/fetching", opt);
 }
@@ -2445,7 +2193,7 @@ export function themesFetchingGitBranchesPost(opt: {
   /**
    * uri
    */
-  uri: string;
+  uri: any;
 }): Promise<Array<ThemeProperty>> {
   return post("/api/admin/themes/fetching/git/branches", opt);
 }
@@ -2457,7 +2205,7 @@ export function themesFetchingThemeIdPut(opt: {
   /**
    * themeId
    */
-  themeId: string;
+  themeId: any;
 }): Promise<ThemeProperty> {
   return put("/api/admin/themes/fetching/{themeId}", opt);
 }
@@ -2469,7 +2217,7 @@ export function themesFetchingBranchesPost(opt: {
   /**
    * uri
    */
-  uri: string;
+  uri: any;
 }): Promise<Array<ThemeProperty>> {
   return post("/api/admin/themes/fetchingBranches", opt);
 }
@@ -2479,14 +2227,14 @@ export function themesFetchingBranchesPost(opt: {
  */
 export function themesFetchingReleaseGet(opt: {
   /**
-   * tag
-   */
-  tag: string;
-
-  /**
    * uri
    */
-  uri: string;
+  uri: any;
+
+  /**
+   * tag
+   */
+  tag: any;
 }): Promise<ThemeProperty> {
   return get("/api/admin/themes/fetchingRelease", opt);
 }
@@ -2498,7 +2246,7 @@ export function themesFetchingReleasesPost(opt: {
   /**
    * uri
    */
-  uri: string;
+  uri: any;
 }): Promise<Array<ThemeProperty>> {
   return post("/api/admin/themes/fetchingReleases", opt);
 }
@@ -2510,21 +2258,16 @@ export function themesFilesContentGet(opt: {
   /**
    * path
    */
-  path: string;
-}): Promise<BaseResponsestring> {
+  path: any;
+}): Promise<BaseResponseOfstring> {
   return get("/api/admin/themes/files/content", opt);
 }
 
 /**
  * Updates template content
  */
-export function themesFilesContentPut(opt: {
-  /**
-   * param
-   */
-  param: any;
-}): Promise<void> {
-  return put("/api/admin/themes/files/content", opt);
+export function themesFilesContentPut(): Promise<void> {
+  return put("/api/admin/themes/files/content");
 }
 
 /**
@@ -2537,13 +2280,8 @@ export function themesReloadPost(): Promise<void> {
 /**
  * Uploads a theme
  */
-export function themesUploadPost(opt: {
-  /**
-   *
-   */
-  file?: any;
-}): Promise<ThemeProperty> {
-  return post("/api/admin/themes/upload", opt);
+export function themesUploadPost(): Promise<ThemeProperty> {
+  return post("/api/admin/themes/upload");
 }
 
 /**
@@ -2551,14 +2289,9 @@ export function themesUploadPost(opt: {
  */
 export function themesUploadThemeIdPut(opt: {
   /**
-   *
-   */
-  file?: any;
-
-  /**
    * themeId
    */
-  themeId: string;
+  themeId: any;
 }): Promise<ThemeProperty> {
   return put("/api/admin/themes/upload/{themeId}", opt);
 }
@@ -2570,7 +2303,7 @@ export function themesThemeIdGet(opt: {
   /**
    * themeId
    */
-  themeId: string;
+  themeId: any;
 }): Promise<ThemeProperty> {
   return get("/api/admin/themes/{themeId}", opt);
 }
@@ -2580,14 +2313,14 @@ export function themesThemeIdGet(opt: {
  */
 export function themesThemeIdRemove(opt: {
   /**
-   * deleteSettings
-   */
-  deleteSettings?: boolean;
-
-  /**
    * themeId
    */
-  themeId: string;
+  themeId: any;
+
+  /**
+   * deleteSettings
+   */
+  deleteSettings?: any;
 }): Promise<void> {
   return remove("/api/admin/themes/{themeId}", opt);
 }
@@ -2599,7 +2332,7 @@ export function themesThemeIdActivationPost(opt: {
   /**
    * themeId
    */
-  themeId: string;
+  themeId: any;
 }): Promise<ThemeProperty> {
   return post("/api/admin/themes/{themeId}/activation", opt);
 }
@@ -2611,7 +2344,7 @@ export function themesThemeIdConfigurationsGet(opt: {
   /**
    * themeId
    */
-  themeId: string;
+  themeId: any;
 }): Promise<Array<Group>> {
   return get("/api/admin/themes/{themeId}/configurations", opt);
 }
@@ -2623,7 +2356,7 @@ export function themesThemeIdFilesGet(opt: {
   /**
    * themeId
    */
-  themeId: string;
+  themeId: any;
 }): Promise<Array<ThemeFile>> {
   return get("/api/admin/themes/{themeId}/files", opt);
 }
@@ -2633,15 +2366,15 @@ export function themesThemeIdFilesGet(opt: {
  */
 export function themesThemeIdFilesContentGet(opt: {
   /**
-   * path
-   */
-  path: string;
-
-  /**
    * themeId
    */
-  themeId: string;
-}): Promise<BaseResponsestring> {
+  themeId: any;
+
+  /**
+   * path
+   */
+  path: any;
+}): Promise<BaseResponseOfstring> {
   return get("/api/admin/themes/{themeId}/files/content", opt);
 }
 
@@ -2650,14 +2383,9 @@ export function themesThemeIdFilesContentGet(opt: {
  */
 export function themesThemeIdFilesContentPut(opt: {
   /**
-   * param
-   */
-  param: any;
-
-  /**
    * themeId
    */
-  themeId: string;
+  themeId: any;
 }): Promise<void> {
   return put("/api/admin/themes/{themeId}/files/content", opt);
 }
@@ -2669,7 +2397,7 @@ export function themesThemeIdSettingsGet(opt: {
   /**
    * themeId
    */
-  themeId: string;
+  themeId: any;
 }): Promise<any> {
   return get("/api/admin/themes/{themeId}/settings", opt);
 }
@@ -2679,14 +2407,9 @@ export function themesThemeIdSettingsGet(opt: {
  */
 export function themesThemeIdSettingsPost(opt: {
   /**
-   * settings
-   */
-  settings: any;
-
-  /**
    * themeId
    */
-  themeId: string;
+  themeId: any;
 }): Promise<void> {
   return post("/api/admin/themes/{themeId}/settings", opt);
 }
@@ -2694,25 +2417,15 @@ export function themesThemeIdSettingsPost(opt: {
 /**
  * Generate Multi-Factor Auth qr image
  */
-export function usersMfaGeneratePut(opt: {
-  /**
-   * multiFactorAuthParam
-   */
-  multiFactorAuthParam: any;
-}): Promise<MultiFactorAuthVO> {
-  return put("/api/admin/users/mfa/generate", opt);
+export function usersMfaGeneratePut(): Promise<MultiFactorAuthVO> {
+  return put("/api/admin/users/mfa/generate");
 }
 
 /**
  * Updates user's Multi Factor Auth
  */
-export function usersMfaUpdatePut(opt: {
-  /**
-   * multiFactorAuthParam
-   */
-  multiFactorAuthParam: any;
-}): Promise<MultiFactorAuthVO> {
-  return put("/api/admin/users/mfa/update", opt);
+export function usersMfaUpdatePut(): Promise<MultiFactorAuthVO> {
+  return put("/api/admin/users/mfa/update");
 }
 
 /**
@@ -2725,23 +2438,13 @@ export function usersProfilesGet(): Promise<UserDTO> {
 /**
  * Updates user profile
  */
-export function usersProfilesPut(opt: {
-  /**
-   * userParam
-   */
-  userParam: any;
-}): Promise<UserDTO> {
-  return put("/api/admin/users/profiles", opt);
+export function usersProfilesPut(): Promise<UserDTO> {
+  return put("/api/admin/users/profiles");
 }
 
 /**
  * Updates user's password
  */
-export function usersProfilesPasswordPut(opt: {
-  /**
-   * passwordParam
-   */
-  passwordParam: any;
-}): Promise<BaseResponsestring> {
-  return put("/api/admin/users/profiles/password", opt);
+export function usersProfilesPasswordPut(): Promise<BaseResponseOfstring> {
+  return put("/api/admin/users/profiles/password");
 }
