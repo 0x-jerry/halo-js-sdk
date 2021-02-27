@@ -90,7 +90,12 @@ export function generateAPICode(
       methodKey[0].toUpperCase() +
       methodKey.slice(1)
 
-    const optStr = type ? `opt: {${type}}` : ''
+    const isRequired = Object.keys(api.params).reduce(
+      (isRequired, key) => isRequired || api.params[key].required,
+      false
+    )
+
+    const optStr = type ? `opt${isRequired ? '' : '?'}: {${type}}` : ''
 
     return `
     /**

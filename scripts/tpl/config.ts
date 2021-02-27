@@ -41,27 +41,33 @@ function decodeResponseData(data: any) {
 }
 
 async function get(path: string, data?: any) {
-  const res = await configs.axios.get(path, {
-    params: data
-  })
+  const { __body, ...other } = data
+
+  const res = await configs.axios.get(path, { params: other, data: __body })
 
   return decodeResponseData(res.data)
 }
 
 async function post(path: string, data?: any) {
-  const res = await configs.axios.post(path, data)
+  const { __body, ...other } = data
+
+  const res = await configs.axios.post(path, { params: other, data: __body })
 
   return decodeResponseData(res.data)
 }
 
 async function put(path: string, data?: any) {
-  const res = await configs.axios.put(path, data)
+  const { __body, ...other } = data
+
+  const res = await configs.axios.put(path, { params: other, data: __body })
 
   return decodeResponseData(res.data)
 }
 
-async function remove(path: string, data?: any) {
-  const res = await configs.axios.delete(path, { params: data })
+async function remove(path: string, data?: any = {}) {
+  const { __body, ...other } = data
+
+  const res = await configs.axios.delete(path, { params: other, data: __body })
 
   return decodeResponseData(res.data)
 }

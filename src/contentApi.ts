@@ -94,27 +94,33 @@ function decodeResponseData(data: any) {
 }
 
 async function get(path: string, data?: any) {
-  const res = await configs.axios.get(path, {
-    params: data,
-  });
+  const { __body, ...other } = data;
+
+  const res = await configs.axios.get(path, { params: other, data: __body });
 
   return decodeResponseData(res.data);
 }
 
 async function post(path: string, data?: any) {
-  const res = await configs.axios.post(path, data);
+  const { __body, ...other } = data;
+
+  const res = await configs.axios.post(path, { params: other, data: __body });
 
   return decodeResponseData(res.data);
 }
 
 async function put(path: string, data?: any) {
-  const res = await configs.axios.put(path, data);
+  const { __body, ...other } = data;
+
+  const res = await configs.axios.put(path, { params: other, data: __body });
 
   return decodeResponseData(res.data);
 }
 
-async function remove(path: string, data?: any) {
-  const res = await configs.axios.delete(path, { params: data });
+async function remove(path: string, data?: any = {}) {
+  const { __body, ...other } = data;
+
+  const res = await configs.axios.delete(path, { params: other, data: __body });
 
   return decodeResponseData(res.data);
 }
@@ -136,7 +142,7 @@ export function archivesYearsGet(): Promise<Array<ArchiveYearVO>> {
 /**
  * Lists categories
  */
-export function categoriesGet(opt: {
+export function categoriesGet(opt?: {
   /**
    *
    */
@@ -185,7 +191,7 @@ export function categoriesSlugPostsGet(opt: {
 /**
  * Lists journals
  */
-export function journalsGet(opt: {
+export function journalsGet(opt?: {
   /**
    *
    */
@@ -207,8 +213,13 @@ export function journalsGet(opt: {
 /**
  * Comments a post
  */
-export function journalsCommentsPost(): Promise<BaseCommentDTO> {
-  return post("/api/content/journals/comments");
+export function journalsCommentsPost(opt: {
+  /**
+   * requestBody
+   */
+  __body: JournalCommentParam;
+}): Promise<BaseCommentDTO> {
+  return post("/api/content/journals/comments", opt);
 }
 
 /**
@@ -329,7 +340,7 @@ export function journalsJournalIdCommentsCommentParentIdChildrenGet(opt: {
 /**
  * List all links
  */
-export function linksGet(opt: {
+export function linksGet(opt?: {
   /**
    *
    */
@@ -341,7 +352,7 @@ export function linksGet(opt: {
 /**
  * List all links with team view
  */
-export function linksTeam_viewGet(opt: {
+export function linksTeam_viewGet(opt?: {
   /**
    *
    */
@@ -353,7 +364,7 @@ export function linksTeam_viewGet(opt: {
 /**
  * Lists all menus
  */
-export function menusGet(opt: {
+export function menusGet(opt?: {
   /**
    *
    */
@@ -365,7 +376,7 @@ export function menusGet(opt: {
 /**
  * Lists menus with tree view
  */
-export function menusTree_viewGet(opt: {
+export function menusTree_viewGet(opt?: {
   /**
    *
    */
@@ -403,7 +414,7 @@ export function optionsList_viewGet(): Promise<Array<OptionDTO>> {
 /**
  * Lists options with map view
  */
-export function optionsMap_viewGet(opt: {
+export function optionsMap_viewGet(opt?: {
   /**
    * key
    */
@@ -415,7 +426,7 @@ export function optionsMap_viewGet(opt: {
 /**
  * pageBy
  */
-export function photosGet(opt: {
+export function photosGet(opt?: {
   /**
    *
    */
@@ -447,7 +458,7 @@ export function photosGet(opt: {
 /**
  * listPhotos
  */
-export function photosLatestGet(opt: {
+export function photosLatestGet(opt?: {
   /**
    *
    */
@@ -459,7 +470,7 @@ export function photosLatestGet(opt: {
 /**
  * Lists posts
  */
-export function postsGet(opt: {
+export function postsGet(opt?: {
   /**
    *
    */
@@ -481,8 +492,13 @@ export function postsGet(opt: {
 /**
  * Comments a post
  */
-export function postsCommentsPost(): Promise<BaseCommentDTO> {
-  return post("/api/content/posts/comments");
+export function postsCommentsPost(opt: {
+  /**
+   * requestBody
+   */
+  __body: PostCommentParam;
+}): Promise<BaseCommentDTO> {
+  return post("/api/content/posts/comments", opt);
 }
 
 /**
@@ -686,7 +702,7 @@ export function postsPostIdPrevGet(opt: {
 /**
  * Lists sheets
  */
-export function sheetsGet(opt: {
+export function sheetsGet(opt?: {
   /**
    *
    */
@@ -708,8 +724,13 @@ export function sheetsGet(opt: {
 /**
  * Comments a post
  */
-export function sheetsCommentsPost(): Promise<BaseCommentDTO> {
-  return post("/api/content/sheets/comments");
+export function sheetsCommentsPost(opt: {
+  /**
+   * requestBody
+   */
+  __body: SheetCommentParam;
+}): Promise<BaseCommentDTO> {
+  return post("/api/content/sheets/comments", opt);
 }
 
 /**
@@ -864,7 +885,7 @@ export function statisticsUserGet(): Promise<StatisticWithUserDTO> {
 /**
  * Lists tags
  */
-export function tagsGet(opt: {
+export function tagsGet(opt?: {
   /**
    *
    */

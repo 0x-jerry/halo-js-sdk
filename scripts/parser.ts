@@ -51,11 +51,28 @@ export function parseAPIJson(json) {
     Object.keys(pathData).forEach((method) => {
       const methodData = pathData[method]
 
+      const params: Prop[] =
+        (methodData.parameters || []).map(parseParameter) || {}
+
+      const hasType =
+        methodData.requestBody?.content?.['application/json']?.schema
+
+      if (hasType) {
+        params.push({
+          name: '__body',
+          desc: 'requestBody',
+          required: true,
+          type: parseType(hasType)
+        })
+        // console.log(params)
+        // params
+      }
+
       const api: API = {
         path: urlPath,
         method: method as any,
         desc: methodData.summary,
-        params: (methodData.parameters || []).map(parseParameter),
+        params,
         data: 'void'
       }
 
